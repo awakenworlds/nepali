@@ -397,9 +397,3 @@ categorySelect.addEventListener('change', applyFilterAndLoad);
 
 // Initial load
 applyFilterAndLoad();
-    })
-    .catch(error => {
-        console.error('Error fetching quiz data:', error);
-        questionEl.textContent = 'Failed to load flashcard data.';
-
-    });

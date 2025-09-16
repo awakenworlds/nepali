@@ -8,7 +8,7 @@ body {
     height: 100vh;
     margin: 0;
     background-color: #000000;
-    color: #333; /* Changed from light gray to dark gray for readability */
+    color: #333;
 }
 
 .card-container {
@@ -24,14 +24,14 @@ body {
 }
 
 .category-select-container {
-    margin-top: 2em; /* This adds a bit more space above the menu */
+    margin-top: 2em;
     padding-top: 1em;
     border-top: 1px solid #e0e0e0;
 }
 
 /* Heading and Card Content */
 h1 {
-    color: #333;
+    color: #004080;
     margin-bottom: 0.5em;
     font-size: 2.2em;
     font-weight: 700;
@@ -41,33 +41,6 @@ h1 {
     font-size: 4.5em;
     margin: 0.5em 0;
     color: #8B0000;
-    min-height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-}
-
-#answer {
-    font-size: 1.6em;
-    color: #333; /* Changed from gray to dark gray for readability */
-    min-height: 30px;
-    margin-bottom: 1em;
-    text-align: center;
-    font-weight: 400;
-}
-/* Heading and Card Content */
-h1 {
-    color: #004080; /* Updated to a dark blue color */
-    margin-bottom: 0.5em;
-    font-size: 2.2em;
-    font-weight: 700;
-}
-
-#question {
-    font-size: 4.5em;
-    margin: 0.5em 0;
-    color: #8B0000; /* Dark red for the Devanagari character */
     min-height: 100px;
     display: flex;
     align-items: center;
@@ -94,6 +67,120 @@ h1 {
     flex-direction: column;
     gap: 15px;
     margin-top: 1em;
-    margin-bottom: 2em; /* Added space below the controls section */
-    align-items: flex-start;
+    margin-bottom: 2em;
+    align-items: center;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    gap: 10px;
+}
+
+.input-group input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.input-group button {
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 1.5em;
+}
+
+.action-buttons button, .category-select {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+.action-buttons button:hover, .category-select:hover {
+    background-color: #e2e2e2;
+}
+
+.reset-button {
+    background-color: #ff4d4d;
+    color: white;
+}
+
+.reset-button:hover {
+    background-color: #cc0000;
+}
+
+.feedback {
+    margin-top: 1em;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.correct {
+    color: #4CAF50;
+}
+
+.incorrect {
+    color: #f44336;
+}
+
+/* Media Queries for Mobile Responsiveness */
+@media (max-width: 600px) {
+    .card-container {
+        padding: 1em;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    #question {
+        font-size: 3em;
+        min-height: 80px;
+    }
+
+    #answer {
+        font-size: 1.2em;
+    }
+
+    .controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .input-group {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 5px;
+    }
+
+    .input-group input, .input-group button {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
 }
