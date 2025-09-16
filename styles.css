@@ -1,0 +1,99 @@
+/* General body and container styling */
+body {
+    font-family: 'Noto Sans Devanagari', Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #000000;
+    color: #333; /* Changed from light gray to dark gray for readability */
+}
+
+.card-container {
+    background-color: #FFFFFF;
+    padding: 2em;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 90%;
+    max-width: 500px;
+    border: 1px solid #ddd;
+    margin: auto;
+}
+
+.category-select-container {
+    margin-top: 2em; /* This adds a bit more space above the menu */
+    padding-top: 1em;
+    border-top: 1px solid #e0e0e0;
+}
+
+/* Heading and Card Content */
+h1 {
+    color: #333;
+    margin-bottom: 0.5em;
+    font-size: 2.2em;
+    font-weight: 700;
+}
+
+#question {
+    font-size: 4.5em;
+    margin: 0.5em 0;
+    color: #8B0000;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+#answer {
+    font-size: 1.6em;
+    color: #333; /* Changed from gray to dark gray for readability */
+    min-height: 30px;
+    margin-bottom: 1em;
+    text-align: center;
+    font-weight: 400;
+}
+/* Heading and Card Content */
+h1 {
+    color: #004080; /* Updated to a dark blue color */
+    margin-bottom: 0.5em;
+    font-size: 2.2em;
+    font-weight: 700;
+}
+
+#question {
+    font-size: 4.5em;
+    margin: 0.5em 0;
+    color: #8B0000; /* Dark red for the Devanagari character */
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+#answer {
+    font-size: 1.6em;
+    color: #666;
+    min-height: 30px;
+    margin-bottom: 1em;
+    text-align: center;
+    font-weight: 400;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Input and Controls */
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 1em;
+    margin-bottom: 2em; /* Added space below the controls section */
+    align-items: flex-start;
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nepali Flashcards</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="card-container">
+        <h1>Nepali Flashcards</h1>
+        <div id="card">
+            <div id="question"></div>
+            <div id="answer" class="hidden"></div>
+            <div id="feedback" class="feedback"></div>
+        </div>
+
+        <div class="controls">
+            <div class="input-group">
+                <input type="text" id="romanized-answer-input" placeholder="Romanized Answer">
+                <button id="submit-romanized-btn">Submit</button>
+            </div>
+            <div class="input-group">
+                <input type="text" id="english-answer-input" placeholder="English Answer">
+                <button id="submit-english-btn">Submit</button>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button id="prev-card-btn">Previous</button>
+            <button id="show-answer-btn">Show Full Answer</button>
+            <button id="reset-btn" class="reset-button">Reset Card</button>
+            <button id="next-card-btn">Next</button>
+        </div>
+
+        <div class="category-select-container">
+            <label for="category-select">Choose a category:</label>
+            <select id="category-select" class="category-select">
+                <option value="popular">Popular</option>
+                <option value="all">All</option>
+                <option value="number">Numbers</option>
+                <option value="letter">Letters</option>
+                <option value="noun">Nouns</option>
+                <option value="verb">Verbs</option>
+                <option value="adjective">Adjectives</option>
+            </select>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
