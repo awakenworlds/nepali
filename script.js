@@ -49,7 +49,7 @@ const quizData = [
     {"devanagari":"म" ,"roman":"ma","english":"ma","sort":"letter"},
     {"devanagari":"य" ,"roman":"ya","english":"ya","sort":"letter"},
     {"devanagari":"र" ,"roman":"ra","english":"ra","sort":"letter"},
-    {"devanagari":"ल" ,"roman":"la","english":"la","la":"letter"},
+    {"devanagari":"ल" ,"roman":"la","english":"la","sort":"letter"},
     {"devanagari":"व","roman":"wa","english":"wa","sort":"letter"},
     {"devanagari":"श","roman":"sha","english":"sha","sort":"letter"},
     {"devanagari":"ष","roman":"sha","english":"sha","sort":"letter"},
@@ -291,6 +291,8 @@ const categorySelect = document.getElementById('category-select');
 
 let currentCardIndex = 0;
 let filteredQuizData = [];
+let isRomanCorrect = false;
+let isEnglishCorrect = false;
 
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -301,7 +303,7 @@ function shuffle(array) {
 
 function displayCard() {
     if (filteredQuizData.length === 0) {
-        questionEl.textContent = 'No cards found for this category.';
+        questionEl.textContent = 'Oops, looks like there are no cards in this category yet. Please try another one!';
         answerEl.textContent = '';
         answerEl.classList.add('hidden');
         return;
@@ -309,24 +311,36 @@ function displayCard() {
 
     const currentCard = filteredQuizData[currentCardIndex];
     questionEl.textContent = currentCard.devanagari;
-    answerEl.textContent = `Romanized: ${currentCard.roman} | English: ${currentCard.english}`;
+    answerEl.textContent = `${currentCard.roman} | ${currentCard.english}`;
     answerEl.classList.add('hidden');
     feedbackEl.textContent = '';
     romanizedInput.value = '';
     englishInput.value = '';
+
+    // Reset the state for the new card
+    isRomanCorrect = false;
+    isEnglishCorrect = false;
 }
 
 function checkRomanizedAnswer() {
     const userAnswer = romanizedInput.value.toLowerCase().trim();
     const correctAnswer = filteredQuizData[currentCardIndex].roman.toLowerCase().trim();
     if (userAnswer === correctAnswer) {
-        feedbackEl.textContent = "Correct! ✅";
-        feedbackEl.classList.remove('incorrect', 'partial');
-        feedbackEl.classList.add('correct');
-        answerEl.classList.remove('hidden');
+        isRomanCorrect = true;
+        if (isEnglishCorrect) {
+            feedbackEl.textContent = "Amazing! Both answers are perfect! ✨";
+            feedbackEl.classList.remove('incorrect');
+            feedbackEl.classList.add('correct');
+            answerEl.classList.remove('hidden');
+        } else {
+            feedbackEl.textContent = "Romanized is spot on! Now, what's the English word for it?";
+            feedbackEl.classList.remove('incorrect');
+            feedbackEl.classList.add('correct');
+        }
     } else {
-        feedbackEl.textContent = "Incorrect Romanized. Try again.";
-        feedbackEl.classList.remove('correct', 'partial');
+        isRomanCorrect = false;
+        feedbackEl.textContent = "Not quite right. Give the Romanized spelling another shot.";
+        feedbackEl.classList.remove('correct');
         feedbackEl.classList.add('incorrect');
     }
 }
@@ -335,13 +349,21 @@ function checkEnglishAnswer() {
     const userAnswer = englishInput.value.toLowerCase().trim();
     const correctAnswer = filteredQuizData[currentCardIndex].english.toLowerCase().trim();
     if (userAnswer === correctAnswer) {
-        feedbackEl.textContent = "Correct! ✅";
-        feedbackEl.classList.remove('incorrect', 'partial');
-        feedbackEl.classList.add('correct');
-        answerEl.classList.remove('hidden');
+        isEnglishCorrect = true;
+        if (isRomanCorrect) {
+            feedbackEl.textContent = "Amazing! Both answers are perfect! ✨";
+            feedbackEl.classList.remove('incorrect');
+            feedbackEl.classList.add('correct');
+            answerEl.classList.remove('hidden');
+        } else {
+            feedbackEl.textContent = "Perfect English translation! Now for the Romanized spelling.";
+            feedbackEl.classList.remove('incorrect');
+            feedbackEl.classList.add('correct');
+        }
     } else {
-        feedbackEl.textContent = "Incorrect English. Try again.";
-        feedbackEl.classList.remove('correct', 'partial');
+        isEnglishCorrect = false;
+        feedbackEl.textContent = "That's not the right English translation. Let's try it again.";
+        feedbackEl.classList.remove('correct');
         feedbackEl.classList.add('incorrect');
     }
 }
