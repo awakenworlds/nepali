@@ -1,4 +1,4 @@
-const quizData = [
+[
     {"devanagari":"१","roman":"ek","english":"one","sort":"number"},
     {"devanagari":"२","roman":"dui","english":"two","sort":"number"},
     {"devanagari":"३","roman":"tin","english":"three","sort":"number"},
@@ -532,4 +532,5 @@ const quizData = [
     {"devanagari":"लागि","roman":"lagi","english":"for","sort":"preposition"},
     {"devanagari":"माथि","roman":"mathi","english":"on/upon","sort":"preposition"},
     {"devanagari":"तल","roman":"tala","english":"under","sort":"preposition"}
-];
+
+]
