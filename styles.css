@@ -107,6 +107,7 @@ h1 {
     margin-bottom: 1.5em;
 }
 
+/* Updated styles for action buttons and select dropdown */
 .action-buttons button, .category-select {
     padding: 10px 15px;
     border: 1px solid #ddd;
@@ -121,14 +122,15 @@ h1 {
     background-color: #e2e2e2;
 }
 
-.reset-button {
+/* Removing the specific styles for the reset button */
+/* .reset-button {
     background-color: #ff4d4d;
     color: white;
 }
 
 .reset-button:hover {
     background-color: #cc0000;
-}
+} */
 
 .feedback {
     margin-top: 1em;

@@ -1,4 +1,5 @@
-const quizData = [
+const quizData = 
+[
     {"devanagari":"१","roman":"ek","english":"one","sort":"number"},
     {"devanagari":"२","roman":"dui","english":"two","sort":"number"},
     {"devanagari":"३","roman":"tin","english":"three","sort":"number"},
@@ -565,6 +566,9 @@ function displayCard() {
         questionEl.textContent = 'Oops! No flashcards found for this category. Please choose a different one.';
         answerEl.textContent = '';
         answerEl.classList.add('hidden');
+        romanizedInput.value = '';
+        englishInput.value = '';
+        englishFieldGroup.style.display = 'none'; // Use style to force hide
         return;
     }
 
@@ -576,14 +580,15 @@ function displayCard() {
     romanizedInput.value = '';
     englishInput.value = '';
 
-    if (currentCard.roman === currentCard.english) {
-        englishFieldGroup.classList.add('hidden');
+    // Check if Romanized and English spellings are the same.
+    const isSingleAnswer = currentCard.roman.toLowerCase().trim() === currentCard.english.toLowerCase().trim();
+    if (isSingleAnswer) {
+        englishFieldGroup.style.display = 'none'; // Directly set display to none
         romanizedInput.placeholder = "Enter the answer";
     } else {
-        englishFieldGroup.classList.remove('hidden');
+        englishFieldGroup.style.display = 'flex'; // Directly set display to flex
         romanizedInput.placeholder = "Romanized Answer";
     }
-
 
     isRomanCorrect = false;
     isEnglishCorrect = false;
@@ -600,10 +605,12 @@ function checkRomanizedAnswer() {
         feedbackEl.classList.add('correct');
         answerEl.classList.add('hidden');
         
-        if (currentCard.roman === currentCard.english) {
+        const isSingleAnswer = currentCard.roman.toLowerCase().trim() === currentCard.english.toLowerCase().trim();
+
+        if (isSingleAnswer) {
             feedbackEl.textContent = "Amazing! You got it perfect! ✨";
             answerEl.classList.remove('hidden');
-            answerEl.textContent = `${currentCard.roman} | ${currentCard.english}`;
+            answerEl.textContent = `${currentCard.roman}`;
         }
         else if (isEnglishCorrect) {
             feedbackEl.textContent = "Fantastic! Both answers are spot-on! 🎉";
@@ -676,7 +683,12 @@ prevBtn.addEventListener('click', () => {
 
 showAnswerBtn.addEventListener('click', () => {
     const currentCard = filteredQuizData[currentCardIndex];
-    answerEl.textContent = `${currentCard.roman} | ${currentCard.english}`;
+    const isSingleAnswer = currentCard.roman.toLowerCase().trim() === currentCard.english.toLowerCase().trim();
+    if (isSingleAnswer) {
+        answerEl.textContent = `${currentCard.roman}`;
+    } else {
+        answerEl.textContent = `${currentCard.roman} | ${currentCard.english}`;
+    }
     answerEl.classList.remove('hidden');
 });
 
