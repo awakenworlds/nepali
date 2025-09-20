@@ -536,9 +536,6 @@ const quizData =
 ];
 
 
-
-
-
 const questionEl = document.getElementById('question');
 const answerEl = document.getElementById('answer');
 const romanizedInput = document.getElementById('romanized-answer-input');
