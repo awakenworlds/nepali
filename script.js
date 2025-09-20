@@ -602,7 +602,15 @@ function checkRomanizedAnswer() {
     const correctAnswer = currentCard.roman.toLowerCase().trim();
     const isSingleAnswer = currentCard.roman.toLowerCase().trim() === currentCard.english.toLowerCase().trim();
 
-    if (userAnswer === correctAnswer) {
+    // Check for "k" vs "ch" as alternative spellings
+    let alternativeAnswer = '';
+    if (correctAnswer.includes('ch')) {
+        alternativeAnswer = correctAnswer.replace(/ch/g, 'k');
+    } else if (correctAnswer.includes('k')) {
+        alternativeAnswer = correctAnswer.replace(/k/g, 'ch');
+    }
+    
+    if (userAnswer === correctAnswer || userAnswer === alternativeAnswer) {
         isRomanCorrect = true;
         feedbackEl.classList.remove('incorrect');
         feedbackEl.classList.add('correct');
