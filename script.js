@@ -602,15 +602,22 @@ function checkRomanizedAnswer() {
     const correctAnswer = currentCard.roman.toLowerCase().trim();
     const isSingleAnswer = currentCard.roman.toLowerCase().trim() === currentCard.english.toLowerCase().trim();
 
-    // Check for "k" vs "ch" as alternative spellings
-    let alternativeAnswer = '';
-    if (correctAnswer.includes('ch')) {
-        alternativeAnswer = correctAnswer.replace(/ch/g, 'k');
-    } else if (correctAnswer.includes('k')) {
-        alternativeAnswer = correctAnswer.replace(/k/g, 'ch');
+    // Create a version of the user's answer with k/ch swapped
+    let kChSwappedUserAnswer = '';
+    if (userAnswer.includes('ch')) {
+        kChSwappedUserAnswer = userAnswer.replace(/ch/g, 'k');
+    } else if (userAnswer.includes('k')) {
+        kChSwappedUserAnswer = userAnswer.replace(/k/g, 'ch');
     }
+
+    const isCorrect = (
+        userAnswer === correctAnswer ||
+        (kChSwappedUserAnswer && kChSwappedUserAnswer === correctAnswer) ||
+        userAnswer.replace(/h/g, '') === correctAnswer.replace(/h/g, '') ||
+        (kChSwappedUserAnswer && kChSwappedUserAnswer.replace(/h/g, '') === correctAnswer.replace(/h/g, ''))
+    );
     
-    if (userAnswer === correctAnswer || userAnswer === alternativeAnswer) {
+    if (isCorrect) {
         isRomanCorrect = true;
         feedbackEl.classList.remove('incorrect');
         feedbackEl.classList.add('correct');
@@ -700,6 +707,9 @@ document.addEventListener('keydown', (event) => {
     }
     if (event.key === 'ArrowRight') {
         nextBtn.click();
+    }
+    if (event.key === 'ArrowLeft') {
+        prevBtn.click();
     }
 });
 
