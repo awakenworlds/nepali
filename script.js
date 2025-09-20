@@ -536,13 +536,14 @@ const quizData =
 ];
 
 
+
 const questionEl = document.getElementById('question');
 const answerEl = document.getElementById('answer');
 const romanizedInput = document.getElementById('romanized-answer-input');
 const englishInput = document.getElementById('english-answer-input');
 const submitRomanizedBtn = document.getElementById('submit-romanized-btn');
 const submitEnglishBtn = document.getElementById('submit-english-btn');
-const feedbackEl = document.getElementById('feedback');
+// The feedback element is no longer needed
 const prevBtn = document.getElementById('prev-card-btn');
 const showAnswerBtn = document.getElementById('show-answer-btn');
 const resetBtn = document.getElementById('reset-btn');
@@ -577,13 +578,12 @@ function displayCard() {
 
     const currentCard = filteredQuizData[currentCardIndex];
     answerEl.classList.add('hidden');
-    feedbackEl.textContent = '';
+    // Clear all feedback-related classes for a fresh start
+    answerEl.classList.remove('correct', 'both-correct', 'incorrect');
+    answerEl.textContent = ''; // Clear any previous feedback or answer
     romanizedInput.value = '';
     englishInput.value = '';
     
-    // Clear all feedback-related classes for a fresh start
-    feedbackEl.classList.remove('correct', 'both-correct', 'incorrect');
-
     if (isEnglishMode) {
         // In English mode, show English word and ask for Romanized answer
         questionEl.textContent = currentCard.english;
@@ -632,7 +632,7 @@ function checkRomanizedAnswer() {
     );
     
     // Clear previous feedback classes
-    feedbackEl.classList.remove('correct', 'both-correct', 'incorrect');
+    answerEl.classList.remove('correct', 'both-correct', 'incorrect');
 
     if (isCorrect) {
         isRomanCorrect = true;
@@ -640,21 +640,19 @@ function checkRomanizedAnswer() {
 
         if (isEnglishMode || isSingleAnswer || isEnglishCorrect) {
             // Both answers are correct, or it's a single-answer mode (e.g., in English mode or single field)
-            feedbackEl.classList.add('both-correct'); // Dark green
-            answerEl.textContent = `${currentCard.roman} ${isEnglishMode ? '' : `| ${currentCard.english}`}`;
-            feedbackEl.textContent = "Correct! Great job! 🎉 Press 'Next' or 'Enter' to continue.";
+            answerEl.classList.add('both-correct'); // Dark green
+            answerEl.textContent = `Correct! Great job! 🎉 The answer is: ${currentCard.roman} ${isEnglishMode ? '' : `| ${currentCard.english}`}. Press 'Next' or 'Enter' to continue.`;
         } else {
             // Only Romanized is correct, English is pending
-            feedbackEl.classList.add('correct'); // Dark yellow
-            answerEl.textContent = `${currentCard.roman}`;
-            feedbackEl.textContent = "Correct! Now, please enter the English translation.";
+            answerEl.classList.add('correct'); // Dark yellow
+            answerEl.textContent = `Correct! Now, please enter the English translation.`;
             englishInput.focus();
         }
     } else {
         isRomanCorrect = false;
-        feedbackEl.classList.add('incorrect'); // Red
-        feedbackEl.textContent = "Not quite. Please try again.";
-        answerEl.classList.add('hidden');
+        answerEl.classList.remove('hidden');
+        answerEl.classList.add('incorrect'); // Red
+        answerEl.textContent = "Not quite. Please try again.";
     }
 }
 
@@ -669,7 +667,7 @@ function checkEnglishAnswer() {
     const isCorrect = acceptableAnswers.includes(userAnswer);
 
     // Clear previous feedback classes
-    feedbackEl.classList.remove('correct', 'both-correct', 'incorrect');
+    answerEl.classList.remove('correct', 'both-correct', 'incorrect');
 
     if (isCorrect) {
         isEnglishCorrect = true;
@@ -677,20 +675,18 @@ function checkEnglishAnswer() {
 
         if (isRomanCorrect) {
             // Both answers are correct
-            feedbackEl.classList.add('both-correct'); // Dark green
-            answerEl.textContent = `${currentCard.roman} | ${currentCard.english}`;
-            feedbackEl.textContent = "Fantastic! Both answers are spot-on! 🎉 Press 'Next' or 'Enter' to continue.";
+            answerEl.classList.add('both-correct'); // Dark green
+            answerEl.textContent = `Fantastic! Both answers are spot-on! 🎉 The answer is: ${currentCard.roman} | ${currentCard.english}. Press 'Next' or 'Enter' to continue.`;
         } else {
             // Only English is correct, Romanized is pending
-            feedbackEl.classList.add('correct'); // Dark yellow
-            answerEl.textContent = `${currentCard.english}`;
-            feedbackEl.textContent = "Correct! Now, what about the Romanized spelling?";
+            answerEl.classList.add('correct'); // Dark yellow
+            answerEl.textContent = `Correct! Now, what about the Romanized spelling?`;
         }
     } else {
         isEnglishCorrect = false;
-        feedbackEl.classList.add('incorrect'); // Red
-        feedbackEl.textContent = "That's not the correct English translation. Give it another shot!";
-        answerEl.classList.add('hidden');
+        answerEl.classList.remove('hidden');
+        answerEl.classList.add('incorrect'); // Red
+        answerEl.textContent = "That's not the correct English translation. Give it another shot!";
     }
 }
 
@@ -701,16 +697,15 @@ function advanceQuiz() {
 function showFullAnswer() {
     const currentCard = filteredQuizData[currentCardIndex];
     answerEl.classList.remove('hidden');
-    // Ensure only 'correct' class is applied for 'show answer'
-    feedbackEl.classList.remove('incorrect', 'both-correct');
-    feedbackEl.classList.add('correct'); // Dark yellow for showing the answer
+    // Clear previous feedback classes
+    answerEl.classList.remove('incorrect', 'both-correct');
+    answerEl.classList.add('correct'); // Dark yellow for showing the answer
     
     if (isEnglishMode) {
-        answerEl.textContent = `${currentCard.roman}`;
+        answerEl.textContent = `The answer is: ${currentCard.roman}. Press "Next" to continue.`;
     } else {
-        answerEl.textContent = `${currentCard.roman} | ${currentCard.english}`;
+        answerEl.textContent = `The answer is: ${currentCard.roman} | ${currentCard.english}. Press "Next" to continue.`;
     }
-    feedbackEl.textContent = 'Here is the correct answer. Press "Next" to continue.';
 }
 
 submitRomanizedBtn.addEventListener('click', checkRomanizedAnswer);
@@ -750,7 +745,7 @@ document.addEventListener('keydown', (event) => {
     }
     // Remove the ArrowRight functionality
     // if (event.key === 'ArrowRight') {
-    //     nextBtn.click();
+    //      nextBtn.click();
     // }
     if (event.key === 'ArrowLeft') {
         prevBtn.click();
