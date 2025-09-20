@@ -536,6 +536,7 @@ const quizData =
 ];
 
 
+
 const questionEl = document.getElementById('question');
 const answerEl = document.getElementById('answer');
 const romanizedInput = document.getElementById('romanized-answer-input');
@@ -592,6 +593,7 @@ function displayCard() {
 
     isRomanCorrect = false;
     isEnglishCorrect = false;
+    romanizedInput.focus();
 }
 
 function checkRomanizedAnswer() {
@@ -632,7 +634,6 @@ function checkEnglishAnswer() {
     const userAnswer = englishInput.value.toLowerCase().trim();
     const currentCard = filteredQuizData[currentCardIndex];
     
-    // New logic to handle brackets and slashes
     const rawEnglish = currentCard.english.toLowerCase().trim();
     const noBrackets = rawEnglish.replace(/\s*\(.*\)/, '');
     const acceptableAnswers = noBrackets.split('/').map(ans => ans.trim());
@@ -683,6 +684,15 @@ englishInput.addEventListener('keypress', (event) => {
             checkEnglishAnswer();
         }
     }
+});
+
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowUp') {
+        showAnswerBtn.click();
+    }
+    if (event.key === 'ArrowRight') {
+        nextBtn.click();
+    }
 });
 
 nextBtn.addEventListener('click', () => {
