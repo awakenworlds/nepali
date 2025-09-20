@@ -78,7 +78,11 @@ h1 {
 }
 
 .correct {
-    color: #FFD700;
+    color: #FFD700; /* Dark yellow for a single correct answer */
+}
+
+.both-correct {
+    color: darkgreen; /* Overrides .correct when both answers are correct */
 }
 
 .incorrect {
@@ -149,16 +153,16 @@ button:active {
     gap: 15px;
 }
 
-/* New style for the fixed "Toggle English Mode" button and category menu */
+/* Updated style for the fixed "Toggle English Mode" button and category menu */
 .top-right-controls {
     position: fixed;
     top: 20px;
     right: 20px;
     z-index: 1000;
     display: flex;
-    flex-direction: column; /* Changed to column to stack items */
+    flex-direction: column;
     gap: 10px;
-    align-items: flex-end; /* Aligns items to the right */
+    align-items: flex-end;
 }
 
 /* Updated styles for the category menu to match the button */
@@ -192,7 +196,18 @@ option {
     .card {
         padding: 30px;
     }
+    
+    /* Change fixed position to static on mobile to prevent overlap */
+    .top-right-controls {
+        position: static;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 20px; /* Add space below the controls */
+        order: -1; /* Place it at the top of the flex container */
+    }
 
+    /* Adjust question font size for medium mobile screens */
     #question {
         font-size: 3rem;
     }
@@ -217,5 +232,15 @@ option {
 
     button {
         padding: 12px 20px;
+    }
+}
+
+/* Extra-small screen adjustments */
+@media (max-width: 400px) {
+    #question {
+        font-size: 2.5rem;
+    }
+    .english-mode-text {
+        font-size: 1.5rem !important;
     }
 }
