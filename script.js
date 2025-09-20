@@ -535,6 +535,7 @@ const quizData =
     {"devanagari":"तल","roman":"tala","english":"under","sort":"preposition"}
 ];
 
+
 const questionEl = document.getElementById('question');
 const answerEl = document.getElementById('answer');
 const romanizedInput = document.getElementById('romanized-answer-input');
@@ -555,161 +556,174 @@ let isRomanCorrect = false;
 let isEnglishCorrect = false;
 
 function shuffle(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
 }
 
 function displayCard() {
-    if (filteredQuizData.length === 0) {
-        questionEl.textContent = 'Oops! No flashcards found for this category. Please choose a different one.';
-        answerEl.textContent = '';
-        answerEl.classList.add('hidden');
-        romanizedInput.value = '';
-        englishInput.value = '';
-        englishFieldGroup.style.display = 'none'; // Use style to force hide
-        return;
-    }
+    if (filteredQuizData.length === 0) {
+        questionEl.textContent = 'Oops! No flashcards found for this category. Please choose a different one.';
+        answerEl.textContent = '';
+        answerEl.classList.add('hidden');
+        romanizedInput.value = '';
+        englishInput.value = '';
+        englishFieldGroup.style.display = 'none';
+        return;
+    }
 
-    const currentCard = filteredQuizData[currentCardIndex];
-    questionEl.textContent = currentCard.devanagari;
-    answerEl.textContent = `${currentCard.roman} | ${currentCard.english}`;
-    answerEl.classList.add('hidden');
-    feedbackEl.textContent = '';
-    romanizedInput.value = '';
-    englishInput.value = '';
+    const currentCard = filteredQuizData[currentCardIndex];
+    questionEl.textContent = currentCard.devanagari;
+    answerEl.textContent = `${currentCard.roman} | ${currentCard.english}`;
+    answerEl.classList.add('hidden');
+    feedbackEl.textContent = '';
+    romanizedInput.value = '';
+    englishInput.value = '';
 
-    // Check if Romanized and English spellings are the same.
-    const isSingleAnswer = currentCard.roman.toLowerCase().trim() === currentCard.english.toLowerCase().trim();
-    if (isSingleAnswer) {
-        englishFieldGroup.style.display = 'none'; // Directly set display to none
-        romanizedInput.placeholder = "Enter the answer";
-    } else {
-        englishFieldGroup.style.display = 'flex'; // Directly set display to flex
-        romanizedInput.placeholder = "Romanized Answer";
-    }
+    const isSingleAnswer = currentCard.roman.toLowerCase().trim() === currentCard.english.toLowerCase().trim();
+    if (isSingleAnswer) {
+        englishFieldGroup.style.display = 'none';
+        romanizedInput.placeholder = "Enter the answer";
+    } else {
+        englishFieldGroup.style.display = 'flex';
+        romanizedInput.placeholder = "Romanized Answer";
+    }
 
-    isRomanCorrect = false;
-    isEnglishCorrect = false;
+    isRomanCorrect = false;
+    isEnglishCorrect = false;
 }
 
 function checkRomanizedAnswer() {
-    const userAnswer = romanizedInput.value.toLowerCase().trim();
-    const currentCard = filteredQuizData[currentCardIndex];
-    const correctAnswer = currentCard.roman.toLowerCase().trim();
+    const userAnswer = romanizedInput.value.toLowerCase().trim();
+    const currentCard = filteredQuizData[currentCardIndex];
+    const correctAnswer = currentCard.roman.toLowerCase().trim();
+    const isSingleAnswer = currentCard.roman.toLowerCase().trim() === currentCard.english.toLowerCase().trim();
 
-    if (userAnswer === correctAnswer) {
-        isRomanCorrect = true;
-        feedbackEl.classList.remove('incorrect');
-        feedbackEl.classList.add('correct');
-        answerEl.classList.add('hidden');
-        
-        const isSingleAnswer = currentCard.roman.toLowerCase().trim() === currentCard.english.toLowerCase().trim();
-
-        if (isSingleAnswer) {
-            feedbackEl.textContent = "Amazing! You got it perfect! ✨";
-            answerEl.classList.remove('hidden');
-            answerEl.textContent = `${currentCard.roman}`;
-        }
-        else if (isEnglishCorrect) {
-            feedbackEl.textContent = "Fantastic! Both answers are spot-on! 🎉";
-            answerEl.classList.remove('hidden');
-            answerEl.textContent = `${currentCard.roman} | ${currentCard.english}`;
-        }
-        else {
-            feedbackEl.textContent = "Correct! Now, please enter the English translation.";
-        }
-    } else {
-        isRomanCorrect = false;
-        feedbackEl.textContent = "Not quite. Let's try that Romanized spelling again.";
-        feedbackEl.classList.remove('correct');
-        feedbackEl.classList.add('incorrect');
-        answerEl.classList.add('hidden');
-    }
+    if (userAnswer === correctAnswer) {
+        isRomanCorrect = true;
+        feedbackEl.classList.remove('incorrect');
+        feedbackEl.classList.add('correct');
+        answerEl.classList.remove('hidden');
+        
+        if (isSingleAnswer) {
+            feedbackEl.textContent = "Amazing! You got it perfect! ✨";
+            answerEl.textContent = `${currentCard.roman}`;
+        }
+        else if (isEnglishCorrect) {
+            feedbackEl.textContent = "Fantastic! Both answers are spot-on! 🎉";
+            answerEl.textContent = `${currentCard.roman} | ${currentCard.english}`;
+        }
+        else {
+            feedbackEl.textContent = "Correct! Now, please enter the English translation.";
+            answerEl.textContent = `${currentCard.roman}`;
+            englishInput.focus();
+        }
+    } else {
+        isRomanCorrect = false;
+        feedbackEl.textContent = "Not quite. Let's try that Romanized spelling again.";
+        feedbackEl.classList.remove('correct');
+        feedbackEl.classList.add('incorrect');
+        answerEl.classList.add('hidden');
+    }
 }
 
 function checkEnglishAnswer() {
-    const userAnswer = englishInput.value.toLowerCase().trim();
-    const currentCard = filteredQuizData[currentCardIndex];
-    const correctAnswer = currentCard.english.toLowerCase().trim();
+    const userAnswer = englishInput.value.toLowerCase().trim();
+    const currentCard = filteredQuizData[currentCardIndex];
+    
+    // New logic to handle brackets and slashes
+    const rawEnglish = currentCard.english.toLowerCase().trim();
+    const noBrackets = rawEnglish.replace(/\s*\(.*\)/, '');
+    const acceptableAnswers = noBrackets.split('/').map(ans => ans.trim());
+    
+    const isCorrect = acceptableAnswers.includes(userAnswer);
 
-    if (userAnswer === correctAnswer) {
-        isEnglishCorrect = true;
-        feedbackEl.classList.remove('incorrect');
-        feedbackEl.classList.add('correct');
-        answerEl.classList.add('hidden');
+    if (isCorrect) {
+        isEnglishCorrect = true;
+        feedbackEl.classList.remove('incorrect');
+        feedbackEl.classList.add('correct');
+        answerEl.classList.remove('hidden');
 
-        if (isRomanCorrect) {
-            feedbackEl.textContent = "Fantastic! Both answers are spot-on! 🎉";
-            answerEl.classList.remove('hidden');
-            answerEl.textContent = `${currentCard.roman} | ${currentCard.english}`;
-        }
-        else {
-            feedbackEl.textContent = "Correct! Now, what about the Romanized spelling?";
-        }
-    } else {
-        isEnglishCorrect = false;
-        feedbackEl.textContent = "That's not the correct English translation. Give it another shot!";
-        feedbackEl.classList.remove('correct');
-        feedbackEl.classList.add('incorrect');
-        answerEl.classList.add('hidden');
-    }
+        if (isRomanCorrect) {
+            feedbackEl.textContent = "Fantastic! Both answers are spot-on! 🎉";
+            answerEl.textContent = `${currentCard.roman} | ${currentCard.english}`;
+        }
+        else {
+            feedbackEl.textContent = "Correct! Now, what about the Romanized spelling?";
+            answerEl.textContent = `${currentCard.english}`;
+        }
+    } else {
+        isEnglishCorrect = false;
+        feedbackEl.textContent = "That's not the correct English translation. Give it another shot!";
+        feedbackEl.classList.remove('correct');
+        feedbackEl.classList.add('incorrect');
+        answerEl.classList.add('hidden');
+    }
 }
 
 submitRomanizedBtn.addEventListener('click', checkRomanizedAnswer);
 submitEnglishBtn.addEventListener('click', checkEnglishAnswer);
 
 romanizedInput.addEventListener('keypress', (event) => {
-    if (event.key === 'Enter') {
-        checkRomanizedAnswer();
-    }
+    if (event.key === 'Enter') {
+        const isSingleAnswer = filteredQuizData[currentCardIndex].roman.toLowerCase().trim() === filteredQuizData[currentCardIndex].english.toLowerCase().trim();
+        if ((isRomanCorrect && isEnglishCorrect) || (isRomanCorrect && isSingleAnswer)) {
+            nextBtn.click();
+        } else {
+            checkRomanizedAnswer();
+        }
+    }
 });
 englishInput.addEventListener('keypress', (event) => {
-    if (event.key === 'Enter') {
-        checkEnglishAnswer();
-    }
+    if (event.key === 'Enter') {
+        if (isRomanCorrect && isEnglishCorrect) {
+            nextBtn.click();
+        } else {
+            checkEnglishAnswer();
+        }
+    }
 });
 
 nextBtn.addEventListener('click', () => {
-    currentCardIndex = (currentCardIndex + 1) % filteredQuizData.length;
-    displayCard();
+    currentCardIndex = (currentCardIndex + 1) % filteredQuizData.length;
+    displayCard();
 });
 
 prevBtn.addEventListener('click', () => {
-    currentCardIndex = (currentCardIndex - 1 + filteredQuizData.length) % filteredQuizData.length;
-    displayCard();
+    currentCardIndex = (currentCardIndex - 1 + filteredQuizData.length) % filteredQuizData.length;
+    displayCard();
 });
 
 showAnswerBtn.addEventListener('click', () => {
-    const currentCard = filteredQuizData[currentCardIndex];
-    const isSingleAnswer = currentCard.roman.toLowerCase().trim() === currentCard.english.toLowerCase().trim();
-    if (isSingleAnswer) {
-        answerEl.textContent = `${currentCard.roman}`;
-    } else {
-        answerEl.textContent = `${currentCard.roman} | ${currentCard.english}`;
-    }
-    answerEl.classList.remove('hidden');
+    const currentCard = filteredQuizData[currentCardIndex];
+    const isSingleAnswer = currentCard.roman.toLowerCase().trim() === currentCard.english.toLowerCase().trim();
+    if (isSingleAnswer) {
+        answerEl.textContent = `${currentCard.roman}`;
+    } else {
+        answerEl.textContent = `${currentCard.roman} | ${currentCard.english}`;
+    }
+    answerEl.classList.remove('hidden');
 });
 
 resetBtn.addEventListener('click', () => {
-    displayCard();
+    displayCard();
 });
 
 categorySelect.addEventListener('change', applyFilterAndLoad);
 
 function applyFilterAndLoad() {
-    const selectedCategory = categorySelect.value;
-    if (selectedCategory === 'all') {
-        filteredQuizData = [...quizData];
-    } else if (selectedCategory === 'popular') {
-        filteredQuizData = quizData.filter(card => card.popular === true);
-    } else {
-        filteredQuizData = quizData.filter(card => card.sort === selectedCategory);
-    }
-    shuffle(filteredQuizData);
-    currentCardIndex = 0;
-    displayCard();
+    const selectedCategory = categorySelect.value;
+    if (selectedCategory === 'all') {
+        filteredQuizData = [...quizData];
+    } else if (selectedCategory === 'popular') {
+        filteredQuizData = quizData.filter(card => card.popular === true);
+    } else {
+        filteredQuizData = quizData.filter(card => card.sort === selectedCategory);
+    }
+    shuffle(filteredQuizData);
+    currentCardIndex = 0;
+    displayCard();
 }
 
 applyFilterAndLoad();
