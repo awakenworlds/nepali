@@ -535,8 +535,6 @@ const quizData =
     {"devanagari":"तल","roman":"tala","english":"under","sort":"preposition"}
 ];
 
-
-
 const questionEl = document.getElementById('question');
 const answerEl = document.getElementById('answer');
 const romanizedInput = document.getElementById('romanized-answer-input');
@@ -611,25 +609,22 @@ function displayCard() {
     romanizedInput.focus();
 }
 
+// Helper function to normalize romanized spelling for comparison
+function normalizeRomanized(text) {
+    return text.toLowerCase().trim()
+        .replace(/oo/g, 'u') // Normalize 'oo' to 'u'
+        .replace(/ch/g, 'k') // Normalize 'ch' to 'k'
+        .replace(/h/g, ''); // Remove silent 'h'
+}
+
 function checkRomanizedAnswer() {
     const userAnswer = romanizedInput.value.toLowerCase().trim();
     const currentCard = filteredQuizData[currentCardIndex];
     const correctAnswer = currentCard.roman.toLowerCase().trim();
     const isSingleAnswer = currentCard.roman.toLowerCase().trim() === currentCard.english.toLowerCase().trim();
 
-    let kChSwappedUserAnswer = '';
-    if (userAnswer.includes('ch')) {
-        kChSwappedUserAnswer = userAnswer.replace(/ch/g, 'k');
-    } else if (userAnswer.includes('k')) {
-        kChSwappedUserAnswer = userAnswer.replace(/k/g, 'ch');
-    }
-
-    const isCorrect = (
-        userAnswer === correctAnswer ||
-        (kChSwappedUserAnswer && kChSwappedUserAnswer === correctAnswer) ||
-        userAnswer.replace(/h/g, '') === correctAnswer.replace(/h/g, '') ||
-        (kChSwappedUserAnswer && kChSwappedUserAnswer.replace(/h/g, '') === correctAnswer.replace(/h/g, ''))
-    );
+    // Use the new helper function for a more robust comparison
+    const isCorrect = normalizeRomanized(userAnswer) === normalizeRomanized(correctAnswer);
     
     // Clear previous feedback classes
     answerEl.classList.remove('correct', 'both-correct', 'incorrect');
@@ -641,7 +636,7 @@ function checkRomanizedAnswer() {
         if (isEnglishMode || isSingleAnswer || isEnglishCorrect) {
             // Both answers are correct, or it's a single-answer mode (e.g., in English mode or single field)
             answerEl.classList.add('both-correct'); // Dark green
-            answerEl.textContent = `Correct! Great job! 🎉 The answer is: ${currentCard.roman} ${isEnglishMode ? '' : `| ${currentCard.english}`}. Press 'Next' or 'Enter' to continue.`;
+            answerEl.textContent = `Correct! Great job! 🎉 ${currentCard.roman} ${isEnglishMode ? '' : `| ${currentCard.english}`}`;
         } else {
             // Only Romanized is correct, English is pending
             answerEl.classList.add('correct'); // Dark yellow
@@ -676,7 +671,7 @@ function checkEnglishAnswer() {
         if (isRomanCorrect) {
             // Both answers are correct
             answerEl.classList.add('both-correct'); // Dark green
-            answerEl.textContent = `Fantastic! Both answers are spot-on! 🎉 The answer is: ${currentCard.roman} | ${currentCard.english}. Press 'Next' or 'Enter' to continue.`;
+            answerEl.textContent = `Fantastic! Both answers are spot-on! 🎉 ${currentCard.roman} | ${currentCard.english}.`;
         } else {
             // Only English is correct, Romanized is pending
             answerEl.classList.add('correct'); // Dark yellow
@@ -702,9 +697,9 @@ function showFullAnswer() {
     answerEl.classList.add('correct'); // Dark yellow for showing the answer
     
     if (isEnglishMode) {
-        answerEl.textContent = `The answer is: ${currentCard.roman}. Press "Next" to continue.`;
+        answerEl.textContent = `${currentCard.roman}.`;
     } else {
-        answerEl.textContent = `The answer is: ${currentCard.roman} | ${currentCard.english}. Press "Next" to continue.`;
+        answerEl.textContent = `${currentCard.roman} | ${currentCard.english}.`;
     }
 }
 
