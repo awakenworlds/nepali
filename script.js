@@ -1,105 +1,105 @@
 const quizData = 
 [
-    {"devanagari":"१","roman":"ek","english":"one","sort":"number"},
-    {"devanagari":"२","roman":"dui","english":"two","sort":"number"},
-    {"devanagari":"३","roman":"tin","english":"three","sort":"number"},
-    {"devanagari":"४","roman":"char","english":"four","sort":"number"},
-    {"devanagari":"५","roman":"paanch","english":"five","sort":"number"},
-    {"devanagari":"६","roman":"chha","english":"six","sort":"number"},
-    {"devanagari":"७","roman":"saat","english":"seven","sort":"number"},
-    {"devanagari":"८","roman":"aath","english":"eight","sort":"number"},
-    {"devanagari":"९","roman":"nau","english":"nine","sort":"number"},
-    {"devanagari":"१०","roman":"das","english":"ten","sort":"number"},
-    {"devanagari":"११","roman":"eghaar","english":"eleven","sort":"number"},
-    {"devanagari":"१२","roman":"baahra","english":"twelve","sort":"number"},
-    {"devanagari":"१३","roman":"tehra","english":"thirteen","sort":"number"},
-    {"devanagari":"१४","roman":"chaudha","english":"fourteen","sort":"number"},
-    {"devanagari":"१५","roman":"pandra","english":"fifteen","sort":"number"},
-    {"devanagari":"१६","roman":"sohra","english":"sixteen","sort":"number"},
-    {"devanagari":"१७","roman":"satra","english":"seventeen","sort":"number"},
-    {"devanagari":"१८","roman":"athaar","english":"eighteen","sort":"number"},
-    {"devanagari":"१९","roman":"unnaais","english":"nineteen","sort":"number"},
-    {"devanagari":"२०","roman":"bis","english":"twenty","sort":"number"},
-    {"devanagari":"२१","roman":"ekais","english":"twenty-one","sort":"number"},
-    {"devanagari":"२२","roman":"bais","english":"twenty-two","sort":"number"},
-    {"devanagari":"२३","roman":"teis","english":"twenty-three","sort":"number"},
-    {"devanagari":"२४","roman":"choubis","english":"twenty-four","sort":"number"},
-    {"devanagari":"२५","roman":"pachchis","english":"twenty-five","sort":"number"},
-    {"devanagari":"२६","roman":"chhabis","english":"twenty-six","sort":"number"},
-    {"devanagari":"२७","roman":"sattaris","english":"twenty-seven","sort":"number"},
-    {"devanagari":"२८","roman":"atthais","english":"twenty-eight","sort":"number"},
-    {"devanagari":"२९","roman":"unantis","english":"twenty-nine","sort":"number"},
-    {"devanagari":"३०","roman":"tis","english":"thirty","sort":"number"},
-    {"devanagari":"३१","roman":"ektis","english":"thirty-one","sort":"number"},
-    {"devanagari":"३२","roman":"battis","english":"thirty-two","sort":"number"},
-    {"devanagari":"३३","roman":"tehtis","english":"thirty-three","sort":"number"},
-    {"devanagari":"३४","roman":"chautis","english":"thirty-four","sort":"number"},
-    {"devanagari":"३५","roman":"paitis","english":"thirty-five","sort":"number"},
-    {"devanagari":"३६","roman":"chhattis","english":"thirty-six","sort":"number"},
-    {"devanagari":"३७","roman":"sainttis","english":"thirty-seven","sort":"number"},
-    {"devanagari":"३८","roman":"aatthis","english":"thirty-eight","sort":"number"},
-    {"devanagari":"३९","roman":"unachalis","english":"thirty-nine","sort":"number"},
-    {"devanagari":"४०","roman":"chalis","english":"forty","sort":"number"},
-    {"devanagari":"४१","roman":"ektalis","english":"forty-one","sort":"number"},
-    {"devanagari":"४२","roman":"bayaalis","english":"forty-two","sort":"number"},
-    {"devanagari":"४३","roman":"chyaalis","english":"forty-three","sort":"number"},
-    {"devanagari":"४४","roman":"chawalis","english":"forty-four","sort":"number"},
-    {"devanagari":"४५","roman":"paitaalish","english":"forty-five","sort":"number"},
-    {"devanagari":"४६","roman":"chayalis","english":"forty-six","sort":"number"},
-    {"devanagari":"४७","roman":"sataalis","english":"forty-seven","sort":"number"},
-    {"devanagari":"४८","roman":"adtaalis","english":"forty-eight","sort":"number"},
-    {"devanagari":"४९","roman":"unanchaas","english":"forty-nine","sort":"number"},
-    {"devanagari":"५०","roman":"pachaas","english":"fifty","sort":"number"},
-    {"devanagari":"५१","roman":"ekanna","english":"fifty-one","sort":"number"},
-    {"devanagari":"५२","roman":"baawanna","english":"fifty-two","sort":"number"},
-    {"devanagari":"५३","roman":"trippanna","english":"fifty-three","sort":"number"},
-    {"devanagari":"५४","roman":"chowanna","english":"fifty-four","sort":"number"},
-    {"devanagari":"५५","roman":"pachpanna","english":"fifty-five","sort":"number"},
-    {"devanagari":"५६","roman":"chhapanna","english":"fifty-six","sort":"number"},
-    {"devanagari":"५७","roman":"sataunna","english":"fifty-seven","sort":"number"},
-    {"devanagari":"५८","roman":"anthawanna","english":"fifty-eight","sort":"number"},
-    {"devanagari":"५९","roman":"unansathi","english":"fifty-nine","sort":"number"},
-    {"devanagari":"६०","roman":"saathi","english":"sixty","sort":"number"},
-    {"devanagari":"६१","roman":"ekasathi","english":"sixty-one","sort":"number"},
-    {"devanagari":"६२","roman":"bahasathi","english":"sixty-two","sort":"number"},
-    {"devanagari":"६३","roman":"terasathi","english":"sixty-three","sort":"number"},
-    {"devanagari":"६४","roman":"chausathi","english":"sixty-four","sort":"number"},
-    {"devanagari":"६५","roman":"paisathi","english":"sixty-five","sort":"number"},
-    {"devanagari":"६६","roman":"chayasathi","english":"sixty-six","sort":"number"},
-    {"devanagari":"६७","roman":"satasathi","english":"sixty-seven","sort":"number"},
-    {"devanagari":"६८","roman":"adasathi","english":"sixty-eight","sort":"number"},
-    {"devanagari":"६९","roman":"unansattari","english":"sixty-nine","sort":"number"},
-    {"devanagari":"७०","roman":"sattari","english":"seventy","sort":"number"},
-    {"devanagari":"७१","roman":"ekahattar","english":"seventy-one","sort":"number"},
-    {"devanagari":"७२","roman":"bahattar","english":"seventy-two","sort":"number"},
-    {"devanagari":"७३","roman":"tihattara","english":"seventy-three","sort":"number"},
-    {"devanagari":"७४","roman":"chauhattar","english":"seventy-four","sort":"number"},
-    {"devanagari":"७५","roman":"pachahattar","english":"seventy-five","sort":"number"},
-    {"devanagari":"७६","roman":"chhehattari","english":"seventy-six","sort":"number"},
-    {"devanagari":"७७","roman":"satahattari","english":"seventy-seven","sort":"number"},
-    {"devanagari":"७८","roman":"athahattari","english":"seventy-eight","sort":"number"},
-    {"devanagari":"७९","roman":"unasi","english":"seventy-nine","sort":"number"},
-    {"devanagari":"८०","roman":"asi","english":"eighty","sort":"number"},
-    {"devanagari":"८१","roman":"ekasi","english":"eighty-one","sort":"number"},
-    {"devanagari":"८२","roman":"bayasi","english":"eighty-two","sort":"number"},
-    {"devanagari":"८३","roman":"triyasi","english":"eighty-three","sort":"number"},
-    {"devanagari":"८४","roman":"chaurasi","english":"eighty-four","sort":"number"},
-    {"devanagari":"८५","roman":"pachasi","english":"eighty-five","sort":"number"},
-    {"devanagari":"८६","roman":"chayasi","english":"eighty-six","sort":"number"},
-    {"devanagari":"८७","roman":"satasi","english":"eighty-seven","sort":"number"},
-    {"devanagari":"८८","roman":"athasi","english":"eighty-eight","sort":"number"},
-    {"devanagari":"८९","roman":"unanabbe","english":"eighty-nine","sort":"number"},
-    {"devanagari":"९०","roman":"nabbe","english":"ninety","sort":"number"},
-    {"devanagari":"९१","roman":"ekannabbe","english":"ninety-one","sort":"number"},
-    {"devanagari":"९२","roman":"bhanabbe","english":"ninety-two","sort":"number"},
-    {"devanagari":"९३","roman":"tiranabbe","english":"ninety-three","sort":"number"},
-    {"devanagari":"९४","roman":"churanabbe","english":"ninety-four","sort":"number"},
-    {"devanagari":"९५","roman":"pachanabbe","english":"ninety-five","sort":"number"},
-    {"devanagari":"९६","roman":"chayanabbe","english":"ninety-six","sort":"number"},
-    {"devanagari":"९७","roman":"satanabbe","english":"ninety-seven","sort":"number"},
-    {"devanagari":"९८","roman":"athanabbe","english":"ninety-eight","sort":"number"},
-    {"devanagari":"९९","roman":"unansaya","english":"ninety-nine","sort":"number"},
-    {"devanagari":"१००","roman":"saya","english":"one hundred","sort":"number"},
+{"devanagari": "१", "roman": "ek", "english": "1", "sort": "number"},
+{"devanagari": "२", "roman": "dui", "english": "2", "sort": "number"},
+{"devanagari": "३", "roman": "tin", "english": "3", "sort": "number"},
+{"devanagari": "४", "roman": "char", "english": "4", "sort": "number"},
+{"devanagari": "५", "roman": "paanch", "english": "5", "sort": "number"},
+{"devanagari": "६", "roman": "chha", "english": "6", "sort": "number"},
+{"devanagari": "७", "roman": "saat", "english": "7", "sort": "number"},
+{"devanagari": "८", "roman": "aath", "english": "8", "sort": "number"},
+{"devanagari": "९", "roman": "nau", "english": "9", "sort": "number"},
+{"devanagari": "१०", "roman": "das", "english": "10", "sort": "number"},
+{"devanagari": "११", "roman": "eghaar", "english": "11", "sort": "number"},
+{"devanagari": "१२", "roman": "baahra", "english": "12", "sort": "number"},
+{"devanagari": "१३", "roman": "tehra", "english": "13", "sort": "number"},
+{"devanagari": "१४", "roman": "chaudha", "english": "14", "sort": "number"},
+{"devanagari": "१५", "roman": "pandra", "english": "15", "sort": "number"},
+{"devanagari": "१६", "roman": "sohra", "english": "16", "sort": "number"},
+{"devanagari": "१७", "roman": "satra", "english": "17", "sort": "number"},
+{"devanagari": "१८", "roman": "athaar", "english": "18", "sort": "number"},
+{"devanagari": "१९", "roman": "unnaais", "english": "19", "sort": "number"},
+{"devanagari": "२०", "roman": "bis", "english": "20", "sort": "number"},
+{"devanagari": "२१", "roman": "ekais", "english": "21", "sort": "number"},
+{"devanagari": "२२", "roman": "bais", "english": "22", "sort": "number"},
+{"devanagari": "२३", "roman": "teis", "english": "23", "sort": "number"},
+{"devanagari": "२४", "roman": "choubis", "english": "24", "sort": "number"},
+{"devanagari": "२५", "roman": "pachchis", "english": "25", "sort": "number"},
+{"devanagari": "२६", "roman": "chhabis", "english": "26", "sort": "number"},
+{"devanagari": "२७", "roman": "sattaris", "english": "27", "sort": "number"},
+{"devanagari": "२८", "roman": "atthais", "english": "28", "sort": "number"},
+{"devanagari": "२९", "roman": "unantis", "english": "29", "sort": "number"},
+{"devanagari": "३०", "roman": "tis", "english": "30", "sort": "number"},
+{"devanagari": "३१", "roman": "ektis", "english": "31", "sort": "number"},
+{"devanagari": "३२", "roman": "battis", "english": "32", "sort": "number"},
+{"devanagari": "३३", "roman": "tehtis", "english": "33", "sort": "number"},
+{"devanagari": "३४", "roman": "chautis", "english": "34", "sort": "number"},
+{"devanagari": "३५", "roman": "paitis", "english": "35", "sort": "number"},
+{"devanagari": "३६", "roman": "chhattis", "english": "36", "sort": "number"},
+{"devanagari": "३७", "roman": "sainttis", "english": "37", "sort": "number"},
+{"devanagari": "३८", "roman": "aatthis", "english": "38", "sort": "number"},
+{"devanagari": "३९", "roman": "unachalis", "english": "39", "sort": "number"},
+{"devanagari": "४०", "roman": "chalis", "english": "40", "sort": "number"},
+{"devanagari": "४१", "roman": "ektalis", "english": "41", "sort": "number"},
+{"devanagari": "४२", "roman": "bayaalis", "english": "42", "sort": "number"},
+{"devanagari": "४३", "roman": "chyaalis", "english": "43", "sort": "number"},
+{"devanagari": "४४", "roman": "chawalis", "english": "44", "sort": "number"},
+{"devanagari": "४५", "roman": "paitaalish", "english": "45", "sort": "number"},
+{"devanagari": "४६", "roman": "chayalis", "english": "46", "sort": "number"},
+{"devanagari": "४७", "roman": "sataalis", "english": "47", "sort": "number"},
+{"devanagari": "४८", "roman": "adtaalis", "english": "48", "sort": "number"},
+{"devanagari": "४९", "roman": "unanchaas", "english": "49", "sort": "number"},
+{"devanagari": "५०", "roman": "pachaas", "english": "50", "sort": "number"},
+{"devanagari": "५१", "roman": "ekanna", "english": "51", "sort": "number"},
+{"devanagari": "५२", "roman": "baawanna", "english": "52", "sort": "number"},
+{"devanagari": "५३", "roman": "trippanna", "english": "53", "sort": "number"},
+{"devanagari": "५४", "roman": "chowanna", "english": "54", "sort": "number"},
+{"devanagari": "५५", "roman": "pachpanna", "english": "55", "sort": "number"},
+{"devanagari": "५६", "roman": "chhapanna", "english": "56", "sort": "number"},
+{"devanagari": "५७", "roman": "sataunna", "english": "57", "sort": "number"},
+{"devanagari": "५८", "roman": "anthawanna", "english": "58", "sort": "number"},
+{"devanagari": "५९", "roman": "unansathi", "english": "59", "sort": "number"},
+{"devanagari": "६०", "roman": "saathi", "english": "60", "sort": "number"},
+{"devanagari": "६१", "roman": "ekasathi", "english": "61", "sort": "number"},
+{"devanagari": "६२", "roman": "bahasathi", "english": "62", "sort": "number"},
+{"devanagari": "६३", "roman": "terasathi", "english": "63", "sort": "number"},
+{"devanagari": "६४", "roman": "chausathi", "english": "64", "sort": "number"},
+{"devanagari": "६५", "roman": "paisathi", "english": "65", "sort": "number"},
+{"devanagari": "६६", "roman": "chayasathi", "english": "66", "sort": "number"},
+{"devanagari": "६७", "roman": "satasathi", "english": "67", "sort": "number"},
+{"devanagari": "६८", "roman": "adasathi", "english": "68", "sort": "number"},
+{"devanagari": "६९", "roman": "unansattari", "english": "69", "sort": "number"},
+{"devanagari": "७०", "roman": "sattari", "english": "70", "sort": "number"},
+{"devanagari": "७१", "roman": "ekahattar", "english": "71", "sort": "number"},
+{"devanagari": "७२", "roman": "bahattar", "english": "72", "sort": "number"},
+{"devanagari": "७३", "roman": "tihattara", "english": "73", "sort": "number"},
+{"devanagari": "७४", "roman": "chauhattar", "english": "74", "sort": "number"},
+{"devanagari": "७५", "roman": "pachahattar", "english": "75", "sort": "number"},
+{"devanagari": "७६", "roman": "chhehattari", "english": "76", "sort": "number"},
+{"devanagari": "७७", "roman": "satahattari", "english": "77", "sort": "number"},
+{"devanagari": "७८", "roman": "athahattari", "english": "78", "sort": "number"},
+{"devanagari": "७९", "roman": "unasi", "english": "79", "sort": "number"},
+{"devanagari": "८०", "roman": "asi", "english": "80", "sort": "number"},
+{"devanagari": "८१", "roman": "ekasi", "english": "81", "sort": "number"},
+{"devanagari": "८२", "roman": "bayasi", "english": "82", "sort": "number"},
+{"devanagari": "८३", "roman": "triyasi", "english": "83", "sort": "number"},
+{"devanagari": "८४", "roman": "chaurasi", "english": "84", "sort": "number"},
+{"devanagari": "८५", "roman": "pachasi", "english": "85", "sort": "number"},
+{"devanagari": "८६", "roman": "chayasi", "english": "86", "sort": "number"},
+{"devanagari": "८७", "roman": "satasi", "english": "87", "sort": "number"},
+{"devanagari": "८८", "roman": "athasi", "english": "88", "sort": "number"},
+{"devanagari": "८९", "roman": "unanabbe", "english": "89", "sort": "number"},
+{"devanagari": "९०", "roman": "nabbe", "english": "90", "sort": "number"},
+{"devanagari": "९१", "roman": "ekannabbe", "english": "91", "sort": "number"},
+{"devanagari": "९२", "roman": "bhanabbe", "english": "92", "sort": "number"},
+{"devanagari": "९३", "roman": "tiranabbe", "english": "93", "sort": "number"},
+{"devanagari": "९४", "roman": "churanabbe", "english": "94", "sort": "number"},
+{"devanagari": "९५", "roman": "pachanabbe", "english": "95", "sort": "number"},
+{"devanagari": "९६", "roman": "chayanabbe", "english": "96", "sort": "number"},
+{"devanagari": "९७", "roman": "satanabbe", "english": "97", "sort": "number"},
+{"devanagari": "९८", "roman": "athanabbe", "english": "98", "sort": "number"},
+{"devanagari": "९९", "roman": "unansaya", "english": "99", "sort": "number"},
+{"devanagari": "१००", "roman": "saya", "english": "100", "sort": "number"},
     {"devanagari":"अ","roman":"a","english":"a","sort":"letter"},
     {"devanagari":"आ","roman":"aa","english":"aa","sort":"letter"},
     {"devanagari":"इ","roman":"i","english":"i","sort":"letter"},
@@ -550,59 +550,68 @@ const resetBtn = document.getElementById('reset-btn');
 const nextBtn = document.getElementById('next-card-btn');
 const categorySelect = document.getElementById('category-select');
 const englishFieldGroup = document.getElementById('english-field-group');
+const englishModeBtn = document.getElementById('english-mode-btn');
 
 let currentCardIndex = 0;
 let filteredQuizData = [];
 let isRomanCorrect = false;
 let isEnglishCorrect = false;
+let isEnglishMode = false;
 
 function shuffle(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
 }
 
 function displayCard() {
-    if (filteredQuizData.length === 0) {
-        questionEl.textContent = 'Oops! No flashcards found for this category. Please choose a different one.';
-        answerEl.textContent = '';
-        answerEl.classList.add('hidden');
-        romanizedInput.value = '';
-        englishInput.value = '';
-        englishFieldGroup.style.display = 'none';
-        return;
-    }
+    if (filteredQuizData.length === 0) {
+        questionEl.textContent = 'Oops! No flashcards found for this category. Please choose a different one.';
+        answerEl.textContent = '';
+        answerEl.classList.add('hidden');
+        romanizedInput.value = '';
+        englishInput.value = '';
+        englishFieldGroup.style.display = 'none';
+        return;
+    }
 
-    const currentCard = filteredQuizData[currentCardIndex];
-    questionEl.textContent = currentCard.devanagari;
-    answerEl.textContent = `${currentCard.roman} | ${currentCard.english}`;
-    answerEl.classList.add('hidden');
-    feedbackEl.textContent = '';
-    romanizedInput.value = '';
-    englishInput.value = '';
+    const currentCard = filteredQuizData[currentCardIndex];
+    answerEl.classList.add('hidden');
+    feedbackEl.textContent = '';
+    romanizedInput.value = '';
+    englishInput.value = '';
 
-    const isSingleAnswer = currentCard.roman.toLowerCase().trim() === currentCard.english.toLowerCase().trim();
-    if (isSingleAnswer) {
-        englishFieldGroup.style.display = 'none';
-        romanizedInput.placeholder = "Enter the answer";
-    } else {
-        englishFieldGroup.style.display = 'flex';
-        romanizedInput.placeholder = "Romanized Answer";
-    }
+    if (isEnglishMode) {
+        questionEl.textContent = currentCard.english;
+        questionEl.classList.add('english-mode-text');
+        englishFieldGroup.style.display = 'none';
+        romanizedInput.placeholder = "Enter Romanized Answer";
+    } else {
+        questionEl.textContent = currentCard.devanagari;
+        questionEl.classList.remove('english-mode-text');
+        const isSingleAnswer = currentCard.roman.toLowerCase().trim() === currentCard.english.toLowerCase().trim();
+        if (isSingleAnswer) {
+            englishFieldGroup.style.display = 'none';
+            romanizedInput.placeholder = "Enter the answer";
+        } else {
+            englishFieldGroup.style.display = 'flex';
+            romanizedInput.placeholder = "Romanized Answer";
+        }
+    }
 
-    isRomanCorrect = false;
-    isEnglishCorrect = false;
+    isRomanCorrect = false;
+    isEnglishCorrect = false;
     romanizedInput.focus();
 }
 
 function checkRomanizedAnswer() {
-    const userAnswer = romanizedInput.value.toLowerCase().trim();
-    const currentCard = filteredQuizData[currentCardIndex];
-    const correctAnswer = currentCard.roman.toLowerCase().trim();
-    const isSingleAnswer = currentCard.roman.toLowerCase().trim() === currentCard.english.toLowerCase().trim();
+    const userAnswer = romanizedInput.value.toLowerCase().trim();
+    const currentCard = filteredQuizData[currentCardIndex];
+    const correctAnswer = currentCard.roman.toLowerCase().trim();
+    const isSingleAnswer = currentCard.roman.toLowerCase().trim() === currentCard.english.toLowerCase().trim();
 
-    // Create a version of the user's answer with k/ch swapped
+    // Flexible spelling check for Romanized answers
     let kChSwappedUserAnswer = '';
     if (userAnswer.includes('ch')) {
         kChSwappedUserAnswer = userAnswer.replace(/ch/g, 'k');
@@ -617,94 +626,118 @@ function checkRomanizedAnswer() {
         (kChSwappedUserAnswer && kChSwappedUserAnswer.replace(/h/g, '') === correctAnswer.replace(/h/g, ''))
     );
     
-    if (isCorrect) {
-        isRomanCorrect = true;
-        feedbackEl.classList.remove('incorrect');
-        feedbackEl.classList.add('correct');
-        answerEl.classList.remove('hidden');
-        
-        if (isSingleAnswer) {
-            feedbackEl.textContent = "Amazing! You got it perfect! ✨";
-            answerEl.textContent = `${currentCard.roman}`;
-        }
-        else if (isEnglishCorrect) {
-            feedbackEl.textContent = "Fantastic! Both answers are spot-on! 🎉";
-            answerEl.textContent = `${currentCard.roman} | ${currentCard.english}`;
-        }
-        else {
-            feedbackEl.textContent = "Correct! Now, please enter the English translation.";
-            answerEl.textContent = `${currentCard.roman}`;
+    if (isCorrect) {
+        isRomanCorrect = true;
+        feedbackEl.classList.remove('incorrect');
+        feedbackEl.classList.add('correct');
+        answerEl.classList.remove('hidden');
+
+        if (isEnglishMode || isSingleAnswer || isEnglishCorrect) {
+            answerEl.textContent = `${currentCard.roman} ${isEnglishMode ? '' : `| ${currentCard.english}`}`;
+            feedbackEl.textContent = "Correct! Great job! 🎉 Press 'Next' or 'Enter' to continue.";
+        } else {
+            answerEl.textContent = `${currentCard.roman}`;
+            feedbackEl.textContent = "Correct! Now, please enter the English translation.";
             englishInput.focus();
-        }
-    } else {
-        isRomanCorrect = false;
-        feedbackEl.textContent = "Not quite. Let's try that Romanized spelling again.";
-        feedbackEl.classList.remove('correct');
-        feedbackEl.classList.add('incorrect');
-        answerEl.classList.add('hidden');
-    }
+        }
+    } else {
+        isRomanCorrect = false;
+        feedbackEl.textContent = "Not quite. Please try again.";
+        feedbackEl.classList.remove('correct');
+        feedbackEl.classList.add('incorrect');
+        answerEl.classList.add('hidden');
+    }
 }
 
 function checkEnglishAnswer() {
-    const userAnswer = englishInput.value.toLowerCase().trim();
-    const currentCard = filteredQuizData[currentCardIndex];
-    
+    const userAnswer = englishInput.value.toLowerCase().trim();
+    const currentCard = filteredQuizData[currentCardIndex];
+    
     const rawEnglish = currentCard.english.toLowerCase().trim();
     const noBrackets = rawEnglish.replace(/\s*\(.*\)/, '');
     const acceptableAnswers = noBrackets.split('/').map(ans => ans.trim());
     
     const isCorrect = acceptableAnswers.includes(userAnswer);
 
-    if (isCorrect) {
-        isEnglishCorrect = true;
-        feedbackEl.classList.remove('incorrect');
-        feedbackEl.classList.add('correct');
-        answerEl.classList.remove('hidden');
+    if (isCorrect) {
+        isEnglishCorrect = true;
+        feedbackEl.classList.remove('incorrect');
+        feedbackEl.classList.add('correct');
+        answerEl.classList.remove('hidden');
 
-        if (isRomanCorrect) {
-            feedbackEl.textContent = "Fantastic! Both answers are spot-on! 🎉";
-            answerEl.textContent = `${currentCard.roman} | ${currentCard.english}`;
-        }
-        else {
-            feedbackEl.textContent = "Correct! Now, what about the Romanized spelling?";
-            answerEl.textContent = `${currentCard.english}`;
-        }
-    } else {
-        isEnglishCorrect = false;
-        feedbackEl.textContent = "That's not the correct English translation. Give it another shot!";
-        feedbackEl.classList.remove('correct');
-        feedbackEl.classList.add('incorrect');
-        answerEl.classList.add('hidden');
-    }
+        if (isRomanCorrect) {
+            answerEl.textContent = `${currentCard.roman} | ${currentCard.english}`;
+            feedbackEl.textContent = "Fantastic! Both answers are spot-on! 🎉 Press 'Next' or 'Enter' to continue.";
+        } else {
+            answerEl.textContent = `${currentCard.english}`;
+            feedbackEl.textContent = "Correct! Now, what about the Romanized spelling?";
+        }
+    } else {
+        isEnglishCorrect = false;
+        feedbackEl.textContent = "That's not the correct English translation. Give it another shot!";
+        feedbackEl.classList.remove('correct');
+        feedbackEl.classList.add('incorrect');
+        answerEl.classList.add('hidden');
+    }
 }
 
+function advanceQuiz() {
+    nextBtn.click();
+}
+
+function showFullAnswer() {
+    const currentCard = filteredQuizData[currentCardIndex];
+    answerEl.classList.remove('hidden');
+    if (isEnglishMode) {
+        answerEl.textContent = `${currentCard.roman}`;
+    } else {
+        answerEl.textContent = `${currentCard.roman} | ${currentCard.english}`;
+    }
+    feedbackEl.textContent = 'Here is the correct answer. Press "Next" to continue.';
+    feedbackEl.classList.remove('incorrect');
+    feedbackEl.classList.add('correct');
+}
+
+// Event listeners to check answers when buttons are clicked
 submitRomanizedBtn.addEventListener('click', checkRomanizedAnswer);
 submitEnglishBtn.addEventListener('click', checkEnglishAnswer);
 
+// Event listener for toggling English mode
+englishModeBtn.addEventListener('click', () => {
+    isEnglishMode = !isEnglishMode;
+    displayCard();
+});
+
+// Event listener for the "Enter" key in the Romanized input
 romanizedInput.addEventListener('keypress', (event) => {
-    if (event.key === 'Enter') {
-        const isSingleAnswer = filteredQuizData[currentCardIndex].roman.toLowerCase().trim() === filteredQuizData[currentCardIndex].english.toLowerCase().trim();
-        if ((isRomanCorrect && isEnglishCorrect) || (isRomanCorrect && isSingleAnswer)) {
-            nextBtn.click();
+    if (event.key === 'Enter') {
+        const currentCard = filteredQuizData[currentCardIndex];
+        const isSingleAnswer = currentCard.roman.toLowerCase().trim() === currentCard.english.toLowerCase().trim();
+        
+        if ((isEnglishMode && isRomanCorrect) || (!isEnglishMode && isRomanCorrect && isEnglishCorrect) || (!isEnglishMode && isRomanCorrect && isSingleAnswer)) {
+            advanceQuiz();
         } else {
             checkRomanizedAnswer();
         }
-    }
+    }
 });
+
+// Event listener for the "Enter" key in the English input
 englishInput.addEventListener('keypress', (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter') {
         if (isRomanCorrect && isEnglishCorrect) {
-            nextBtn.click();
+            advanceQuiz();
         } else {
             checkEnglishAnswer();
         }
-    }
+    }
 });
 
+// Keyboard shortcuts for navigation
 document.addEventListener('keydown', (event) => {
-    if (event.key === 'ArrowUp') {
-        showAnswerBtn.click();
-    }
+    if (event.key === 'ArrowUp') {
+        showFullAnswer();
+    }
     if (event.key === 'ArrowRight') {
         nextBtn.click();
     }
@@ -713,45 +746,40 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
+// Navigation button event listeners
 nextBtn.addEventListener('click', () => {
-    currentCardIndex = (currentCardIndex + 1) % filteredQuizData.length;
-    displayCard();
+    currentCardIndex = (currentCardIndex + 1) % filteredQuizData.length;
+    displayCard();
 });
 
 prevBtn.addEventListener('click', () => {
-    currentCardIndex = (currentCardIndex - 1 + filteredQuizData.length) % filteredQuizData.length;
-    displayCard();
+    currentCardIndex = (currentCardIndex - 1 + filteredQuizData.length) % filteredQuizData.length;
+    displayCard();
 });
 
-showAnswerBtn.addEventListener('click', () => {
-    const currentCard = filteredQuizData[currentCardIndex];
-    const isSingleAnswer = currentCard.roman.toLowerCase().trim() === currentCard.english.toLowerCase().trim();
-    if (isSingleAnswer) {
-        answerEl.textContent = `${currentCard.roman}`;
-    } else {
-        answerEl.textContent = `${currentCard.roman} | ${currentCard.english}`;
-    }
-    answerEl.classList.remove('hidden');
-});
+showAnswerBtn.addEventListener('click', showFullAnswer);
 
 resetBtn.addEventListener('click', () => {
-    displayCard();
+    shuffle(filteredQuizData);
+    currentCardIndex = 0;
+    displayCard();
 });
 
 categorySelect.addEventListener('change', applyFilterAndLoad);
 
 function applyFilterAndLoad() {
-    const selectedCategory = categorySelect.value;
-    if (selectedCategory === 'all') {
-        filteredQuizData = [...quizData];
-    } else if (selectedCategory === 'popular') {
-        filteredQuizData = quizData.filter(card => card.popular === true);
-    } else {
-        filteredQuizData = quizData.filter(card => card.sort === selectedCategory);
-    }
-    shuffle(filteredQuizData);
-    currentCardIndex = 0;
-    displayCard();
+    const selectedCategory = categorySelect.value;
+    if (selectedCategory === 'all') {
+        filteredQuizData = [...quizData];
+    } else if (selectedCategory === 'popular') {
+        filteredQuizData = quizData.filter(card => card.popular === true);
+    } else {
+        filteredQuizData = quizData.filter(card => card.sort === selectedCategory);
+    }
+    shuffle(filteredQuizData);
+    currentCardIndex = 0;
+    displayCard();
 }
 
+// Initial load
 applyFilterAndLoad();

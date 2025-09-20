@@ -4,50 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nepali Flashcards</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@100..900&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="card-container">
+    <div class="quiz-container">
         <h1>Nepali Flashcards</h1>
-        <div id="card">
+        <div class="top-right-controls">
+            <button id="english-mode-btn" class="nav-button">Toggle English Mode</button>
+            <div class="controls">
+                <select id="category-select" class="nav-select">
+                    <option value="all">All</option>
+                    <option value="number">Numbers</option>
+                    <option value="letter">Letters</option>
+                    <option value="verb">Verbs</option>
+                    <option value="noun">Nouns</option>
+                    <option value="adjective">Adjectives</option>
+                    <option value="adverb">Adverbs</option>
+                    <option value="conjunction">Conjunctions</option>
+                    <option value="preposition">Prepositions</option>
+                    <option value="popular">Popular</option>
+                </select>
+            </div>
+        </div>
+        <div class="card">
             <div id="question"></div>
             <div id="answer" class="hidden"></div>
-            <div id="feedback" class="feedback"></div>
         </div>
-
-        <div class="controls">
-            <div class="input-group">
-                <input type="text" id="romanized-answer-input" placeholder="Romanized Answer">
-                <button id="submit-romanized-btn">Submit</button>
-            </div>
-            <div id="english-field-group" class="input-group hidden">
-                <input type="text" id="english-answer-input" placeholder="English Answer">
-                <button id="submit-english-btn">Submit</button>
-            </div>
+        <div id="feedback"></div>
+        
+        <div class="input-group">
+            <input type="text" id="romanized-answer-input" placeholder="Romanized Answer">
+            <button id="submit-romanized-btn" class="submit-button">Submit</button>
         </div>
-
-        <div class="action-buttons">
-            <button id="prev-card-btn">Previous</button>
-            <button id="show-answer-btn">Show Full Answer</button>
-            <button id="reset-btn" class="reset-button">Reset Card</button>
-            <button id="next-card-btn">Next</button>
+        <div class="input-group" id="english-field-group">
+            <input type="text" id="english-answer-input" placeholder="English Answer">
+            <button id="submit-english-btn" class="submit-button">Submit</button>
         </div>
-
-        <div class="category-select-container">
-            <label for="category-select">Choose a category:</label>
-            <select id="category-select" class="category-select">
-                <option value="popular">Popular</option>
-                <option value="all">All</option>
-                <option value="number">Numbers</option>
-                <option value="letter">Letters</option>
-                <option value="noun">Nouns</option>
-                <option value="verb">Verbs</option>
-                <option value="adjective">Adjectives</option>
-            </select>
+        <div class="navigation-buttons">
+            <button id="prev-card-btn" class="nav-button">Previous</button>
+            <button id="show-answer-btn" class="nav-button">Show Answer</button>
+            <button id="reset-btn" class="nav-button">Reset</button>
+            <button id="next-card-btn" class="nav-button">Next</button>
         </div>
     </div>
     <script src="script.js"></script>
