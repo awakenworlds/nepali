@@ -241,7 +241,7 @@ categorySelect.addEventListener('change', applyFilterAndLoad);
 // --- New Logic to Fetch and Initialize the Quiz ---
 async function initializeQuiz() {
     try {
-        const response = await fetch('awakenworlds.github.io/nepali/data.json');
+        const response = await fetch('nepali/data.json');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -257,3 +257,4 @@ async function initializeQuiz() {
 
 // Start the quiz by fetching the data
 initializeQuiz();
+
