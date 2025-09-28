@@ -34,7 +34,7 @@ h1 {
   margin-bottom: 1em;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  align-items: center; /* Centers question horizontally */
 }
 
 .card #question {
@@ -44,7 +44,8 @@ h1 {
   margin-bottom: 0.5em;
   word-wrap: break-word;
   text-align: center;
-  width: 100%;
+  width: auto; /* Shrinks to fit text */
+  max-width: 100%; /* Prevent overflow */
 }
 
 #answer {
