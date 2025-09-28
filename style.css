@@ -32,6 +32,9 @@ h1 {
   border-radius: 6px;
   padding: 1em;
   margin-bottom: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 
 .card #question {
@@ -39,6 +42,9 @@ h1 {
   font-weight: 600;
   color: #2c3e50;
   margin-bottom: 0.5em;
+  word-wrap: break-word;
+  text-align: center;
+  width: 100%;
 }
 
 #answer {
@@ -51,10 +57,11 @@ h1 {
   display: flex;
   gap: 0.5em;
   margin: 0.8em 0;
+  flex-wrap: wrap;
 }
 
 .input-group input[type="text"] {
-  flex: 1 1 200px;
+  flex: 1;
   padding: 0.7em;
   border: 1px solid #ccc;
   border-radius: 6px;
@@ -71,7 +78,6 @@ h1 {
   padding: 0.7em 1em;
   font-size: 1rem;
   cursor: pointer;
-  flex: 0 0 auto;
 }
 
 .submit-button:hover {
@@ -83,6 +89,7 @@ h1 {
   display: flex;
   justify-content: center;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
 .nav-button, #prev-card-btn, #next-card-btn, #english-mode-btn {
@@ -124,6 +131,13 @@ h1 {
   display: none;
 }
 
+@media (max-width: 600px) {
+  h1 { font-size: 1.8rem; }
+  .card #question { font-size: 2.4rem; }
+  .input-group input[type="text"], .submit-button, .nav-button { font-size: 0.9rem; }
+  .submit-button { padding: 0.5em 0.8em; }
+}
+
 #feedback {
   margin-top: 0.5em;
   font-size: 1rem;
@@ -134,42 +148,12 @@ h1 {
   color: #e74c3c;
 }
 
-/* Randomize toggle styling */
-#random-toggle-container {
-  margin-top: 1em;
+#randomize-container {
   display: flex;
   justify-content: center;
-  align-items: center;
-}
-
-#random-toggle-container label {
-  font-size: 0.95rem;
-  color: #f0f0f0;
+  margin-top: 1em;
 }
 
 #random-toggle {
-  margin-right: 0.5em;
-  accent-color: #3498db;
-}
-
-/* Mobile adjustments */
-@media (max-width: 600px) {
-  h1 { font-size: 1.8rem; }
-  .card #question { font-size: 2.4rem; }
-
-  .input-group input[type="text"] {
-    font-size: 0.9rem;
-    padding: 0.5em;
-  }
-
-  .submit-button {
-    font-size: 0.85rem;
-    padding: 0.4em 0.6em; /* smaller buttons */
-    white-space: nowrap;
-  }
-
-  .input-group {
-    gap: 0.3em;
-    flex-wrap: nowrap; /* keep buttons in one row */
-  }
+  margin-left: 0.5em;
 }
