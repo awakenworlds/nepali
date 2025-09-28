@@ -134,6 +134,24 @@ h1 {
   color: #e74c3c;
 }
 
+/* Randomize toggle styling */
+#random-toggle-container {
+  margin-top: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#random-toggle-container label {
+  font-size: 0.95rem;
+  color: #f0f0f0;
+}
+
+#random-toggle {
+  margin-right: 0.5em;
+  accent-color: #3498db;
+}
+
 /* Mobile adjustments */
 @media (max-width: 600px) {
   h1 { font-size: 1.8rem; }
@@ -146,10 +164,12 @@ h1 {
 
   .submit-button {
     font-size: 0.85rem;
-    padding: 0.4em 0.6em; /* Smaller button padding for mobile */
+    padding: 0.4em 0.6em; /* smaller buttons */
+    white-space: nowrap;
   }
 
   .input-group {
     gap: 0.3em;
+    flex-wrap: nowrap; /* keep buttons in one row */
   }
 }

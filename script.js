@@ -21,13 +21,14 @@ let isEnglishMode = false;
 let isRomanCorrect = false;
 let isEnglishCorrect = false;
 let readyForNext = false;
-let isRandom = true; // Default random
+let isRandomized = true; // Default is randomized
 
 const letterCheckbox = document.querySelector('.filter-checkbox[value="letter"]');
 const popularCheckbox = document.querySelector('.filter-checkbox[value="popular"]');
 
+// Randomize toggle event
 randomToggle.addEventListener('change', () => {
-  isRandom = randomToggle.checked;
+  isRandomized = randomToggle.checked;
   applyFilters();
 });
 
@@ -86,6 +87,7 @@ function normalizeAnswer(ans) {
   return ans.toLowerCase().trim();
 }
 
+// Accepts "a" in place of "ā"
 function isAnswerCorrect(userAnswer, cardAnswer) {
   userAnswer = normalizeAnswer(userAnswer).replace(/ā/g, 'a');
   cardAnswer = normalizeAnswer(cardAnswer).replace(/ā/g, 'a');
@@ -209,6 +211,7 @@ function handleUpArrowKey(e) {
 
 submitRomanizedBtn.addEventListener('click', checkRomanizedAnswer);
 submitEnglishBtn.addEventListener('click', checkEnglishAnswer);
+
 romanizedInput.addEventListener('keypress', handleEnterKey);
 englishInput.addEventListener('keypress', handleEnterKey);
 romanizedInput.addEventListener('keydown', handleUpArrowKey);
@@ -234,7 +237,7 @@ function applyFilters() {
     return activeFilters.includes(card.sort);
   });
 
-  if (isRandom) {
+  if (isRandomized) {
     shuffle(filteredQuizData);
   }
 
