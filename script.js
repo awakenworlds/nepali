@@ -1,287 +1,97 @@
-const questionEl = document.getElementById('question');
-const answerEl = document.getElementById('answer');
-const feedbackEl = document.getElementById('feedback');
-const romanizedInput = document.getElementById('romanized-answer-input');
-const englishInput = document.getElementById('english-answer-input');
-const submitRomanizedBtn = document.getElementById('submit-romanized-btn');
-const submitEnglishBtn = document.getElementById('submit-english-btn');
-const prevBtn = document.getElementById('prev-card-btn');
-const nextBtn = document.getElementById('next-card-btn');
-const englishModeBtn = document.getElementById('english-mode-btn');
-const filterCheckboxes = document.querySelectorAll('.filter-checkbox');
-const englishFieldGroup = document.getElementById('english-field-group');
-const showRomanBtn = document.getElementById('show-roman-answer-btn');
-const showEnglishBtn = document.getElementById('show-english-answer-btn');
-const randomToggle = document.getElementById('random-toggle');
+document.addEventListener('DOMContentLoaded', () => {
+  const questionEl = document.getElementById('question');
+  const answerEl = document.getElementById('answer');
+  const feedbackEl = document.getElementById('feedback');
+  const romanizedInput = document.getElementById('romanized-answer-input');
+  const englishInput = document.getElementById('english-answer-input');
+  const submitRomanizedBtn = document.getElementById('submit-romanized-btn');
+  const submitEnglishBtn = document.getElementById('submit-english-btn');
+  const prevBtn = document.getElementById('prev-card-btn');
+  const nextBtn = document.getElementById('next-card-btn');
+  const englishModeBtn = document.getElementById('english-mode-btn');
+  const randomizeToggle = document.getElementById('random-toggle');
+  const filterDropdown = document.getElementById('filter-dropdown');
 
-let quizData = [];
-let filteredQuizData = [];
-let currentCardIndex = 0;
-let isEnglishMode = false;
-let isRomanCorrect = false;
-let isEnglishCorrect = false;
-let readyForNext = false;
-let isRandomized = true; // Default is randomized
+  let quizData = [];
+  let filteredQuizData = [];
+  let currentCardIndex = 0;
+  let isEnglishMode = false;
 
-const letterCheckbox = document.querySelector('.filter-checkbox[value="letter"]');
-const popularCheckbox = document.querySelector('.filter-checkbox[value="popular"]');
-
-// Randomize toggle event
-randomToggle.addEventListener('change', () => {
-  isRandomized = randomToggle.checked;
-  applyFilters();
-});
-
-function shuffle(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-}
-
-function displayCard() {
-  if (filteredQuizData.length === 0) {
-    questionEl.textContent = 'No flashcards with current filters.';
-    answerEl.classList.add('hidden');
-    feedbackEl.classList.add('hidden');
-    return;
-  }
-
-  const card = filteredQuizData[currentCardIndex];
-  questionEl.textContent = isEnglishMode ? card.english : card.devanagari;
-
-  answerEl.classList.add('hidden');
-  answerEl.textContent = '';
-  feedbackEl.classList.add('hidden');
-
-  romanizedInput.value = '';
-  englishInput.value = '';
-  isRomanCorrect = false;
-  isEnglishCorrect = false;
-  readyForNext = false;
-
-  englishFieldGroup.style.display =
-    !isEnglishMode && card.roman.toLowerCase().trim() !== card.english.toLowerCase().trim()
-      ? 'flex'
-      : 'none';
-
-  romanizedInput.focus();
-  updateAnswerDisplay();
-}
-
-function updateAnswerDisplay() {
-  const card = filteredQuizData[currentCardIndex];
-  if (!card) return;
-  let parts = [];
-  if (isRomanCorrect) parts.push(card.roman);
-  if (!isEnglishMode && isEnglishCorrect) parts.push(card.english);
-  if (parts.length > 0) {
-    answerEl.textContent = parts.join(' | ');
-    answerEl.classList.remove('hidden');
-  } else {
-    answerEl.classList.add('hidden');
-  }
-}
-
-function normalizeAnswer(ans) {
-  return ans.toLowerCase().trim();
-}
-
-// Accepts "a" in place of "ā"
-function isAnswerCorrect(userAnswer, cardAnswer) {
-  userAnswer = normalizeAnswer(userAnswer).replace(/ā/g, 'a');
-  cardAnswer = normalizeAnswer(cardAnswer).replace(/ā/g, 'a');
-
-  const bracketIndex = cardAnswer.indexOf('(');
-  if (bracketIndex !== -1) cardAnswer = cardAnswer.slice(0, bracketIndex).trim();
-
-  const acceptableAnswers = cardAnswer.split('/').map(e => e.trim());
-  return acceptableAnswers.includes(userAnswer);
-}
-
-function updateFeedback() {
-  const cardHasEnglishInput = englishFieldGroup.style.display !== 'none';
-  const romanFilled = romanizedInput.value.trim() !== '';
-  const englishFilled = englishInput.value.trim() !== '';
-
-  if (!cardHasEnglishInput) {
-    if (isRomanCorrect) {
-      showFeedback("Correct! Press Enter to continue.");
-      readyForNext = true;
-    } else if (romanFilled) {
-      showFeedback("❌ Incorrect — try again.", false);
-      readyForNext = false;
-    } else {
-      feedbackEl.classList.add('hidden');
-      readyForNext = false;
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
     }
-    return;
   }
 
-  if (isRomanCorrect && isEnglishCorrect) {
-    showFeedback("Both answers correct! Press Enter to continue.");
-    readyForNext = true;
-  } else if (isRomanCorrect && (!isEnglishCorrect && englishFilled)) {
-    updateAnswerDisplay();
-    showFeedback("Roman answer correct! English answer incorrect — try again.", false);
-    englishInput.focus();
-    readyForNext = false;
-  } else if (isRomanCorrect && !isEnglishCorrect) {
-    updateAnswerDisplay();
-    showFeedback("Roman answer correct! Enter English answer.", true);
-    englishInput.focus();
-    readyForNext = false;
-  } else if ((!isRomanCorrect && romanFilled) && isEnglishCorrect) {
-    updateAnswerDisplay();
-    showFeedback("English answer correct! Roman answer incorrect — try again.", false);
-    romanizedInput.focus();
-    readyForNext = false;
-  } else if ((!isRomanCorrect && romanFilled) && (!isEnglishCorrect && englishFilled)) {
-    updateAnswerDisplay();
-    showFeedback("❌ Both answers incorrect — try again.", false);
-    romanizedInput.focus();
-    readyForNext = false;
-  } else {
-    feedbackEl.classList.add('hidden');
-    readyForNext = false;
+  function normalizeAnswer(ans) {
+    return String(ans || '').toLowerCase().trim().replace(/ā/g, 'a');
   }
-}
 
-function checkRomanizedAnswer() {
-  const card = filteredQuizData[currentCardIndex];
-  if (!card) return;
+  function isAnswerCorrect(userAnswer, cardAnswer) {
+    const answers = normalizeAnswer(cardAnswer).split('/').map(a => a.trim());
+    return answers.includes(normalizeAnswer(userAnswer));
+  }
 
-  if (romanizedInput.value.trim() !== '' && isAnswerCorrect(romanizedInput.value, card.roman)) {
-    isRomanCorrect = true;
-    updateAnswerDisplay();
+  function showFeedback(message, correct = true) {
+    feedbackEl.textContent = message;
+    feedbackEl.classList.toggle('incorrect', !correct);
+    feedbackEl.classList.remove('hidden');
+  }
 
-    if (englishFieldGroup.style.display !== 'none') {
-      showFeedback("Roman answer correct! Enter English answer.", true);
-      englishInput.focus();
+  function displayCard() {
+    if (!filteredQuizData.length) {
+      questionEl.textContent = 'No flashcards with current filter.';
+      return;
     }
-  } else if (romanizedInput.value.trim() !== '') {
-    showFeedback("❌ Incorrect — try again.", false);
+    currentCardIndex = Math.min(currentCardIndex, filteredQuizData.length - 1);
+    const card = filteredQuizData[currentCardIndex];
+    questionEl.textContent = isEnglishMode ? card.english : card.devanagari;
+    answerEl.classList.add('hidden');
+    romanizedInput.value = '';
+    englishInput.value = '';
+    feedbackEl.classList.add('hidden');
   }
 
-  updateFeedback();
-}
-
-function checkEnglishAnswer() {
-  if (englishFieldGroup.style.display === 'none') return;
-  const card = filteredQuizData[currentCardIndex];
-  if (englishInput.value.trim() !== '' && isAnswerCorrect(englishInput.value, card.english)) {
-    isEnglishCorrect = true;
-  } else if (englishInput.value.trim() !== '') {
-    showFeedback("❌ Incorrect — try again.", false);
-  }
-  updateAnswerDisplay();
-  updateFeedback();
-}
-
-function handleEnterKey(e) {
-  if (e.key !== 'Enter') return;
-  e.preventDefault();
-  const active = document.activeElement;
-  if (readyForNext) {
-    currentCardIndex = (currentCardIndex + 1) % filteredQuizData.length;
+  function applyFilters() {
+    const selectedFilter = filterDropdown.value;
+    filteredQuizData = selectedFilter === 'all'
+      ? [...quizData]
+      : quizData.filter(card => card.sort === selectedFilter || (selectedFilter === 'popular' && card.popular));
+    if (randomizeToggle.checked) shuffle(filteredQuizData);
+    currentCardIndex = 0;
     displayCard();
-  } else {
-    if (active === romanizedInput) checkRomanizedAnswer();
-    else if (active === englishInput) checkEnglishAnswer();
-  }
-}
-
-function handleUpArrowKey(e) {
-  if (e.key !== 'ArrowUp') return;
-  e.preventDefault();
-  const active = document.activeElement;
-  const card = filteredQuizData[currentCardIndex];
-  if (!card) return;
-
-  if (active === romanizedInput) {
-    answerEl.textContent = card.roman;
-    answerEl.classList.remove('hidden');
-    feedbackEl.classList.add('hidden');
-  } else if (active === englishInput) {
-    answerEl.textContent = card.english;
-    answerEl.classList.remove('hidden');
-    feedbackEl.classList.add('hidden');
-  }
-}
-
-submitRomanizedBtn.addEventListener('click', checkRomanizedAnswer);
-submitEnglishBtn.addEventListener('click', checkEnglishAnswer);
-
-romanizedInput.addEventListener('keypress', handleEnterKey);
-englishInput.addEventListener('keypress', handleEnterKey);
-romanizedInput.addEventListener('keydown', handleUpArrowKey);
-englishInput.addEventListener('keydown', handleUpArrowKey);
-
-showRomanBtn.addEventListener('click', () => {
-  const card = filteredQuizData[currentCardIndex];
-  if (card) { answerEl.textContent = card.roman; answerEl.classList.remove('hidden'); feedbackEl.classList.add('hidden'); }
-});
-showEnglishBtn.addEventListener('click', () => {
-  const card = filteredQuizData[currentCardIndex];
-  if (card) { answerEl.textContent = card.english; answerEl.classList.remove('hidden'); feedbackEl.classList.add('hidden'); }
-});
-
-prevBtn.addEventListener('click', () => { currentCardIndex = (currentCardIndex - 1 + filteredQuizData.length) % filteredQuizData.length; displayCard(); });
-nextBtn.addEventListener('click', () => { currentCardIndex = (currentCardIndex + 1) % filteredQuizData.length; displayCard(); });
-
-function applyFilters() {
-  const activeFilters = Array.from(filterCheckboxes).filter(cb => cb.checked).map(cb => cb.value);
-
-  filteredQuizData = quizData.filter(card => {
-    if (activeFilters.includes('popular') && card.popular) return true;
-    return activeFilters.includes(card.sort);
-  });
-
-  if (isRandomized) {
-    shuffle(filteredQuizData);
   }
 
-  currentCardIndex = 0;
-  displayCard();
-}
+  submitRomanizedBtn.onclick = () => {
+    const card = filteredQuizData[currentCardIndex];
+    if (isAnswerCorrect(romanizedInput.value, card.roman)) {
+      showFeedback("Roman correct!", true);
+    } else {
+      showFeedback("Incorrect — try again.", false);
+    }
+  };
 
-function setDefaultFilters() {
-  if (isEnglishMode) { filterCheckboxes.forEach(cb => cb.checked = (cb.value === 'popular')); }
-  else { filterCheckboxes.forEach(cb => cb.checked = (cb.value === 'letter')); }
-}
+  submitEnglishBtn.onclick = () => {
+    const card = filteredQuizData[currentCardIndex];
+    if (isAnswerCorrect(englishInput.value, card.english)) {
+      showFeedback("English correct!", true);
+    } else {
+      showFeedback("Incorrect — try again.", false);
+    }
+  };
 
-function updateLetterCheckboxVisibility() {
-  if (isEnglishMode) { letterCheckbox.parentElement.style.display = 'none'; letterCheckbox.checked = false; }
-  else { letterCheckbox.parentElement.style.display = 'flex'; }
-}
+  prevBtn.onclick = () => { currentCardIndex = (currentCardIndex - 1 + filteredQuizData.length) % filteredQuizData.length; displayCard(); };
+  nextBtn.onclick = () => { currentCardIndex = (currentCardIndex + 1) % filteredQuizData.length; displayCard(); };
+  englishModeBtn.onclick = () => { isEnglishMode = !isEnglishMode; displayCard(); };
+  filterDropdown.addEventListener('change', applyFilters);
+  randomizeToggle.addEventListener('change', applyFilters);
 
-englishModeBtn.addEventListener('click', () => {
-  isEnglishMode = !isEnglishMode;
-  englishModeBtn.textContent = isEnglishMode ? "Toggle to Devanagari" : "Toggle to English";
-  updateLetterCheckboxVisibility();
-  setDefaultFilters();
-  applyFilters();
-});
-
-updateLetterCheckboxVisibility();
-setDefaultFilters();
-filterCheckboxes.forEach(cb => cb.addEventListener('change', applyFilters));
-
-async function initializeQuiz() {
-  try {
-    const response = await fetch('data.json');
-    quizData = await response.json();
+  async function initializeQuiz() {
+    const res = await fetch('data.json');
+    quizData = await res.json();
     applyFilters();
-  } catch (err) {
-    questionEl.textContent = 'Error loading data.json';
-    console.error(err);
   }
-}
 
-initializeQuiz();
-
-function showFeedback(message, correct = true) {
-  feedbackEl.textContent = message;
-  feedbackEl.classList.remove('hidden');
-  feedbackEl.classList.toggle('incorrect', !correct);
-}
+  initializeQuiz();
+});

@@ -10,17 +10,21 @@
   <div class="quiz-container">
     <h1>Nepali Flashcards</h1>
 
-    <!-- Filter checkboxes -->
-    <div id="filters">
-      <label><input type="checkbox" class="filter-checkbox" value="letter"> Letter</label>
-      <label><input type="checkbox" class="filter-checkbox" value="number"> Number</label>
-      <label><input type="checkbox" class="filter-checkbox" value="verb"> Verb</label>
-      <label><input type="checkbox" class="filter-checkbox" value="noun"> Noun</label>
-      <label><input type="checkbox" class="filter-checkbox" value="adjective"> Adjective</label>
-      <label><input type="checkbox" class="filter-checkbox" value="popular"> Popular</label>
+    <!-- Filter dropdown and toggle button -->
+    <div class="filter-toggle-row">
+      <div id="filter-dropdown-container">
+        <select id="filter-dropdown">
+          <option value="all">All</option>
+          <option value="letter">Letter</option>
+          <option value="number">Number</option>
+          <option value="verb">Verb</option>
+          <option value="noun">Noun</option>
+          <option value="adjective">Adjective</option>
+          <option value="popular">Popular</option>
+        </select>
+      </div>
+      <button id="english-mode-btn">Toggle to English</button>
     </div>
-
-    <button id="english-mode-btn">Toggle to English</button>
 
     <div class="card">
       <div id="question"></div>
@@ -30,14 +34,18 @@
 
     <div class="input-group">
       <input type="text" id="romanized-answer-input" placeholder="Roman Answer" autocomplete="off">
-      <button id="submit-romanized-btn" class="submit-button">Submit</button>
-      <button id="show-roman-answer-btn" class="submit-button">Reveal</button>
+      <div class="button-group">
+        <button id="submit-romanized-btn" class="submit-button">Submit</button>
+        <button id="show-roman-answer-btn" class="submit-button">Reveal</button>
+      </div>
     </div>
 
     <div class="input-group" id="english-field-group">
       <input type="text" id="english-answer-input" placeholder="English Answer" autocomplete="off">
-      <button id="submit-english-btn" class="submit-button">Submit</button>
-      <button id="show-english-answer-btn" class="submit-button">Reveal</button>
+      <div class="button-group">
+        <button id="submit-english-btn" class="submit-button">Submit</button>
+        <button id="show-english-answer-btn" class="submit-button">Reveal</button>
+      </div>
     </div>
 
     <div class="button-container">
@@ -45,8 +53,7 @@
       <button id="next-card-btn">Next</button>
     </div>
 
-    <!-- Randomize Quiz toggle -->
-    <div id="random-toggle-container">
+    <div id="randomize-container">
       <label>
         <input type="checkbox" id="random-toggle" checked>
         Randomize Quiz
