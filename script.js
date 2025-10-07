@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function showFeedback(message, correct = true) {
-    feedbackEl.textContent = message;
+    feedbackEl.innerHTML = message; // allow HTML for underlining
     feedbackEl.classList.remove('hidden');
     feedbackEl.classList.toggle('incorrect', !correct);
   }
@@ -67,22 +67,45 @@ document.addEventListener('DOMContentLoaded', () => {
     answerEl.classList.add('hidden');
     answerEl.textContent = '';
     feedbackEl.classList.add('hidden');
+    feedbackEl.innerHTML = '';
 
     romanizedInput.value = '';
     englishInput.value = '';
     isRomanCorrect = false;
     isEnglishCorrect = false;
     readyForNext = false;
+
+    // Hide English answer box in English mode
+    const englishFieldGroup = document.getElementById('english-field-group');
+    if (isEnglishMode) {
+      englishFieldGroup.style.display = "none";
+    } else {
+      englishFieldGroup.style.display = "flex";
+    }
+
+    romanizedInput.focus();
   }
 
   function updateFeedback() {
-    const cardHasEnglishInput = !document.getElementById('english-field-group').classList.contains('hidden');
     const romanFilled = romanizedInput.value.trim() !== '';
     const englishFilled = englishInput.value.trim() !== '';
 
+    const romanAnswer = `<u>${romanizedInput.value.trim()}</u>`;
+    const englishAnswer = `<u>${englishInput.value.trim()}</u>`;
+
+    if (isEnglishMode) {
+      if (isRomanCorrect) {
+        showFeedback(`${romanAnswer} is correct. Press Enter to continue.`);
+        readyForNext = true;
+      }
+      return;
+    }
+
+    const cardHasEnglishInput = !document.getElementById('english-field-group').classList.contains('hidden');
+
     if (!cardHasEnglishInput) {
       if (isRomanCorrect) {
-        showFeedback("Correct! Press Enter to continue.");
+        showFeedback(`${romanAnswer} is correct. Press Enter to continue.`);
         readyForNext = true;
       } else if (romanFilled) {
         showFeedback("❌ Incorrect — try again.", false);
@@ -95,16 +118,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (isRomanCorrect && isEnglishCorrect) {
-      showFeedback("Both answers correct! Press Enter to continue.");
+      showFeedback(`${romanAnswer} and ${englishAnswer} are correct. Press Enter to continue.`);
       readyForNext = true;
     } else if (isRomanCorrect && (!isEnglishCorrect && englishFilled)) {
-      showFeedback("Roman correct, English incorrect — try again.", false);
+      showFeedback(`${romanAnswer} is correct. English incorrect — try again.`, false);
       readyForNext = false;
     } else if (isRomanCorrect && !isEnglishCorrect) {
-      showFeedback("Roman answer correct! Enter English answer.", true);
+      showFeedback(`${romanAnswer} is correct. Enter English answer.`, true);
       readyForNext = false;
     } else if ((!isRomanCorrect && romanFilled) && isEnglishCorrect) {
-      showFeedback("English correct, Roman incorrect — try again.", false);
+      showFeedback(`${englishAnswer} is correct. Roman incorrect — try again.`, false);
       readyForNext = false;
     } else if ((!isRomanCorrect && romanFilled) && (!isEnglishCorrect && englishFilled)) {
       showFeedback("❌ Both answers incorrect — try again.", false);
@@ -119,22 +142,34 @@ document.addEventListener('DOMContentLoaded', () => {
     const card = filteredQuizData[currentCardIndex];
     if (!card) return;
 
-    if (romanizedInput.value.trim() !== '' && isAnswerCorrect(romanizedInput.value, card.roman)) {
+    const userAnswer = romanizedInput.value.trim();
+    const underlined = `<u>${userAnswer}</u>`;
+
+    if (userAnswer !== '' && isAnswerCorrect(userAnswer, card.roman)) {
       isRomanCorrect = true;
-      showFeedback("Roman answer correct! Enter English answer.", true);
-    } else if (romanizedInput.value.trim() !== '') {
+      if (isEnglishMode) {
+        showFeedback(`${underlined} is correct. Press Enter to continue.`, true);
+        readyForNext = true;
+      } else {
+        showFeedback(`${underlined} is correct. Enter English answer.`, true);
+      }
+    } else if (userAnswer !== '') {
       showFeedback("❌ Incorrect — try again.", false);
     }
     updateFeedback();
   }
 
   function checkEnglishAnswer() {
-    if (document.getElementById('english-field-group').classList.contains('hidden')) return;
+    if (document.getElementById('english-field-group').style.display === "none") return;
     const card = filteredQuizData[currentCardIndex];
     if (!card) return;
-    if (englishInput.value.trim() !== '' && isAnswerCorrect(englishInput.value, card.english)) {
+
+    const userAnswer = englishInput.value.trim();
+    const underlined = `<u>${userAnswer}</u>`;
+    if (userAnswer !== '' && isAnswerCorrect(userAnswer, card.english)) {
       isEnglishCorrect = true;
-    } else if (englishInput.value.trim() !== '') {
+      showFeedback(`${underlined} is correct.`, true);
+    } else if (userAnswer !== '') {
       showFeedback("❌ Incorrect — try again.", false);
     }
     updateFeedback();
@@ -197,6 +232,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       filteredQuizData = quizData.filter(card => card.sort === value);
     }
+    if (randomizeToggle.checked) shuffle(filteredQuizData);
     displayCard();
   });
 
@@ -210,6 +246,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const response = await fetch('data.json');
       quizData = await response.json();
       filteredQuizData = quizData.slice();
+
+      if (randomizeToggle.checked) shuffle(filteredQuizData);
+
       displayCard();
     } catch (err) {
       console.error(err);
