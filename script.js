@@ -151,6 +151,11 @@ document.addEventListener('DOMContentLoaded', () => {
         readyForNext = true;
       } else {
         showFeedback(`${underlined} is correct. Enter English answer.`, true);
+
+        // Move focus to English textbox after correct Romanized answer
+        setTimeout(() => {
+          englishInput.focus();
+        }, 100);
       }
     } else if (userAnswer !== '') {
       showFeedback("❌ Incorrect — try again.", false);
