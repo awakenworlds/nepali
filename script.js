@@ -36,10 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
   function isAnswerCorrect(userAnswer, cardAnswer) {
     userAnswer = normalizeAnswer(userAnswer).replace(/ā/g, 'a');
     cardAnswer = normalizeAnswer(cardAnswer).replace(/ā/g, 'a');
-
     const bracketIndex = cardAnswer.indexOf('(');
     if (bracketIndex !== -1) cardAnswer = cardAnswer.slice(0, bracketIndex).trim();
-
     const acceptableAnswers = cardAnswer.split('/').map(e => e.trim());
     return acceptableAnswers.includes(userAnswer);
   }
@@ -57,7 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
       feedbackEl.classList.add('hidden');
       return;
     }
-
     if (currentCardIndex >= filteredQuizData.length) currentCardIndex = 0;
     if (currentCardIndex < 0) currentCardIndex = 0;
 
@@ -76,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
     readyForNext = false;
 
     const englishFieldGroup = document.getElementById('english-field-group');
-    if (isEnglishMode) {
+    if (isEnglishMode || filterDropdown.value === "letter") {
       englishFieldGroup.style.display = "none";
     } else {
       englishFieldGroup.style.display = "flex";
@@ -88,30 +85,15 @@ document.addEventListener('DOMContentLoaded', () => {
   function updateFeedback() {
     const romanFilled = romanizedInput.value.trim() !== '';
     const englishFilled = englishInput.value.trim() !== '';
-
     const romanAnswer = `<u>${romanizedInput.value.trim()}</u>`;
     const englishAnswer = `<u>${englishInput.value.trim()}</u>`;
+    const englishFieldGroup = document.getElementById('english-field-group');
+    const englishFieldVisible = englishFieldGroup.style.display !== "none";
 
-    if (isEnglishMode) {
+    if (!englishFieldVisible) {
       if (isRomanCorrect) {
         showFeedback(`${romanAnswer} is correct. Press Enter to continue.`);
         readyForNext = true;
-      }
-      return;
-    }
-
-    const cardHasEnglishInput = !document.getElementById('english-field-group').classList.contains('hidden');
-
-    if (!cardHasEnglishInput) {
-      if (isRomanCorrect) {
-        showFeedback(`${romanAnswer} is correct. Press Enter to continue.`);
-        readyForNext = true;
-      } else if (romanFilled) {
-        showFeedback("❌ Incorrect — try again.", false);
-        readyForNext = false;
-      } else {
-        feedbackEl.classList.add('hidden');
-        readyForNext = false;
       }
       return;
     }
@@ -125,12 +107,6 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (isRomanCorrect && !isEnglishCorrect) {
       showFeedback(`${romanAnswer} is correct. Enter English answer.`, true);
       readyForNext = false;
-    } else if ((!isRomanCorrect && romanFilled) && isEnglishCorrect) {
-      showFeedback(`${englishAnswer} is correct. Roman incorrect — try again.`, false);
-      readyForNext = false;
-    } else if ((!isRomanCorrect && romanFilled) && (!isEnglishCorrect && englishFilled)) {
-      showFeedback("❌ Both answers incorrect — try again.", false);
-      readyForNext = false;
     } else {
       feedbackEl.classList.add('hidden');
       readyForNext = false;
@@ -140,19 +116,18 @@ document.addEventListener('DOMContentLoaded', () => {
   function checkRomanizedAnswer() {
     const card = filteredQuizData[currentCardIndex];
     if (!card) return;
-
     const userAnswer = romanizedInput.value.trim();
     const underlined = `<u>${userAnswer}</u>`;
+    const englishFieldGroup = document.getElementById('english-field-group');
+    const englishFieldVisible = englishFieldGroup.style.display !== "none";
 
     if (userAnswer !== '' && isAnswerCorrect(userAnswer, card.roman)) {
       isRomanCorrect = true;
-      if (isEnglishMode) {
+      if (!englishFieldVisible) {
         showFeedback(`${underlined} is correct. Press Enter to continue.`, true);
         readyForNext = true;
       } else {
         showFeedback(`${underlined} is correct. Enter English answer.`, true);
-
-        // Move focus to English textbox after correct Romanized answer
         setTimeout(() => {
           englishInput.focus();
         }, 100);
@@ -164,10 +139,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function checkEnglishAnswer() {
-    if (document.getElementById('english-field-group').style.display === "none") return;
+    const englishFieldGroup = document.getElementById('english-field-group');
+    if (englishFieldGroup.style.display === "none") return;
     const card = filteredQuizData[currentCardIndex];
     if (!card) return;
-
     const userAnswer = englishInput.value.trim();
     const underlined = `<u>${userAnswer}</u>`;
     if (userAnswer !== '' && isAnswerCorrect(userAnswer, card.english)) {
@@ -196,7 +171,6 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     const card = filteredQuizData[currentCardIndex];
     if (!card) return;
-
     if (document.activeElement === romanizedInput) {
       romanizedInput.value = card.roman;
       checkRomanizedAnswer();
@@ -208,10 +182,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   submitRomanizedBtn.addEventListener('click', checkRomanizedAnswer);
   submitEnglishBtn.addEventListener('click', checkEnglishAnswer);
-
   romanizedInput.addEventListener('keypress', handleEnterKey);
   englishInput.addEventListener('keypress', handleEnterKey);
-
   document.addEventListener('keydown', handleArrowUp);
 
   showRomanBtn.addEventListener('click', () => {
@@ -221,7 +193,6 @@ document.addEventListener('DOMContentLoaded', () => {
       answerEl.classList.remove('hidden');
     }
   });
-
   showEnglishBtn.addEventListener('click', () => {
     const card = filteredQuizData[currentCardIndex];
     if (card) {
@@ -234,7 +205,6 @@ document.addEventListener('DOMContentLoaded', () => {
     currentCardIndex = (currentCardIndex - 1 + filteredQuizData.length) % filteredQuizData.length;
     displayCard();
   });
-
   nextBtn.addEventListener('click', () => {
     currentCardIndex = (currentCardIndex + 1) % filteredQuizData.length;
     displayCard();
@@ -264,12 +234,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function initializeQuiz() {
     try {
-      const response = await fetch('data.json');
+      const response = await fetch('./data.json');
       quizData = await response.json();
       filteredQuizData = quizData.slice();
-
       if (randomizeToggle.checked) shuffle(filteredQuizData);
-
       displayCard();
     } catch (err) {
       console.error(err);
