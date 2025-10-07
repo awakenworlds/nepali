@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function showFeedback(message, correct = true) {
-    feedbackEl.innerHTML = message; // allow HTML for underlining
+    feedbackEl.innerHTML = message;
     feedbackEl.classList.remove('hidden');
     feedbackEl.classList.toggle('incorrect', !correct);
   }
@@ -75,7 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
     isEnglishCorrect = false;
     readyForNext = false;
 
-    // Hide English answer box in English mode
     const englishFieldGroup = document.getElementById('english-field-group');
     if (isEnglishMode) {
       englishFieldGroup.style.display = "none";
@@ -187,11 +186,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function handleArrowUp(e) {
+    if (e.key !== "ArrowUp") return;
+    e.preventDefault();
+    const card = filteredQuizData[currentCardIndex];
+    if (!card) return;
+
+    if (document.activeElement === romanizedInput) {
+      romanizedInput.value = card.roman;
+      checkRomanizedAnswer();
+    } else if (document.activeElement === englishInput) {
+      englishInput.value = card.english;
+      checkEnglishAnswer();
+    }
+  }
+
   submitRomanizedBtn.addEventListener('click', checkRomanizedAnswer);
   submitEnglishBtn.addEventListener('click', checkEnglishAnswer);
 
   romanizedInput.addEventListener('keypress', handleEnterKey);
   englishInput.addEventListener('keypress', handleEnterKey);
+
+  document.addEventListener('keydown', handleArrowUp);
 
   showRomanBtn.addEventListener('click', () => {
     const card = filteredQuizData[currentCardIndex];
