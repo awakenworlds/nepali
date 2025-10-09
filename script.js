@@ -1,20 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- EMBEDDED FLASHCARD DATA (Replaces data.json) ---
-    const flashcardData = [
-        { devanagari: "नमस्ते", roman: "namaste", english: "hello / greetings", sort: "popular" },
-        { devanagari: "पानी", roman: "paani", english: "water", sort: "noun" },
-        { devanagari: "खानु", roman: "khanu", english: "to eat", sort: "verb" },
-        { devanagari: "ठूलो", roman: "thulo", english: "big", sort: "adjective" },
-        { devanagari: "सानी", roman: "saani", english: "small (feminine)", sort: "adjective" },
-        { devanagari: "म", roman: "ma", english: "I", sort: "letter" },
-        { devanagari: "तपाईं", roman: "tapai(n)", english: "you (formal)", sort: "popular" },
-        { devanagari: "आउनु", roman: "aaunu", english: "to come", sort: "verb" },
-        { devanagari: "एक", roman: "ek", english: "one", sort: "number" },
-        { devanagari: "दुई", roman: "dui", english: "two", sort: "number" }
-    ];
-    // -----------------------------------------------------
-
-    // Existing Elements
+    // --- ELEMENT REFERENCES ---
     const questionEl = document.getElementById('question');
     const answerEl = document.getElementById('answer');
     const feedbackEl = document.getElementById('feedback');
@@ -30,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const filterDropdown = document.getElementById('filter-dropdown');
     const randomizeToggle = document.getElementById('random-toggle');
 
-    // SEARCH & LAYOUT ELEMENTS
     const searchInput = document.getElementById('search-input');
     const searchResultsContainer = document.getElementById('search-results-container');
     const searchResultsList = document.getElementById('search-results-list');
@@ -45,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let isEnglishCorrect = false;
     let readyForNext = false;
 
+    // --- UTILITY FUNCTIONS ---
     function shuffle(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -70,8 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         feedbackEl.classList.remove('hidden');
         feedbackEl.classList.toggle('incorrect', !correct);
     }
-    
-    // NEW: Function to clear feedback on input
+
     function clearFeedbackOnInput() {
         if (!feedbackEl.classList.contains('hidden')) {
             feedbackEl.classList.add('hidden');
@@ -79,7 +63,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function displayCard() {
-        // Only hide search results if quiz content is active
         searchResultsContainer.classList.add('hidden');
         quizContent.style.display = 'block'; 
 
@@ -93,8 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentCardIndex < 0) currentCardIndex = filteredQuizData.length - 1; 
 
         const card = filteredQuizData[currentCardIndex];
-        
-        // Use the opposite language of the mode for the question 
         questionEl.textContent = isEnglishMode ? card.english : card.devanagari;
 
         answerEl.classList.add('hidden');
@@ -109,8 +90,6 @@ document.addEventListener('DOMContentLoaded', () => {
         readyForNext = false;
 
         const englishActionRow = document.getElementById('english-action-row');
-        
-        // Use 'none' for hidden, 'flex' for visible (matching CSS display property)
         if (isEnglishMode || filterDropdown.value === "letter") {
             englishActionRow.style.display = "none";
         } else {
@@ -146,7 +125,6 @@ document.addEventListener('DOMContentLoaded', () => {
             showFeedback(`${romanAnswer} is correct. Enter English answer.`, true);
             readyForNext = false;
         } else {
-            // Only hide if neither is correct, otherwise feedback should persist until new input
             feedbackEl.classList.add('hidden');
             readyForNext = false;
         }
@@ -167,9 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 readyForNext = true;
             } else {
                 showFeedback(`${underlined} is correct. Enter English answer.`, true);
-                setTimeout(() => {
-                    englishInput.focus();
-                }, 100);
+                setTimeout(() => { englishInput.focus(); }, 100);
             }
         } else if (userAnswer !== '') {
             showFeedback("❌ Incorrect — try again.", false);
@@ -219,27 +195,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- SEARCH FUNCTIONS ---
-
     function searchFlashcards() {
-        searchInput.focus(); 
-        
         const searchTerm = normalizeAnswer(searchInput.value);
-        
-        // Show/Hide search results and quiz content based on search term
+
         if (searchTerm.length > 0) {
             quizContent.style.display = 'none';
-            searchResultsContainer.classList.remove('hidden'); // Show results container
+            searchResultsContainer.classList.remove('hidden');
         } else {
             quizContent.style.display = 'block';
-            searchResultsContainer.classList.add('hidden'); // Hide results container
+            searchResultsContainer.classList.add('hidden');
             return;
         }
 
         const results = quizData.filter(card => {
-            const romanMatch = normalizeAnswer(card.roman).includes(searchTerm);
-            const englishMatch = normalizeAnswer(card.english).includes(searchTerm);
-            return romanMatch || englishMatch;
+            return normalizeAnswer(card.roman).includes(searchTerm) ||
+                   normalizeAnswer(card.english).includes(searchTerm) ||
+                   normalizeAnswer(card.devanagari).includes(searchTerm);
         });
 
         displaySearchResults(results);
@@ -250,55 +221,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (results.length === 0 && searchInput.value.length > 0) {
             searchResultsList.innerHTML = '<li>No matches found.</li>';
-        } else if (results.length > 0) {
-            results.forEach((card) => {
+        } else {
+            results.forEach(card => {
                 const li = document.createElement('li');
                 li.innerHTML = `<span class="result-nepali">${card.devanagari}</span> <span class="result-english">(${card.roman} / ${card.english})</span>`;
-                
                 li.addEventListener('click', () => {
-                    filterDropdown.dispatchEvent(new Event('change'));
-                    
                     const newIndex = filteredQuizData.findIndex(item => item.devanagari === card.devanagari);
-                    
-                    if (newIndex !== -1) {
-                         currentCardIndex = newIndex;
-                    } else {
-                        filterDropdown.value = 'all';
-                        filterDropdown.dispatchEvent(new Event('change')); 
-                        const allIndex = filteredQuizData.findIndex(item => item.devanagari === card.devanagari);
-                        if (allIndex !== -1) {
-                            currentCardIndex = allIndex;
-                        }
-                    }
-                    
+                    if (newIndex !== -1) currentCardIndex = newIndex;
                     resetSearchAndGoToQuiz();
                     displayCard();
                 });
-
                 searchResultsList.appendChild(li);
             });
         }
     }
-    
+
     function resetSearchAndGoToQuiz() {
         searchInput.value = '';
         searchResultsContainer.classList.add('hidden');
-        quizContent.style.display = 'block'; // Show quiz content
+        quizContent.style.display = 'block';
         romanizedInput.focus(); 
     }
 
     // --- EVENT LISTENERS ---
-    
     searchInput.addEventListener('input', searchFlashcards);
     backToQuizBtn.addEventListener('click', resetSearchAndGoToQuiz);
-
     submitRomanizedBtn.addEventListener('click', checkRomanizedAnswer);
     submitEnglishBtn.addEventListener('click', checkEnglishAnswer);
-    
-    // NEW: Clear feedback when typing starts
     romanizedInput.addEventListener('input', clearFeedbackOnInput);
     englishInput.addEventListener('input', clearFeedbackOnInput);
-    
     romanizedInput.addEventListener('keypress', handleEnterKey);
     englishInput.addEventListener('keypress', handleEnterKey);
     document.addEventListener('keydown', handleArrowUp);
@@ -335,13 +286,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     filterDropdown.addEventListener('change', () => {
         const value = filterDropdown.value;
-        if (value === "all") {
-            filteredQuizData = quizData.slice();
-        } else {
-            filteredQuizData = quizData.filter(card => card.sort === value);
-        }
+        if (value === "all") filteredQuizData = quizData.slice();
+        else filteredQuizData = quizData.filter(card => card.sort === value);
         if (randomizeToggle.checked) shuffle(filteredQuizData);
-        currentCardIndex = 0; 
+        currentCardIndex = 0;
         displayCard();
     });
 
@@ -350,13 +298,20 @@ document.addEventListener('DOMContentLoaded', () => {
         displayCard();
     });
 
-    // --- INITIALIZATION FUNCTION ---
+    // --- INITIALIZATION ---
     function initializeQuiz() {
-        // Load data from the embedded array instead of fetching
-        quizData = flashcardData.slice();
-        filteredQuizData = quizData.slice();
-        if (randomizeToggle.checked) shuffle(filteredQuizData);
-        displayCard();
+        fetch("./data.json")
+            .then(res => res.json())
+            .then(data => {
+                quizData = data;
+                filteredQuizData = quizData.slice();
+                if (randomizeToggle.checked) shuffle(filteredQuizData);
+                displayCard();
+            })
+            .catch(err => {
+                console.error("Error loading data.json:", err);
+                questionEl.textContent = "Failed to load flashcards.";
+            });
     }
 
     initializeQuiz();
