@@ -1,4 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- EMBEDDED FLASHCARD DATA (Replaces data.json) ---
+    const flashcardData = [
+        { devanagari: "नमस्ते", roman: "namaste", english: "hello / greetings", sort: "popular" },
+        { devanagari: "पानी", roman: "paani", english: "water", sort: "noun" },
+        { devanagari: "खानु", roman: "khanu", english: "to eat", sort: "verb" },
+        { devanagari: "ठूलो", roman: "thulo", english: "big", sort: "adjective" },
+        { devanagari: "सानी", roman: "saani", english: "small (feminine)", sort: "adjective" },
+        { devanagari: "म", roman: "ma", english: "I", sort: "letter" },
+        { devanagari: "तपाईं", roman: "tapai(n)", english: "you (formal)", sort: "popular" },
+        { devanagari: "आउनु", roman: "aaunu", english: "to come", sort: "verb" },
+        { devanagari: "एक", roman: "ek", english: "one", sort: "number" },
+        { devanagari: "दुई", roman: "dui", english: "two", sort: "number" }
+    ];
+    // -----------------------------------------------------
+
     // Existing Elements
     const questionEl = document.getElementById('question');
     const answerEl = document.getElementById('answer');
@@ -25,7 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let quizData = [];
     let filteredQuizData = [];
     let currentCardIndex = 0;
-    // Initial state is Devanagari (English mode is OFF)
     let isEnglishMode = false; 
     let isRomanCorrect = false;
     let isEnglishCorrect = false;
@@ -56,9 +70,16 @@ document.addEventListener('DOMContentLoaded', () => {
         feedbackEl.classList.remove('hidden');
         feedbackEl.classList.toggle('incorrect', !correct);
     }
+    
+    // NEW: Function to clear feedback on input
+    function clearFeedbackOnInput() {
+        if (!feedbackEl.classList.contains('hidden')) {
+            feedbackEl.classList.add('hidden');
+        }
+    }
 
     function displayCard() {
-        // Hide search results and show quiz content
+        // Only hide search results if quiz content is active
         searchResultsContainer.classList.add('hidden');
         quizContent.style.display = 'block'; 
 
@@ -74,8 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const card = filteredQuizData[currentCardIndex];
         
         // Use the opposite language of the mode for the question 
-        // If isEnglishMode is false (Devanagari mode), show Devanagari question.
-        // If isEnglishMode is true (English mode), show English question.
         questionEl.textContent = isEnglishMode ? card.english : card.devanagari;
 
         answerEl.classList.add('hidden');
@@ -89,11 +108,13 @@ document.addEventListener('DOMContentLoaded', () => {
         isEnglishCorrect = false;
         readyForNext = false;
 
-        const englishFieldGroup = document.getElementById('english-field-group');
+        const englishActionRow = document.getElementById('english-action-row');
+        
+        // Use 'none' for hidden, 'flex' for visible (matching CSS display property)
         if (isEnglishMode || filterDropdown.value === "letter") {
-            englishFieldGroup.style.display = "none";
+            englishActionRow.style.display = "none";
         } else {
-            englishFieldGroup.style.display = "flex";
+            englishActionRow.style.display = "flex";
         }
 
         romanizedInput.focus();
@@ -104,8 +125,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const englishFilled = englishInput.value.trim() !== '';
         const romanAnswer = `<u>${romanizedInput.value.trim()}</u>`;
         const englishAnswer = `<u>${englishInput.value.trim()}</u>`;
-        const englishFieldGroup = document.getElementById('english-field-group');
-        const englishFieldVisible = englishFieldGroup.style.display !== "none";
+        const englishActionRow = document.getElementById('english-action-row');
+        const englishFieldVisible = englishActionRow.style.display !== "none";
 
         if (!englishFieldVisible) {
             if (isRomanCorrect) {
@@ -125,6 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
             showFeedback(`${romanAnswer} is correct. Enter English answer.`, true);
             readyForNext = false;
         } else {
+            // Only hide if neither is correct, otherwise feedback should persist until new input
             feedbackEl.classList.add('hidden');
             readyForNext = false;
         }
@@ -135,8 +157,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!card) return;
         const userAnswer = romanizedInput.value.trim();
         const underlined = `<u>${userAnswer}</u>`;
-        const englishFieldGroup = document.getElementById('english-field-group');
-        const englishFieldVisible = englishFieldGroup.style.display !== "none";
+        const englishActionRow = document.getElementById('english-action-row');
+        const englishFieldVisible = englishActionRow.style.display !== "none";
 
         if (userAnswer !== '' && isAnswerCorrect(userAnswer, card.roman)) {
             isRomanCorrect = true;
@@ -156,8 +178,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function checkEnglishAnswer() {
-        const englishFieldGroup = document.getElementById('english-field-group');
-        if (englishFieldGroup.style.display === "none") return;
+        const englishActionRow = document.getElementById('english-action-row');
+        if (englishActionRow.style.display === "none") return;
         const card = filteredQuizData[currentCardIndex];
         if (!card) return;
         const userAnswer = englishInput.value.trim();
@@ -204,12 +226,13 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const searchTerm = normalizeAnswer(searchInput.value);
         
-        // Hide the quiz content, but keep top-controls visible
+        // Show/Hide search results and quiz content based on search term
         if (searchTerm.length > 0) {
             quizContent.style.display = 'none';
+            searchResultsContainer.classList.remove('hidden'); // Show results container
         } else {
             quizContent.style.display = 'block';
-            displaySearchResults([]); 
+            searchResultsContainer.classList.add('hidden'); // Hide results container
             return;
         }
 
@@ -226,11 +249,9 @@ document.addEventListener('DOMContentLoaded', () => {
         searchResultsList.innerHTML = '';
 
         if (results.length === 0 && searchInput.value.length > 0) {
-            searchResultsContainer.classList.remove('hidden');
             searchResultsList.innerHTML = '<li>No matches found.</li>';
         } else if (results.length > 0) {
-            searchResultsContainer.classList.remove('hidden');
-            results.forEach((card, index) => {
+            results.forEach((card) => {
                 const li = document.createElement('li');
                 li.innerHTML = `<span class="result-nepali">${card.devanagari}</span> <span class="result-english">(${card.roman} / ${card.english})</span>`;
                 
@@ -256,8 +277,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 searchResultsList.appendChild(li);
             });
-        } else {
-            searchResultsContainer.classList.add('hidden');
         }
     }
     
@@ -275,6 +294,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     submitRomanizedBtn.addEventListener('click', checkRomanizedAnswer);
     submitEnglishBtn.addEventListener('click', checkEnglishAnswer);
+    
+    // NEW: Clear feedback when typing starts
+    romanizedInput.addEventListener('input', clearFeedbackOnInput);
+    englishInput.addEventListener('input', clearFeedbackOnInput);
+    
     romanizedInput.addEventListener('keypress', handleEnterKey);
     englishInput.addEventListener('keypress', handleEnterKey);
     document.addEventListener('keydown', handleArrowUp);
@@ -305,12 +329,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     englishModeBtn.addEventListener('click', () => {
         isEnglishMode = !isEnglishMode;
-        
-        // UPDATE: Toggle button text between "Devanagari" and "English"
-        // If English mode is ON, the question is in English, and the button should say "Devanagari" 
-        // to indicate the next mode you can switch to.
         englishModeBtn.textContent = isEnglishMode ? "Devanagari" : "English"; 
-        
         displayCard();
     });
 
@@ -331,17 +350,13 @@ document.addEventListener('DOMContentLoaded', () => {
         displayCard();
     });
 
-    async function initializeQuiz() {
-        try {
-            const response = await fetch('./data.json');
-            quizData = await response.json();
-            filteredQuizData = quizData.slice();
-            if (randomizeToggle.checked) shuffle(filteredQuizData);
-            displayCard();
-        } catch (err) {
-            console.error(err);
-            questionEl.textContent = "Error loading data.json";
-        }
+    // --- INITIALIZATION FUNCTION ---
+    function initializeQuiz() {
+        // Load data from the embedded array instead of fetching
+        quizData = flashcardData.slice();
+        filteredQuizData = quizData.slice();
+        if (randomizeToggle.checked) shuffle(filteredQuizData);
+        displayCard();
     }
 
     initializeQuiz();

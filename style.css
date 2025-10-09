@@ -14,13 +14,13 @@ body {
 
 /* Define colors */
 :root {
-    /* NEW SUBTLE COLOR: Almost the same as main background (#1b263b) but slightly lighter for the search/submit buttons */
+    /* Subtle Dark Blue for search input/submit buttons */
     --subtle-dark-blue: #222c3c; 
     --subtle-dark-blue-hover: #34495e;
-    /* Very Dark Blue for dropdown and toggle (Unchanged) */
+    /* Very Dark Blue for dropdown and toggle */
     --very-dark-blue: #151d2c; 
     --very-dark-blue-hover: #222c3c;
-    /* Grey for navigation (Unchanged) */
+    /* Grey for navigation */
     --default-grey: #34495e; 
     --grey-hover: #4a637d;
 }
@@ -52,7 +52,7 @@ h1 {
     border-bottom: none; 
 }
 
-/* --- CONTROL ROW: Filter | Search | Toggle --- */
+/* --- ROW 1: CONTROL ROW (Filter | Search | Toggle) --- */
 .top-controls {
     display: flex;
     justify-content: space-between; 
@@ -77,7 +77,7 @@ select {
     min-height: 44px; /* Mobile touch target */
 }
 
-/* --- SEARCH STYLES (Subtle Dark Blue) --- */
+/* --- SEARCH STYLES --- */
 .search-container {
     flex-grow: 1; 
     margin: 0; 
@@ -89,7 +89,6 @@ select {
     border: none;
     border-radius: 6px;
     font-size: 1rem;
-    /* APPLIED SUBTLE DARK BLUE */
     background-color: var(--subtle-dark-blue);
     color: #f0f0f0;
     box-sizing: border-box;
@@ -97,17 +96,7 @@ select {
     min-height: 44px; /* Mobile touch target */
 }
 
-#search-input::placeholder {
-    color: #b0c4de; /* Make placeholder lighter */
-}
-
-#search-input:focus {
-    background-color: var(--subtle-dark-blue-hover);
-    outline: none;
-}
-/* --- END SEARCH STYLES --- */
-
-/* Toggle Button (Very Dark Blue) */
+/* Toggle Button */
 #english-mode-btn {
     padding: 0.7em 1em; 
     background-color: var(--very-dark-blue);
@@ -122,11 +111,7 @@ select {
     min-height: 44px; /* Mobile touch target */
 }
 
-#english-mode-btn:hover {
-    background-color: var(--very-dark-blue-hover);
-}
-
-/* --- CARD CONTENT & INPUTS --- */
+/* --- ROW 2: CARD CONTENT --- */
 .card {
     background: #ffffff;
     border-radius: 6px;
@@ -147,63 +132,6 @@ select {
     margin-top: 0.5em;
 }
 
-.input-group {
-    display: flex;
-    gap: 0.4em;
-    margin: 0.8em 0;
-}
-
-.input-group input[type="text"] {
-    flex: 1;
-    padding: 0.6em;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    background-color: #f0f0f0; 
-    color: #1b263b;
-    min-height: 44px; /* Mobile touch target */
-    box-sizing: border-box;
-}
-
-.submit-button {
-    /* Uses subtle dark blue, consistent with the search input */
-    background-color: var(--subtle-dark-blue);
-    color: white;
-    border: none;
-    border-radius: 6px;
-    padding: 0.6em 1em; 
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    min-height: 44px; /* Mobile touch target */
-}
-
-.submit-button:hover {
-    background-color: var(--subtle-dark-blue-hover);
-}
-
-.button-container {
-    margin-top: 1em;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
-
-/* Navigation Buttons (Grey) */
-.nav-button, #prev-card-btn, #next-card-btn {
-    background-color: var(--default-grey); 
-    border: 1px solid #555;
-    color: #f0f0f0;
-    padding: 0.6em 1em;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    min-height: 44px; /* Mobile touch target */
-}
-
-.nav-button:hover, #prev-card-btn:hover, #next-card-btn:hover {
-    background-color: var(--grey-hover);
-}
-
 #feedback {
     margin-top: 0.5em;
     font-size: 1rem;
@@ -214,7 +142,129 @@ select {
     color: #e74c3c;
 }
 
-/* --- SEARCH RESULTS CONTAINER (Inline Placement) --- */
+/* --- ROW 3 & 4: INPUT & ACTION ROW (Combined) --- */
+.input-action-row {
+    display: flex;
+    gap: 0.4em; /* Gap between input and buttons */
+    margin: 0.8em 0;
+}
+
+.input-action-row input[type="text"] {
+    flex: 1; /* Input takes up maximum available space */
+    padding: 0.6em;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #f0f0f0; 
+    color: #1b263b;
+    min-height: 44px; 
+    box-sizing: border-box;
+}
+
+/* Submit and Reveal Buttons */
+.submit-button {
+    background-color: var(--subtle-dark-blue);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 0.6em 0.4em; /* Reduced horizontal padding for compactness */
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    min-height: 44px; 
+    white-space: nowrap; /* Prevents "Submit" and "Reveal" from wrapping */
+}
+
+.submit-button:hover {
+    background-color: var(--subtle-dark-blue-hover);
+}
+
+/* --- ROW 5: NAVIGATION BUTTONS (Previous/Next) --- */
+.nav-button-container {
+    margin-top: 1em;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.nav-button-container .nav-button {
+    flex: 1; /* Makes buttons share the row space equally */
+}
+
+/* Navigation Buttons (Grey) */
+.nav-button {
+    background-color: var(--default-grey); 
+    border: 1px solid #555;
+    color: #f0f0f0;
+    padding: 0.6em 1em;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    min-height: 44px; /* Mobile touch target */
+}
+
+.nav-button:hover {
+    background-color: var(--grey-hover);
+}
+
+/* --- MOBILE SPECIFIC LAYOUT ADJUSTMENTS (@media) --- */
+@media (max-width: 450px) {
+    .quiz-container {
+        padding: 1em 1em 1.5em 1em; 
+    }
+
+    /* ROW 1: Stack controls vertically on very small screens */
+    .top-controls {
+        flex-direction: column;
+        gap: 0.8em;
+    }
+    
+    .top-controls > * {
+        width: 100%;
+        margin-right: 0 !important;
+    }
+    
+    .search-container {
+        width: 100%;
+        margin: 0;
+    }
+    
+    /* ROW 3 & 4: Input and Action buttons: Stack vertically on mobile */
+    .input-action-row {
+        flex-direction: column; 
+        gap: 0.6em;
+    }
+    
+    .input-action-row input[type="text"] {
+        width: 100%;
+    }
+    
+    /* Force Submit/Reveal buttons to be side-by-side on their own sub-row */
+    .input-action-row button {
+        /* Since the parent is flex-direction: column, we need to override the button's layout */
+        display: inline-block;
+        width: calc(50% - 5px); 
+        box-sizing: border-box;
+        flex: unset; /* Remove flex sizing */
+    }
+
+    .input-action-row button:nth-of-type(1) {
+        margin-right: 10px; /* Separator gap */
+    }
+    
+    /* ROW 5: Navigation buttons remain horizontal */
+    .nav-button-container {
+        flex-direction: row; 
+        gap: 10px;
+        width: 100%;
+    }
+    
+    .nav-button-container .nav-button {
+        flex: 1;
+        min-height: 44px;
+    }
+}
+
+/* Search results styles (unmodified) */
 .search-results-container {
     background: #1b263b;
     width: 100%;
@@ -222,7 +272,6 @@ select {
     padding: 0;
     text-align: left;
 }
-
 #search-results-list {
     list-style: none;
     padding: 0;
@@ -230,7 +279,6 @@ select {
     max-height: 300px; 
     overflow-y: auto; 
 }
-
 #search-results-list li {
     background-color: #2c3e50;
     padding: 0.7em;
@@ -243,72 +291,6 @@ select {
     align-items: center;
     font-size: 1.1rem;
 }
-
-#search-results-list li:hover {
-    background-color: #34495e;
-    transform: translateY(-1px);
-}
-
-#search-results-list li .result-nepali {
-    font-weight: bold;
-    color: #f0f0f0;
-    margin-right: 10px;
-}
-
-#search-results-list li .result-english {
-    color: #b0c4de;
-    font-style: italic;
-    font-size: 0.9rem;
-}
-
-.back-to-quiz-btn-container {
-    margin-top: 1em;
-    text-align: center;
-}
-
-/* ---------------------------------------------------- */
-/* --- MOBILE SPECIFIC LAYOUT ADJUSTMENTS (@media) --- */
-/* ---------------------------------------------------- */
-@media (max-width: 450px) {
-    .quiz-container {
-        padding: 1em 1em 1.5em 1em; 
-    }
-
-    /* Stack controls vertically on very small screens */
-    .top-controls {
-        flex-direction: column;
-        gap: 0.8em;
-    }
-    
-    /* Make stacked controls full width */
-    .top-controls > * {
-        width: 100%;
-        margin-right: 0 !important;
-    }
-    
-    .search-container {
-        width: 100%;
-        margin: 0;
-    }
-    
-    /* Make input groups stack vertically */
-    .input-group {
-        flex-direction: column;
-        gap: 0.6em;
-    }
-    
-    /* Make submit buttons full width when stacked */
-    .submit-button {
-        width: 100%;
-    }
-    
-    /* Make previous/next buttons stack vertically */
-    .button-container {
-        flex-direction: column;
-        gap: 0.6em;
-    }
-}
-
 
 /* Utility Class */
 .hidden {
