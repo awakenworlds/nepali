@@ -1,59 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nepali Flashcards</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Spanish Flashcards</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-  <div class="quiz-container">
-    <h1>Nepali Flashcards</h1>
-
-    <div class="top-controls">
-      <select id="filter-dropdown">
-        <option value="all">All</option>
-        <option value="letter">Letter</option>
-        <option value="number">Number</option>
-        <option value="verb">Verb</option>
-        <option value="noun">Noun</option>
-        <option value="adjective">Adjective</option>
-        <option value="popular">Popular</option>
-      </select>
-      <button id="english-mode-btn">Toggle to English</button>
-    </div>
-
-    <div class="card">
+  <div class="card-container">
+    <h1>Spanish Flashcards</h1>
+    <div id="card">
       <div id="question"></div>
       <div id="answer" class="hidden"></div>
-      <div id="feedback" class="hidden"></div>
+      <div id="feedback" class="feedback"></div>
     </div>
 
-    <div class="input-group">
-      <input type="text" id="romanized-answer-input" placeholder="Roman Answer" autocomplete="off">
-      <button id="submit-romanized-btn" class="submit-button">Submit</button>
-      <button id="show-roman-answer-btn" class="submit-button">Reveal</button>
+    <div class="controls">
+      <div class="input-group">
+        <input type="text" id="spanish-answer-input" placeholder="Your Answer" autocomplete="off">
+        <button id="submit-btn">Submit</button>
+      </div>
     </div>
 
-    <div class="input-group" id="english-field-group">
-      <input type="text" id="english-answer-input" placeholder="English Answer" autocomplete="off">
-      <button id="submit-english-btn" class="submit-button">Submit</button>
-      <button id="show-english-answer-btn" class="submit-button">Reveal</button>
-    </div>
-
-    <div class="button-container">
+    <div class="action-buttons">
       <button id="prev-card-btn">Previous</button>
+      <button id="show-answer-btn">Show Answer</button>
+      <button id="reset-btn" class="reset-button">Reset Card</button>
       <button id="next-card-btn">Next</button>
+      <button id="switch-language-btn">Switch Language</button>
     </div>
 
-    <div id="randomize-container">
-      <label>
-        <input type="checkbox" id="random-toggle" checked>
-        Randomize Quiz
-      </label>
+    <div class="category-select-container">
+      <label for="category-select">Choose a category:</label>
+      <select id="category-select" class="category-select">
+        <option value="all">All</option>
+        <option value="verb">Verbs</option>
+        <option value="noun">Nouns</option>
+        <option value="adjective">Adjectives</option>
+        <option value="phrase">Common Phrases</option>
+      </select>
     </div>
   </div>
-
   <script src="script.js"></script>
 </body>
 </html>
