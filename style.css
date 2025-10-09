@@ -1,111 +1,316 @@
 body {
-  font-family: 'Noto Sans', sans-serif;
-  background: #1e1e1e; /* Dark background */
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  color: #f0f0f0; /* Light text color */
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #0d1b2a;
+    color: #f0f0f0;
+    margin: 0;
+    padding: 20px 0 0 0; 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
 }
 
-.card-container {
-  background: #2c2c2c; /* Dark card */
-  border-radius: 10px;
-  padding: 20px;
-  width: 400px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-  text-align: center;
+/* Define colors */
+:root {
+    /* NEW SUBTLE COLOR: Almost the same as main background (#1b263b) but slightly lighter for the search/submit buttons */
+    --subtle-dark-blue: #222c3c; 
+    --subtle-dark-blue-hover: #34495e;
+    /* Very Dark Blue for dropdown and toggle (Unchanged) */
+    --very-dark-blue: #151d2c; 
+    --very-dark-blue-hover: #222c3c;
+    /* Grey for navigation (Unchanged) */
+    --default-grey: #34495e; 
+    --grey-hover: #4a637d;
 }
 
-#card {
-  margin-bottom: 20px;
+/* --- TOP CONTAINER & TITLE --- */
+.top-header {
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    margin: 0; 
 }
 
-#question {
-  font-size: 1.5em;
-  margin-bottom: 10px;
-  color: #ffcc00; /* Highlight question */
+.quiz-container {
+    background: #1b263b; /* Base container color */
+    max-width: 500px;
+    width: 90%;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    padding: 1em 1.5em 1.5em 1.5em; 
+    text-align: center;
+    margin-bottom: 20px; 
+}
+
+h1 {
+    font-size: 2.2rem;
+    color: #f0f0f0;
+    margin: 0; 
+    padding: 0 0 0.5em 0; 
+    border-bottom: none; 
+}
+
+/* --- CONTROL ROW: Filter | Search | Toggle --- */
+.top-controls {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    margin-top: 0.8em; 
+    margin-bottom: 1em;
+    width: 100%;
+    gap: 10px; 
+}
+
+/* Dropdown (Very Dark Blue) */
+select {
+    padding: 0.7em 0.8em; 
+    border-radius: 6px;
+    border: none;
+    font-size: 1rem;
+    background-color: var(--very-dark-blue); 
+    color: #f0f0f0;
+    box-sizing: border-box; 
+    line-height: 1.2; 
+    cursor: pointer;
+    min-height: 44px; /* Mobile touch target */
+}
+
+/* --- SEARCH STYLES (Subtle Dark Blue) --- */
+.search-container {
+    flex-grow: 1; 
+    margin: 0; 
+}
+
+#search-input {
+    width: 100%; 
+    padding: 0.7em 0.8em; 
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    /* APPLIED SUBTLE DARK BLUE */
+    background-color: var(--subtle-dark-blue);
+    color: #f0f0f0;
+    box-sizing: border-box;
+    transition: background-color 0.3s;
+    min-height: 44px; /* Mobile touch target */
+}
+
+#search-input::placeholder {
+    color: #b0c4de; /* Make placeholder lighter */
+}
+
+#search-input:focus {
+    background-color: var(--subtle-dark-blue-hover);
+    outline: none;
+}
+/* --- END SEARCH STYLES --- */
+
+/* Toggle Button (Very Dark Blue) */
+#english-mode-btn {
+    padding: 0.7em 1em; 
+    background-color: var(--very-dark-blue);
+    border: 1px solid #555;
+    color: #f0f0f0;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    box-sizing: border-box;
+    line-height: 1.2; 
+    font-size: 1rem; 
+    min-height: 44px; /* Mobile touch target */
+}
+
+#english-mode-btn:hover {
+    background-color: var(--very-dark-blue-hover);
+}
+
+/* --- CARD CONTENT & INPUTS --- */
+.card {
+    background: #ffffff;
+    border-radius: 6px;
+    padding: 1em;
+    margin-bottom: 1em;
+}
+
+.card #question {
+    font-size: 2.8rem; 
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.5em;
 }
 
 #answer {
-  font-size: 1.2em;
-  color: #ddd;
-  margin-bottom: 10px;
-}
-
-.feedback {
-  margin-top: 10px;
-  font-weight: bold;
-}
-
-.correct {
-  color: #2ecc71;
-}
-
-.incorrect {
-  color: #e74c3c;
-}
-
-.hidden {
-  display: none;
+    font-size: 1.4rem;
+    color: #16a085;
+    margin-top: 0.5em;
 }
 
 .input-group {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 10px;
+    display: flex;
+    gap: 0.4em;
+    margin: 0.8em 0;
 }
 
-.input-group input {
-  flex: 1;
-  padding: 8px;
-  font-size: 1em;
-  background: #3a3a3a;
-  border: 1px solid #555;
-  color: #f0f0f0;
+.input-group input[type="text"] {
+    flex: 1;
+    padding: 0.6em;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #f0f0f0; 
+    color: #1b263b;
+    min-height: 44px; /* Mobile touch target */
+    box-sizing: border-box;
 }
 
-.input-group button {
-  padding: 8px 12px;
-  margin-left: 5px;
-  background: #27ae60;
-  color: white;
-  border: none;
-  cursor: pointer;
+.submit-button {
+    /* Uses subtle dark blue, consistent with the search input */
+    background-color: var(--subtle-dark-blue);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 0.6em 1em; 
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    min-height: 44px; /* Mobile touch target */
 }
 
-.input-group button:hover {
-  background: #219150;
+.submit-button:hover {
+    background-color: var(--subtle-dark-blue-hover);
 }
 
-.action-buttons button {
-  margin: 5px;
-  padding: 8px 12px;
-  background: #444;
-  color: white;
-  border: none;
-  cursor: pointer;
+.button-container {
+    margin-top: 1em;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }
 
-.action-buttons button:hover {
-  background: #555;
+/* Navigation Buttons (Grey) */
+.nav-button, #prev-card-btn, #next-card-btn {
+    background-color: var(--default-grey); 
+    border: 1px solid #555;
+    color: #f0f0f0;
+    padding: 0.6em 1em;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    min-height: 44px; /* Mobile touch target */
 }
 
-.category-select-container {
-  margin-top: 15px;
+.nav-button:hover, #prev-card-btn:hover, #next-card-btn:hover {
+    background-color: var(--grey-hover);
 }
 
-.category-select {
-  padding: 8px;
-  background: #3a3a3a;
-  color: white;
-  border: 1px solid #555;
+#feedback {
+    margin-top: 0.5em;
+    font-size: 1rem;
+    color: #2ecc71;
 }
 
-.reset-button {
-  background-color: #f44336;
-  color: white;
-  border: none;
+#feedback.incorrect {
+    color: #e74c3c;
+}
+
+/* --- SEARCH RESULTS CONTAINER (Inline Placement) --- */
+.search-results-container {
+    background: #1b263b;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+
+#search-results-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.5em 0 1em 0;
+    max-height: 300px; 
+    overflow-y: auto; 
+}
+
+#search-results-list li {
+    background-color: #2c3e50;
+    padding: 0.7em;
+    margin-bottom: 0.5em;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1rem;
+}
+
+#search-results-list li:hover {
+    background-color: #34495e;
+    transform: translateY(-1px);
+}
+
+#search-results-list li .result-nepali {
+    font-weight: bold;
+    color: #f0f0f0;
+    margin-right: 10px;
+}
+
+#search-results-list li .result-english {
+    color: #b0c4de;
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+.back-to-quiz-btn-container {
+    margin-top: 1em;
+    text-align: center;
+}
+
+/* ---------------------------------------------------- */
+/* --- MOBILE SPECIFIC LAYOUT ADJUSTMENTS (@media) --- */
+/* ---------------------------------------------------- */
+@media (max-width: 450px) {
+    .quiz-container {
+        padding: 1em 1em 1.5em 1em; 
+    }
+
+    /* Stack controls vertically on very small screens */
+    .top-controls {
+        flex-direction: column;
+        gap: 0.8em;
+    }
+    
+    /* Make stacked controls full width */
+    .top-controls > * {
+        width: 100%;
+        margin-right: 0 !important;
+    }
+    
+    .search-container {
+        width: 100%;
+        margin: 0;
+    }
+    
+    /* Make input groups stack vertically */
+    .input-group {
+        flex-direction: column;
+        gap: 0.6em;
+    }
+    
+    /* Make submit buttons full width when stacked */
+    .submit-button {
+        width: 100%;
+    }
+    
+    /* Make previous/next buttons stack vertically */
+    .button-container {
+        flex-direction: column;
+        gap: 0.6em;
+    }
+}
+
+
+/* Utility Class */
+.hidden {
+    display: none !important;
 }
