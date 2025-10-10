@@ -20,6 +20,10 @@ body {
     --very-dark-blue-hover: #222c3c;
     --default-grey: #34495e; 
     --grey-hover: #4a637d;
+    --forest-green: #228B22;
+    --forest-green-hover: #2ca42c;
+    --dark-yellow: #bfa70a;
+    --dark-yellow-hover: #d4bf29;
 }
 
 /* --- TOP CONTAINER & TITLE --- */
@@ -52,52 +56,56 @@ h1 {
 .top-controls {
     display: flex;
     justify-content: space-between; 
-    align-items: center; 
+    align-items: stretch;
     margin-top: 0.8em; 
     margin-bottom: 1em;
     width: 100%;
     gap: 10px; 
 }
 
-select {
-    padding: 0.7em 0.8em; 
+select,
+#search-input,
+#english-mode-btn {
     border-radius: 6px;
     border: none;
     font-size: 1rem;
-    background-color: var(--very-dark-blue); 
     color: #f0f0f0;
-    line-height: 1.2; 
-    cursor: pointer;
-    min-height: 44px;
+    height: 48px;
+    box-sizing: border-box;
 }
 
+/* Dropdown */
+select {
+    background-color: var(--very-dark-blue); 
+    padding: 0 0.8em;
+    cursor: pointer;
+}
+
+/* Search box */
 .search-container {
     flex-grow: 1; 
 }
 
 #search-input {
     width: 100%; 
-    padding: 0.7em 0.8em; 
-    border: none;
-    border-radius: 6px;
-    font-size: 1rem;
+    padding: 0 0.8em; 
     background-color: var(--subtle-dark-blue);
-    color: #f0f0f0;
-    min-height: 44px;
 }
 
+/* English/Devanagari toggle button */
 #english-mode-btn {
-    padding: 0.7em 1em; 
     background-color: var(--very-dark-blue);
     border: 1px solid #555;
-    color: #f0f0f0;
-    border-radius: 6px;
+    padding: 0 1em; 
     cursor: pointer;
-    font-size: 1rem; 
-    min-height: 44px;
+    transition: background-color 0.2s;
 }
 
-/* --- ROW 2: CARD CONTENT --- */
+#english-mode-btn:hover {
+    background-color: var(--very-dark-blue-hover);
+}
+
+/* --- CARD CONTENT --- */
 .card {
     background: #ffffff;
     border-radius: 6px;
@@ -128,7 +136,7 @@ select {
     color: #e74c3c;
 }
 
-/* --- INPUT ROW --- */
+/* --- INPUT & BUTTON ROW --- */
 .input-action-row {
     display: flex;
     gap: 0.4em;
@@ -145,20 +153,40 @@ select {
     min-height: 44px; 
 }
 
+/* Submit button (forest green) */
 .submit-button {
-    background-color: var(--subtle-dark-blue);
+    background-color: var(--forest-green);
     color: white;
     border: none;
     border-radius: 6px;
-    padding: 0.6em 0.4em;
-    font-size: 0.9rem;
+    padding: 0.6em 0.8em;
+    font-size: 0.95rem;
     cursor: pointer;
     min-height: 44px;
+    font-weight: 600;
     white-space: nowrap;
 }
 
 .submit-button:hover {
-    background-color: var(--subtle-dark-blue-hover);
+    background-color: var(--forest-green-hover);
+}
+
+/* Reveal button (dark yellow) */
+.reveal-button {
+    background-color: var(--dark-yellow) !important;
+    color: #1b1b1b !important;
+    border: none;
+    border-radius: 6px;
+    padding: 0.6em 0.8em;
+    font-size: 0.95rem;
+    cursor: pointer;
+    min-height: 44px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.reveal-button:hover {
+    background-color: var(--dark-yellow-hover) !important;
 }
 
 /* --- NAV BUTTONS --- */
@@ -183,48 +211,19 @@ select {
     background-color: var(--grey-hover);
 }
 
-/* --- MOBILE LAYOUT --- */
-@media (max-width: 450px) {
-    .quiz-container {
-        padding: 1em;
-    }
-
-    .top-controls {
-        flex-direction: column;
-        gap: 0.8em;
-    }
-    
-    .top-controls > * {
-        width: 100%;
-    }
-    
-    .input-action-row {
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 0.4em;
-    }
-
-    .input-action-row input[type="text"] {
-        flex: 1 1 60%;
-    }
-
-    .input-action-row button {
-        flex: 1 1 auto;
-        min-width: 80px;
-    }
-
-    .nav-button-container {
-        flex-direction: row;
-        gap: 10px;
-        width: 100%;
-    }
-
-    .nav-button-container .nav-button {
-        flex: 1;
-    }
+/* --- RANDOMIZE TOGGLE --- */
+#randomize-container {
+    margin-top: 1em;
+    font-size: 0.95rem;
+    color: #d0d0d0;
 }
 
-/* Search results */
+#randomize-container input[type="checkbox"] {
+    transform: scale(1.2);
+    margin-right: 0.4em;
+}
+
+/* --- SEARCH RESULTS --- */
 .search-results-container {
     background: #1b263b;
     width: 100%;
@@ -252,6 +251,55 @@ select {
     font-size: 1.1rem;
 }
 
+#search-results-list li:hover {
+    background-color: #3d566e;
+}
+
 .hidden {
     display: none !important;
+}
+
+/* --- MOBILE LAYOUT --- */
+@media (max-width: 450px) {
+    .quiz-container {
+        padding: 1em;
+    }
+
+    .top-controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.8em;
+    }
+    
+    select,
+    #search-input,
+    #english-mode-btn {
+        width: 100%;
+        height: 48px;
+    }
+
+    .input-action-row {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.4em;
+    }
+
+    .input-action-row input[type="text"] {
+        flex: 1 1 60%;
+    }
+
+    .input-action-row button {
+        flex: 1 1 auto;
+        min-width: 80px;
+    }
+
+    .nav-button-container {
+        flex-direction: row;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .nav-button-container .nav-button {
+        flex: 1;
+    }
 }
