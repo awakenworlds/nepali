@@ -11,26 +11,19 @@
     <div class="top-header"></div>
     
     <div class="quiz-container">
-        <h1>Nepali Flashcards</h1>
         
+        <div class="header-nav-container">
+            <button id="prev-card-btn" class="nav-button top-nav-button">Previous</button>
+            <h1 class="header-title">Nepali</h1>
+            <button id="next-card-btn" class="nav-button top-nav-button">Next</button>
+        </div>
         <div class="top-controls">
-            <!-- grouped row for dropdown + toggle (new minimal wrapper) -->
             <div class="top-controls-row">
-                <select id="filter-dropdown">
-                    <option value="all">All</option>
-                    <option value="letter">Letter</option>
-                    <option value="number">Number</option>
-                    <option value="verb">Verb</option>
-                    <option value="noun">Noun</option>
-                    <option value="adjective">Adjective</option>
-                    <option value="popular">Popular</option>
-                </select>
-
-                <button id="english-mode-btn">English</button>
-            </div>
+                </div>
 
             <div class="search-container">
                 <input type="text" id="search-input" placeholder="Search here..." autocomplete="off">
+                <button id="english-mode-btn">En</button>
             </div>
         </div>
 
@@ -66,15 +59,19 @@
 
             <div class="multiple-choice-container hidden" id="multiple-choice-container"></div>
 
-            <div class="nav-button-container">
-                <button id="prev-card-btn" class="nav-button">Previous</button>
-                <button id="next-card-btn" class="nav-button">Next</button>
-            </div>
-
             <div id="randomize-container">
+                <select id="filter-dropdown">
+                    <option value="all">All</option>
+                    <option value="letter">Letter</option>
+                    <option value="number">Number</option>
+                    <option value="verb">Verb</option>
+                    <option value="noun">Noun</option>
+                    <option value="adjective">Adjective</option>
+                    <option value="popular">Popular</option>
+                </select>
                 <label>
                     <input type="checkbox" id="random-toggle" checked>
-                    Randomize Quiz
+                    Random
                 </label>
             </div>
         </div>
