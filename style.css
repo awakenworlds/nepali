@@ -1,389 +1,458 @@
-/* GLOBAL RESET: CRITICAL for preventing bleed-out */
-* {
-    box-sizing: border-box;
-}
+document.addEventListener('DOMContentLoaded', () => {
+    const questionEl = document.getElementById('question');
+    const answerEl = document.getElementById('answer');
+    const feedbackEl = document.getElementById('feedback');
+    const romanizedInput = document.getElementById('romanized-answer-input');
+    const englishInput = document.getElementById('english-answer-input');
+    const submitRomanizedBtn = document.getElementById('submit-romanized-btn');
+    const submitEnglishBtn = document.getElementById('submit-english-btn');
+    const prevBtn = document.getElementById('prev-card-btn');
+    const nextBtn = document.getElementById('next-card-btn');
+    const englishModeBtn = document.getElementById('english-mode-btn');
+    const showRomanBtn = document.getElementById('show-roman-answer-btn');
+    const showEnglishBtn = document.getElementById('show-english-answer-btn');
+    const filterDropdown = document.getElementById('filter-dropdown');
+    const randomizeToggle = document.getElementById('random-toggle');
+    const searchInput = document.getElementById('search-input');
+    const searchResultsContainer = document.getElementById('search-results-container');
+    const searchResultsList = document.getElementById('search-results-list');
+    const quizContent = document.getElementById('quiz-content');    
+    const backToQuizBtn = document.getElementById('back-to-quiz-btn');    
+    const multipleChoiceContainer = document.getElementById('multiple-choice-container');
 
-body {
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    background-color: #0d1b2a;
-    color: #f0f0f0;
-    margin: 0;
-    padding: 20px 0 0 0; 
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    min-height: 100vh;
-}
+    const romanActionRow = document.getElementById('romanized-action-row');
+    const englishActionRow = document.getElementById('english-action-row');
 
-:root {
-    --subtle-dark-blue: #222c3c; 
-    --subtle-dark-blue-hover: #34495e;
-    --very-dark-blue: #151d2c; 
-    --very-dark-blue-hover: #222c3c;
-    --default-grey: #34495e; 
-    --grey-hover: #4a637d;
-    --submit-green: #2ecc71;
-    --reveal-yellow: #d4ac0d;
-}
-
-/* --- TOP CONTAINER & TITLE --- */
-.top-header {
-    max-width: 500px;
-    width: 90%;
-    text-align: center;
-    margin: 0; 
-}
-
-.quiz-container {
-    background: #1b263b;
-    max-width: 500px;
-    width: 90%;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    padding: 1em 1.5em 1.5em 1.5em; 
-    text-align: center;
-    margin-bottom: 20px; 
-}
-
-/* CRITICAL FIX: Ensures Previous Button, H1, and Next Button are on the same line. */
-.header-nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center; 
-    width: 100%;
-    margin-bottom: 0.5em; 
-}
-
-.header-title {
-    font-size: 2.2rem;
-    color: #f0f0f0;
-    margin: 0; 
-    padding: 0; 
-    flex-grow: 1;
-    text-align: center; 
-}
-
-/* Style for the buttons at the top */
-.top-nav-button {
-    flex-shrink: 0; 
-    padding: 0.5em 0.8em;
-    font-size: 0.9rem;
-    min-height: 40px; 
-}
-
-/* --- ROW 1: CONTROL ROW (Now only contains Search/Toggle) --- */
-.top-controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    margin-top: 0.8em;
-    margin-bottom: 1em;
-    width: 100%;
-    /* Keep as column for simple stacking on mobile */
-    flex-direction: column;
-}
-
-/* top-controls-row is now essentially empty in HTML, but we keep the style below for safety */
-.top-controls-row {
-    display: flex;
-    gap: 10px;
-    width: 100%;
-    justify-content: space-between;
-}
-
-.top-controls select,
-.top-controls button {
-    height: 44px;
-    flex-shrink: 0;
-}
-
-/* NEW FLEX LAYOUT FOR SEARCH & TOGGLE BUTTON */
-.top-controls .search-container {
-    flex: 1 1 auto;
-    width: 100%; 
-    display: flex;
-    gap: 10px;
-}
-
-.top-controls .search-container input {
-    width: 100%;
-    flex-grow: 1; 
-    min-width: 120px;
-    padding: 0.7em 0.8em;
-    border: none;
-    border-radius: 6px;
-    font-size: 1rem;
-    background-color: var(--subtle-dark-blue);
-    color: #f0f0f0;
-}
-
-/* Dropdown */
-select {
-    padding: 0.7em 0.8em;
-    border-radius: 6px;
-    border: none;
-    font-size: 1rem;
-    background-color: var(--very-dark-blue);
-    color: #f0f0f0;
-    cursor: pointer;
-    /* Ensure dropdown doesn't take up too much space in the row */
-    flex-grow: 1; 
-}
-
-/* Mode button - now inside search-container */
-#english-mode-btn {
-    padding: 0.7em 1em;
-    background-color: var(--very-dark-blue);
-    border: 1px solid #555;
-    color: #f0f0f0;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 1rem;
-    flex-shrink: 0; /* Prevents button from shrinking */
-}
-
-/* --- CARD CONTENT --- */
-.card {
-    background: #ffffff;
-    border-radius: 6px;
-    padding: 1em;
-    margin-bottom: 1em;
-}
-
-.card #question {
-    font-size: 2.8rem; 
-    font-weight: 600;
-    color: #2c3e50;
-    margin-bottom: 0.5em;
-}
-
-#answer {
-    font-size: 2.0em; 
-    color: #16a085;
-    margin-top: 0.5em;
-}
-
-#feedback {
-    margin-top: 0.5em;
-    font-size: 1rem;
-    color: #2ecc71;
-}
-
-#feedback.incorrect {
-    color: #e74c3c;
-}
-
-/* --- INPUT ROW (The main area causing issues) --- */
-.input-action-row {
-    display: flex;
-    gap: 0.4em;
-    margin: 0.8em 0;
-    align-items: flex-start;
-    /* Ensure the row doesn't force a larger width */
-    min-width: 0; 
-}
-
-.input-action-row input[type="text"] {
-    flex: 1;
-    padding: 0.6em;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    background-color: #f0f0f0; 
-    color: #1b263b;
-    min-height: 44px; 
-    font-size: 2.0em; 
-    /* Critical: Allows input to shrink below its default size */
-    min-width: 0; 
-}
-
-.input-action-row .button-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4em;
-    /* Allows the button group to take up the space it needs */
-    flex-shrink: 0;
-}
-
-.input-action-row button {
-    padding: 0.5em 0.7em;
-    font-size: 0.85rem;
-    min-height: 36px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    white-space: nowrap;
-}
-
-.submit-button {
-    background-color: var(--submit-green);
-    color: white;
-}
-
-.submit-button.reveal {
-    background-color: var(--reveal-yellow);
-    color: #1b263b;
-}
-
-.submit-button:hover {
-    opacity: 0.85;
-}
-
-/* --- NAV BUTTONS (General style used by top-nav-button) --- */
-.nav-button {
-    background-color: var(--default-grey); 
-    border: 1px solid #555;
-    color: #f0f0f0;
-    padding: 0.6em 1em;
-    border-radius: 6px;
-    cursor: pointer;
-    min-height: 44px;
-}
-
-.nav-button:hover {
-    background-color: var(--grey-hover);
-}
-
-
-/* --- MULTIPLE CHOICE GRID --- */
-.multiple-choice-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-    margin: 1em 0;
-}
-
-.multiple-choice-container button {
-    background-color: var(--very-dark-blue);
-    color: #f0f0f0;
-    border: none;
-    border-radius: 6px;
-    padding: 0.6em;
-    font-size: 1.6rem; 
-    cursor: pointer;
-    min-height: 40px;
-}
-
-.multiple-choice-container button:hover {
-    background-color: var(--subtle-dark-blue-hover);
-}
-
-/* --- RANDOMIZE/FILTER ROW --- */
-#randomize-container {
-    margin-top: 1em;
-    /* Set to flex to place dropdown and checkbox on the same line */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px; /* Spacing between the dropdown and the checkbox */
-    font-size: 0.9rem;
-}
-
-/* Ensure the dropdown takes available space on the left */
-#randomize-container select {
-    flex-grow: 1;
-    min-width: 0; /* Allows it to shrink nicely */
-}
-
-/* Ensure the label/checkbox stays on the right */
-#randomize-container label {
-    flex-shrink: 0;
-    white-space: nowrap;
-}
-
-
-/* --- MOBILE LAYOUT (Refined to prevent overflow) --- */
-@media (max-width: 450px) {
-    /* * Reduce Quiz Container Padding: 
-     * The internal padding combined with the 90% width could cause overflow on tiny screens. 
-     */
-    .quiz-container {
-        padding: 1em; 
-    }
-
-    /* .top-controls is already set to flex-direction: column */
+    let quizData = [];
+    let filteredQuizData = [];
+    let currentCardIndex = 0;
+    let isEnglishMode = false;    
+    let isRomanCorrect = false;
+    let isEnglishCorrect = false;
+    let readyForNext = false;
     
-    .top-controls-row {
-        /* This row is effectively empty in the new HTML, but we keep the styles */
-        flex-direction: row; 
-        gap: 0.8em;
+    // Swipe feature variables
+    let startX = 0;
+    let endX = 0;
+    const threshold = 75; // Minimum distance (in pixels) for a valid swipe
+
+    function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
     }
+
+    function normalizeAnswer(ans) {
+        return String(ans || '').toLowerCase().trim();
+    }
+
+    function isAnswerCorrect(userAnswer, cardAnswer) {
+        userAnswer = normalizeAnswer(userAnswer).replace(/ā/g, 'a');
+        cardAnswer = normalizeAnswer(cardAnswer).replace(/ā/g, 'a');
+        const bracketIndex = cardAnswer.indexOf('(');
+        if (bracketIndex !== -1) cardAnswer = cardAnswer.slice(0, bracketIndex).trim();
+        const acceptableAnswers = cardAnswer.split('/').map(e => e.trim());
+        return acceptableAnswers.includes(userAnswer);
+    }
+
+    function showFeedback(message, correct = true) {
+        feedbackEl.innerHTML = message;
+        feedbackEl.classList.remove('hidden');
+        feedbackEl.classList.toggle('incorrect', !correct);
+    }
+
+    function clearFeedbackOnInput() {
+        feedbackEl.classList.add('hidden');
+    }
+
+    function displayCard() {
+        searchResultsContainer.classList.add('hidden');
+        quizContent.style.display = 'block';    
+
+        if (!filteredQuizData || filteredQuizData.length === 0) {
+            questionEl.textContent = 'No flashcards with current filters.';
+            answerEl.classList.add('hidden');
+            feedbackEl.classList.add('hidden');
+            return;
+        }
+        if (currentCardIndex >= filteredQuizData.length) currentCardIndex = 0;
+        if (currentCardIndex < 0) currentCardIndex = filteredQuizData.length - 1;    
+
+        const card = filteredQuizData[currentCardIndex];
+        // Question is always English when in English Mode (asking for Devanagari/Romanized answer)
+        questionEl.textContent = isEnglishMode ? card.english : card.devanagari;
+
+        answerEl.classList.add('hidden');
+        answerEl.textContent = '';
+        feedbackEl.classList.add('hidden');
+        feedbackEl.innerHTML = '';
+
+        romanizedInput.value = '';
+        englishInput.value = '';
+        isRomanCorrect = false;
+        isEnglishCorrect = false;
+        readyForNext = false;
+
+        // English Mode (Question is English, Answer is Devanagari via MC)
+        if (isEnglishMode) {
+            multipleChoiceContainer.classList.remove('hidden');
+            englishActionRow.style.display = 'none'; // English input is always irrelevant here
+            
+            // Show Romanized input only for non-letter types (where pronunciation is complex)
+            if (card.sort === "letter") {
+                romanActionRow.style.display = 'none';
+            } else {
+                romanActionRow.style.display = 'flex';
+                romanizedInput.focus();
+            }
+            
+            generateMultipleChoice(card);
+        } else {
+            // Devanagari Mode (Question is Devanagari, Answer is Romanized/English via text input)
+            multipleChoiceContainer.classList.add('hidden');
+            romanActionRow.style.display = 'flex'; // Romanized input always visible in Devanagari mode
+
+            // Only hide English input if it's a letter (as Romanized alone is the answer)
+            englishActionRow.style.display = (card.sort === "letter") ? "none" : "flex";
+
+            // Number type changes placeholder
+            if (card.sort === "number") {
+                englishInput.placeholder = "Numerical Answer";
+            } else {
+                englishInput.placeholder = "English Answer";
+            }
+            romanizedInput.focus();
+        }
+    }
+
+    function generateMultipleChoice(card) {
+        multipleChoiceContainer.innerHTML = '';
+        // Clear input in case user decides to use MC after typing a bit
+        romanizedInput.value = '';    
+
+        // In English mode, the answer (the question on the button) is always the Devanagari text.
+        const correctAnswer = card.devanagari;    
+        let options = [correctAnswer];
+        
+        // Filter the pool to only include items of the same 'sort' category    
+        // and exclude the correct answer itself.
+        const categoryPool = filteredQuizData.filter(
+            c => c.sort === card.sort && c.devanagari !== correctAnswer
+        );
+
+        // Pick 3 random wrong answers from the category pool
+        shuffle(categoryPool);
+        for (let i = 0; i < 3 && i < categoryPool.length; i++) {
+            options.push(categoryPool[i].devanagari);
+        }
+        
+        // Fallback: Ensure we always have 4 options if possible by grabbing from a general pool
+        while (options.length < 4) {
+            const generalPool = quizData.filter(c => c.devanagari !== correctAnswer && !options.includes(c.devanagari));
+            shuffle(generalPool);
+            if (generalPool.length > 0) {
+                options.push(generalPool[0].devanagari);
+            } else {
+                break; // Stop if there are no more unique words
+            }
+        }
+        
+        shuffle(options); // Randomize the final positions
+
+        options.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.textContent = opt;
+            btn.addEventListener('click', () => {
+                if (opt === correctAnswer) {
+                    showFeedback(`✅ Correct! Press 'Next' to continue.`, true);
+                    readyForNext = true;
+                    // Visually indicate the correct choice
+                    btn.style.backgroundColor = 'var(--submit-green)';    
+                    // Disable all buttons after a correct answer
+                    Array.from(multipleChoiceContainer.querySelectorAll('button')).forEach(b => b.disabled = true);
+                    // Mark Romanized as correct if it was visible and correct (optional side-check)
+                    if (romanActionRow.style.display !== 'none' && isAnswerCorrect(romanizedInput.value, card.roman)) {
+                        isRomanCorrect = true;
+                    }
+                } else {
+                    showFeedback(`❌ Incorrect — try again.`, false);
+                    // Visually indicate the incorrect choice
+                    btn.style.backgroundColor = '#e74c3c';    
+                    btn.disabled = true;
+                }
+            });
+            multipleChoiceContainer.appendChild(btn);
+        });
+    }
+
+    function updateFeedback() {
+        const romanFilled = romanizedInput.value.trim() !== '';
+        const englishFilled = englishInput.value.trim() !== '';
+        const romanAnswer = `<u>${romanizedInput.value.trim()}</u>`;
+        const englishAnswer = `<u>${englishInput.value.trim()}</u>`;
+        const englishFieldVisible = englishActionRow.style.display !== "none";
+        const romanFieldVisible = romanActionRow.style.display !== "none";
+
+        if (isEnglishMode) {
+            // In English mode, only Romanized input is relevant for feedback besides MC
+            if (romanFieldVisible && isRomanCorrect) {
+                showFeedback(`${romanAnswer} is correct. Select the Devanagari answer via the options below.`);
+            } else if (romanFieldVisible && romanFilled && !isRomanCorrect) {
+                showFeedback(`Romanization: ${romanAnswer} is incorrect.`, false);
+            } else {
+                feedbackEl.classList.add('hidden');
+            }
+            return;
+        }
+
+        // Devanagari Mode (Word/Number types - Both Romanized and English are expected)
+        if (englishFieldVisible) {
+            if (isRomanCorrect && isEnglishCorrect) {
+                showFeedback(`${romanAnswer} and ${englishAnswer} are correct. Press Enter to continue.`);
+                readyForNext = true;
+            } else if (isRomanCorrect && englishFilled && !isEnglishCorrect) {
+                showFeedback(`${romanAnswer} is correct. English incorrect — try again.`, false);
+                readyForNext = false;
+            } else if (isRomanCorrect) {
+                showFeedback(`${romanAnswer} is correct. Enter English answer.`, true);
+                readyForNext = false;
+            } else if (romanFilled) {
+                showFeedback(`❌ Romanization incorrect — try again.`, false);
+                readyForNext = false;
+            } else {
+                feedbackEl.classList.add('hidden');
+                readyForNext = false;
+            }
+            return;
+        }
+
+        // Devanagari Mode (Letter type - Only Romanized is expected)
+        if (isRomanCorrect) {
+            showFeedback(`${romanAnswer} is correct. Press Enter to continue.`);
+            readyForNext = true;
+        } else if (romanFilled) {
+            showFeedback(`❌ Incorrect — try again.`, false);
+        }
+        readyForNext = isRomanCorrect;
+    }
+
+    function checkRomanizedAnswer() {
+        const card = filteredQuizData[currentCardIndex];
+        if (!card) return;
+        const userAnswer = romanizedInput.value.trim();
+        const underlined = `<u>${userAnswer}</u>`;
+        const englishFieldVisible = englishActionRow.style.display !== "none";
+
+        if (userAnswer !== '' && isAnswerCorrect(userAnswer, card.roman)) {
+            isRomanCorrect = true;
+            if (isEnglishMode) {
+                showFeedback(`${underlined} is correct. Now choose the Devanagari option.`, true);
+            } else if (!englishFieldVisible) {
+                // Devanagari Letter type
+                showFeedback(`${underlined} is correct. Press Enter to continue.`, true);
+            } else {
+                // Devanagari Word/Number type
+                showFeedback(`${underlined} is correct. Enter English answer.`, true);
+                setTimeout(() => { englishInput.focus(); }, 100);
+            }
+        } else if (userAnswer !== '') {
+            showFeedback("❌ Incorrect — try again.", false);
+        }
+        updateFeedback();
+    }
+
+    function checkEnglishAnswer() {
+        if (englishActionRow.style.display === "none") return;
+        const card = filteredQuizData[currentCardIndex];
+        if (!card) return;
+        const userAnswer = englishInput.value.trim();
+        const underlined = `<u>${userAnswer}</u>`;
+        if (userAnswer !== '' && isAnswerCorrect(userAnswer, card.english)) {
+            isEnglishCorrect = true;
+            showFeedback(`${underlined} is correct.`, true);
+        } else if (userAnswer !== '') {
+            showFeedback("❌ Incorrect — try again.", false);
+        }
+        updateFeedback();
+    }
+
+    function handleEnterKey(e) {
+        if (e.key !== 'Enter') return;
+        e.preventDefault();
+        if (readyForNext) {
+            currentCardIndex = (currentCardIndex + 1) % filteredQuizData.length;
+            displayCard();
+        } else {
+            if (document.activeElement === romanizedInput) checkRomanizedAnswer();
+            else if (document.activeElement === englishInput) checkEnglishAnswer();
+        }
+    }
+
+    function handleArrowUp(e) {
+        if (e.key !== "ArrowUp") return;
+        e.preventDefault();
+        const card = filteredQuizData[currentCardIndex];
+        if (!card) return;
+        if (document.activeElement === romanizedInput) {
+            romanizedInput.value = card.roman;
+            checkRomanizedAnswer();
+        } else if (document.activeElement === englishInput) {
+            englishInput.value = card.english;
+            checkEnglishAnswer();
+        }
+    }
+
+    function searchFlashcards() {
+        const searchTerm = normalizeAnswer(searchInput.value);
+
+        if (searchTerm.length > 0) {
+            quizContent.style.display = 'none';
+            searchResultsContainer.classList.remove('hidden');
+        } else {
+            quizContent.style.display = 'block';
+            searchResultsContainer.classList.add('hidden');
+            return;
+        }
+
+        const results = quizData.filter(card => {
+            return normalizeAnswer(card.roman).includes(searchTerm) ||
+                       normalizeAnswer(card.english).includes(searchTerm) ||
+                       normalizeAnswer(card.devanagari).includes(searchTerm);
+        });
+
+        displaySearchResults(results);
+    }
+
+    function displaySearchResults(results) {
+        searchResultsList.innerHTML = '';
+
+        if (results.length === 0 && searchInput.value.length > 0) {
+            searchResultsList.innerHTML = '<li>No matches found.</li>';
+        } else {
+            results.forEach(card => {
+                const li = document.createElement('li');
+                li.innerHTML = `<span class="result-nepali">${card.devanagari}</span> <span class="result-english">(${card.roman} / ${card.english})</span>`;
+                li.addEventListener('click', () => {
+                    const newIndex = filteredQuizData.findIndex(item => item.devanagari === card.devanagari);
+                    if (newIndex !== -1) currentCardIndex = newIndex;
+                    resetSearchAndGoToQuiz();
+                    displayCard();
+                });
+                searchResultsList.appendChild(li);
+            });
+        }
+    }
+
+    function resetSearchAndGoToQuiz() {
+        searchInput.value = '';
+        searchResultsContainer.classList.add('hidden');
+        quizContent.style.display = 'block';
+        romanizedInput.focus();    
+    }
+
+    searchInput.addEventListener('input', searchFlashcards);
+    backToQuizBtn.addEventListener('click', resetSearchAndGoToQuiz);
+    submitRomanizedBtn.addEventListener('click', checkRomanizedAnswer);
+    submitEnglishBtn.addEventListener('click', checkEnglishAnswer);
+    romanizedInput.addEventListener('input', clearFeedbackOnInput);
+    englishInput.addEventListener('input', clearFeedbackOnInput);
+    romanizedInput.addEventListener('keypress', handleEnterKey);
+    englishInput.addEventListener('keypress', handleEnterKey);
+    document.addEventListener('keydown', handleArrowUp);
+
+    showRomanBtn.addEventListener('click', () => {
+        const card = filteredQuizData[currentCardIndex];
+        if (card) {
+            answerEl.textContent = card.roman;
+            answerEl.classList.remove('hidden');
+        }
+    });
+    showEnglishBtn.addEventListener('click', () => {
+        const card = filteredQuizData[currentCardIndex];
+        if (card) {
+            answerEl.textContent = card.english;
+            answerEl.classList.remove('hidden');
+        }
+    });
+
+    prevBtn.addEventListener('click', () => {
+        currentCardIndex = (currentCardIndex - 1 + filteredQuizData.length) % filteredQuizData.length;
+        displayCard();
+    });
+    nextBtn.addEventListener('click', () => {
+        currentCardIndex = (currentCardIndex + 1) % filteredQuizData.length;
+        displayCard();
+    });
+
+    englishModeBtn.addEventListener('click', () => {
+        isEnglishMode = !isEnglishMode;
+        englishModeBtn.textContent = isEnglishMode ? "दे" : "En";    
+        displayCard();
+    });
+
+    filterDropdown.addEventListener('change', () => {
+        const value = filterDropdown.value;
+        if (value === "all") filteredQuizData = quizData.slice();
+        else filteredQuizData = quizData.filter(card => card.sort === value);
+        if (randomizeToggle.checked) shuffle(filteredQuizData);
+        currentCardIndex = 0;
+        displayCard();
+    });
+
+    randomizeToggle.addEventListener('change', () => {
+        if (randomizeToggle.checked) shuffle(filteredQuizData);
+        displayCard();
+    });
     
-    /* This style is no longer strictly needed but kept for structure */
-    .top-controls-row select,
-    .top-controls .search-container {
-        flex: 1 1 50%;
-    }
-    
-    /* Fix for Input/Action Row: 
-     * Ensures buttons have minimal fixed width and input uses remaining space.
-     */
-    .input-action-row {
-        flex-wrap: nowrap;
-        gap: 0.4em;
-        align-items: flex-start;
+    // --- Swipe Logic ---
+    quizContent.addEventListener('touchstart', (e) => {
+        // Record the starting X position of the first touch point
+        startX = e.touches[0].clientX;
+    });
+
+    quizContent.addEventListener('touchmove', (e) => {
+        // Continuously record the current X position
+        endX = e.touches[0].clientX;
+    });
+
+    quizContent.addEventListener('touchend', () => {
+        // Calculate the distance and direction of the swipe
+        const deltaX = endX - startX;
+
+        // Check if a swipe occurred and is greater than the threshold
+        if (Math.abs(deltaX) > threshold) {
+            if (deltaX > 0) {
+                // Swipe Right: Go to Previous Card
+                prevBtn.click();
+            } else {
+                // Swipe Left: Go to Next Card
+                nextBtn.click();
+            }
+        }
+        
+        // Reset positions after the touch ends
+        startX = 0;
+        endX = 0;
+    });
+    // -------------------
+
+    function initializeQuiz() {
+        fetch("./data.json")
+            .then(res => res.json())
+            .then(data => {
+                quizData = data;
+                filteredQuizData = quizData.slice();
+                if (randomizeToggle.checked) shuffle(filteredQuizData);
+                displayCard();
+                // Set initial text after data loads
+                englishModeBtn.textContent = 'En';    
+            })
+            .catch(err => {
+                console.error("Error loading data.json:", err);
+                questionEl.textContent = "Failed to load flashcards.";
+            });
     }
 
-    .input-action-row .button-group {
-        flex-direction: column;
-        gap: 0.2em;
-    }
-
-    .input-action-row input[type="text"] {
-        flex: 1;
-        min-width: 55%;
-    }
-
-    .input-action-row button {
-        /* Set a fixed minimum width for Submit/Reveal buttons */
-        flex: none;
-        min-width: 38px;
-        min-height: 34px;
-        font-size: 0.7rem; /* Smaller font on small screens */
-        padding: 0.4em 0.6em;
-    }
-    
-    /* Ensure the search input and toggle button stay together */
-    .top-controls .search-container {
-        width: 100%;
-        display: flex;
-        gap: 5px;
-    }
-    
-    .top-controls .search-container input {
-        flex-grow: 1;
-    }
-}
-
-/* Search results */
-.search-results-container {
-    background: #1b263b;
-    width: 100%;
-    padding: 0;
-    text-align: left;
-}
-
-#search-results-list {
-    list-style: none;
-    padding: 0;
-    margin: 0.5em 0 1em 0;
-    max-height: 300px;
-    overflow-y: auto;
-}
-
-#search-results-list li {
-    background-color: #2c3e50;
-    padding: 0.7em;
-    margin-bottom: 0.5em;
-    border-radius: 4px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 1.1rem;
-}
-
-.hidden {
-    display: none !important;
-}
+    initializeQuiz();
+});
