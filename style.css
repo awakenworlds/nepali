@@ -387,3 +387,35 @@ select {
 .hidden {
     display: none !important;
 }
+
+/* * --- CARD ANIMATION CLASSES ---
+ * Added to enable the smooth card swipe effect using the JavaScript.
+ */
+#quiz-content {
+    /* Set the transition duration to match the 300ms used in script.js */
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+/* Class applied when moving to the NEXT card (swipes left/out) */
+.slide-out-left {
+    transform: translateX(-100%);
+    opacity: 0;
+}
+
+/* Class applied when moving to the PREVIOUS card (swipes right/out) */
+.slide-out-right {
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+/* Base state for the new card *before* it slides in (coming from the right) */
+.slide-in-right {
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+/* Base state for the new card *before* it slides in (coming from the left) */
+.slide-in-left {
+    transform: translateX(-100%);
+    opacity: 0;
+}
