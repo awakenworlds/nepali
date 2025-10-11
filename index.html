@@ -11,7 +11,6 @@
     <div class="top-header"></div>
     
     <div class="quiz-container">
-        
         <h1>Nepali Flashcards</h1>
         
         <div class="top-controls">
@@ -24,11 +23,9 @@
                 <option value="adjective">Adjective</option>
                 <option value="popular">Popular</option>
             </select>
-            
             <div class="search-container">
                 <input type="text" id="search-input" placeholder="Search here..." autocomplete="off">
             </div>
-            
             <button id="english-mode-btn">English</button>
         </div>
 
@@ -39,24 +36,26 @@
             </div>
         </div>
 
-        <div id="quiz-content"> 
+        <div id="quiz-content">
             <div class="card">
                 <div id="question"></div>
                 <div id="answer" class="hidden"></div>
                 <div id="feedback" class="hidden"></div>
             </div>
-            
+
             <div class="input-action-row" id="romanized-action-row">
                 <input type="text" id="romanized-answer-input" placeholder="Roman Answer" autocomplete="off">
                 <button id="submit-romanized-btn" class="submit-button">Submit</button>
-                <button id="show-roman-answer-btn" class="reveal-button">Reveal</button>
+                <button id="show-roman-answer-btn" class="submit-button">Reveal</button>
             </div>
 
             <div class="input-action-row" id="english-action-row">
                 <input type="text" id="english-answer-input" placeholder="English Answer" autocomplete="off">
                 <button id="submit-english-btn" class="submit-button">Submit</button>
-                <button id="show-english-answer-btn" class="reveal-button">Reveal</button>
+                <button id="show-english-answer-btn" class="submit-button">Reveal</button>
             </div>
+
+            <div class="multiple-choice-container hidden" id="multiple-choice-container"></div>
 
             <div class="nav-button-container">
                 <button id="prev-card-btn" class="nav-button">Previous</button>
