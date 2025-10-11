@@ -63,17 +63,17 @@ h1 {
 .top-controls select,
 .top-controls input,
 .top-controls button {
-    height: 44px; /* uniform height */
+    height: 44px;
     box-sizing: border-box;
 }
 
 .top-controls select,
 .top-controls button {
-    flex: 0 0 auto; /* fixed size for dropdown & button */
+    flex: 0 0 auto;
 }
 
 .top-controls .search-container {
-    flex: 1 1 auto; /* take remaining space */
+    flex: 1 1 auto;
 }
 
 .top-controls .search-container input {
@@ -125,7 +125,7 @@ select {
 }
 
 #answer {
-    font-size: 1.4rem;
+    font-size: 2.0em; /* increased for larger answer text */
     color: #16a085;
     margin-top: 0.5em;
 }
@@ -145,6 +145,7 @@ select {
     display: flex;
     gap: 0.4em;
     margin: 0.8em 0;
+    align-items: flex-start;
 }
 
 .input-action-row input[type="text"] {
@@ -155,18 +156,28 @@ select {
     background-color: #f0f0f0; 
     color: #1b263b;
     min-height: 44px; 
+    font-size: 2.0em; /* increased text size */
+}
+
+.input-action-row .button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4em;
+}
+
+.input-action-row button {
+    padding: 0.5em 0.7em;
+    font-size: 0.85rem;
+    min-height: 36px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    white-space: nowrap;
 }
 
 .submit-button {
     background-color: var(--submit-green);
     color: white;
-    border: none;
-    border-radius: 6px;
-    padding: 0.6em 0.8em;
-    font-size: 0.9rem;
-    cursor: pointer;
-    min-height: 44px;
-    white-space: nowrap;
 }
 
 .submit-button.reveal {
@@ -214,7 +225,7 @@ select {
     border: none;
     border-radius: 6px;
     padding: 0.6em;
-    font-size: 1rem;
+    font-size: 1.6rem; /* increased for easier reading in Devanagari mode */
     cursor: pointer;
     min-height: 40px;
 }
@@ -232,28 +243,38 @@ select {
 
 /* --- MOBILE LAYOUT --- */
 @media (max-width: 450px) {
+
     .top-controls {
         flex-direction: column;
         gap: 0.8em;
     }
-    
+
     .top-controls > * {
         width: 100%;
     }
-    
+
     .input-action-row {
-        flex-direction: row;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
         gap: 0.4em;
+        align-items: flex-start;
+    }
+
+    .input-action-row .button-group {
+        flex-direction: column;
+        gap: 0.2em;
     }
 
     .input-action-row input[type="text"] {
-        flex: 1 1 60%;
+        flex: 1;
+        min-width: 55%;
     }
 
     .input-action-row button {
-        flex: 1 1 auto;
-        min-width: 80px;
+        flex: none;
+        min-width: 36px;
+        min-height: 34px;
+        font-size: 0.8rem;
+        padding: 0.4em 0.6em;
     }
 
     .nav-button-container {
