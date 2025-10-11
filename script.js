@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- ELEMENT REFERENCES ---
     const questionEl = document.getElementById('question');
     const answerEl = document.getElementById('answer');
     const feedbackEl = document.getElementById('feedback');
@@ -14,12 +13,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const showEnglishBtn = document.getElementById('show-english-answer-btn');
     const filterDropdown = document.getElementById('filter-dropdown');
     const randomizeToggle = document.getElementById('random-toggle');
-
     const searchInput = document.getElementById('search-input');
     const searchResultsContainer = document.getElementById('search-results-container');
     const searchResultsList = document.getElementById('search-results-list');
     const quizContent = document.getElementById('quiz-content'); 
     const backToQuizBtn = document.getElementById('back-to-quiz-btn'); 
+    const multipleChoiceContainer = document.getElementById('multiple-choice-container');
 
     let quizData = [];
     let filteredQuizData = [];
@@ -29,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let isEnglishCorrect = false;
     let readyForNext = false;
 
-    // --- UTILITY FUNCTIONS ---
     function shuffle(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -57,9 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function clearFeedbackOnInput() {
-        if (!feedbackEl.classList.contains('hidden')) {
-            feedbackEl.classList.add('hidden');
-        }
+        feedbackEl.classList.add('hidden');
     }
 
     function displayCard() {
@@ -90,13 +86,55 @@ document.addEventListener('DOMContentLoaded', () => {
         readyForNext = false;
 
         const englishActionRow = document.getElementById('english-action-row');
-        if (isEnglishMode || filterDropdown.value === "letter") {
-            englishActionRow.style.display = "none";
+        const romanActionRow = document.getElementById('romanized-action-row');
+
+        // Letter in English mode -> multiple choice grid
+        if (isEnglishMode && card.sort === 'letter') {
+            multipleChoiceContainer.classList.remove('hidden');
+            romanActionRow.style.display = 'none';
+            englishActionRow.style.display = 'none';
+            generateMultipleChoice(card);
         } else {
-            englishActionRow.style.display = "flex";
+            multipleChoiceContainer.classList.add('hidden');
+            romanActionRow.style.display = 'flex';
+            englishActionRow.style.display = (isEnglishMode || card.sort === "letter") ? "none" : "flex";
+
+            // Number type changes placeholder
+            if (card.sort === "number") {
+                englishInput.placeholder = "Numerical Answer";
+            } else {
+                englishInput.placeholder = "English Answer";
+            }
         }
 
         romanizedInput.focus();
+    }
+
+    function generateMultipleChoice(card) {
+        multipleChoiceContainer.innerHTML = '';
+        const correctAnswer = card.devanagari;
+        let options = [correctAnswer];
+
+        // Pick 3 random wrong answers
+        let letters = filteredQuizData.filter(c => c.sort === 'letter' && c.devanagari !== correctAnswer);
+        shuffle(letters);
+        for (let i = 0; i < 3 && i < letters.length; i++) {
+            options.push(letters[i].devanagari);
+        }
+        shuffle(options);
+
+        options.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.textContent = opt;
+            btn.addEventListener('click', () => {
+                if (opt === correctAnswer) {
+                    showFeedback(`✅ Correct!`);
+                } else {
+                    showFeedback(`❌ Incorrect — try again.`, false);
+                }
+            });
+            multipleChoiceContainer.appendChild(btn);
+        });
     }
 
     function updateFeedback() {
@@ -243,7 +281,6 @@ document.addEventListener('DOMContentLoaded', () => {
         romanizedInput.focus(); 
     }
 
-    // --- EVENT LISTENERS ---
     searchInput.addEventListener('input', searchFlashcards);
     backToQuizBtn.addEventListener('click', resetSearchAndGoToQuiz);
     submitRomanizedBtn.addEventListener('click', checkRomanizedAnswer);
@@ -298,7 +335,6 @@ document.addEventListener('DOMContentLoaded', () => {
         displayCard();
     });
 
-    // --- INITIALIZATION ---
     function initializeQuiz() {
         fetch("./data.json")
             .then(res => res.json())
