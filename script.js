@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextBtn = document.getElementById('next-card-btn');
     const englishModeBtn = document.getElementById('english-mode-btn');
     const showRomanBtn = document.getElementById('show-roman-answer-btn');
-    const showEnglishBtn = document.getElementById('show-english-answer-btn');
+    const showEnglishBtn = document = document.getElementById('show-english-answer-btn');
     const filterDropdown = document.getElementById('filter-dropdown');
     const randomizeToggle = document.getElementById('random-toggle');
     const searchInput = document.getElementById('search-input');
@@ -66,9 +66,40 @@ document.addEventListener('DOMContentLoaded', () => {
         feedbackEl.classList.add('hidden');
     }
 
-    function displayCard() {
+    // New function to handle animation and display
+    function animateAndDisplayCard(direction) {
+        // 'direction' is 'next' (slide left) or 'prev' (slide right)
+        
+        const isNext = direction === 'next';
+        const slideOutClass = isNext ? 'slide-out-left' : 'slide-out-right';
+        const slideInClass = isNext ? 'slide-in-right' : 'slide-in-left';
+        
+        // 1. Apply slide-out animation
+        quizContent.classList.add(slideOutClass);
+
+        // 2. Wait for the animation (300ms) before loading the new content
+        setTimeout(() => {
+            // Remove the slide-out class to reset the transition property
+            quizContent.classList.remove(slideOutClass); 
+            
+            // Calculate and display the new card
+            if (isNext) {
+                currentCardIndex = (currentCardIndex + 1) % filteredQuizData.length;
+            } else {
+                currentCardIndex = (currentCardIndex - 1 + filteredQuizData.length) % filteredQuizData.length;
+            }
+            displayCard(slideInClass); // Pass slideInClass to displayCard
+
+        }, 300); // Must match the CSS transition duration
+    }
+
+    // displayCard now takes an optional animation class
+    function displayCard(animationClass = '') {
         searchResultsContainer.classList.add('hidden');
-        quizContent.style.display = 'block';    
+        quizContent.style.display = 'block';
+        
+        // Remove any existing animation classes
+        quizContent.classList.remove('slide-in-right', 'slide-in-left', 'slide-out-left', 'slide-out-right');
 
         if (!filteredQuizData || filteredQuizData.length === 0) {
             questionEl.textContent = 'No flashcards with current filters.';
@@ -76,11 +107,8 @@ document.addEventListener('DOMContentLoaded', () => {
             feedbackEl.classList.add('hidden');
             return;
         }
-        if (currentCardIndex >= filteredQuizData.length) currentCardIndex = 0;
-        if (currentCardIndex < 0) currentCardIndex = filteredQuizData.length - 1;    
 
         const card = filteredQuizData[currentCardIndex];
-        // Question is always English when in English Mode (asking for Devanagari/Romanized answer)
         questionEl.textContent = isEnglishMode ? card.english : card.devanagari;
 
         answerEl.classList.add('hidden');
@@ -94,71 +122,74 @@ document.addEventListener('DOMContentLoaded', () => {
         isEnglishCorrect = false;
         readyForNext = false;
 
-        // English Mode (Question is English, Answer is Devanagari via MC)
-        if (isEnglishMode) {
-            multipleChoiceContainer.classList.remove('hidden');
-            englishActionRow.style.display = 'none'; // English input is always irrelevant here
-            
-            // Show Romanized input only for non-letter types (where pronunciation is complex)
-            if (card.sort === "letter") {
-                romanActionRow.style.display = 'none';
+        // Apply temporary slide-in class
+        if (animationClass) {
+            quizContent.classList.add(animationClass);
+        }
+
+        // Use a slight delay to allow the browser to render the initial (off-screen) state 
+        // before transitioning back to the center (translateX(0)).
+        setTimeout(() => {
+             // 3. Trigger the slide-in animation by removing the slide-in class 
+             // and allowing the transition to default (translateX(0))
+            quizContent.classList.remove(animationClass);
+            quizContent.style.transform = 'translateX(0)';
+            quizContent.style.opacity = '1';
+
+            // --- UI logic ---
+            if (isEnglishMode) {
+                multipleChoiceContainer.classList.remove('hidden');
+                englishActionRow.style.display = 'none';
+                
+                if (card.sort === "letter") {
+                    romanActionRow.style.display = 'none';
+                } else {
+                    romanActionRow.style.display = 'flex';
+                    romanizedInput.focus();
+                }
+                
+                generateMultipleChoice(card);
             } else {
+                multipleChoiceContainer.classList.add('hidden');
                 romanActionRow.style.display = 'flex';
+                englishActionRow.style.display = (card.sort === "letter") ? "none" : "flex";
+
+                if (card.sort === "number") {
+                    englishInput.placeholder = "Numerical Answer";
+                } else {
+                    englishInput.placeholder = "English Answer";
+                }
                 romanizedInput.focus();
             }
-            
-            generateMultipleChoice(card);
-        } else {
-            // Devanagari Mode (Question is Devanagari, Answer is Romanized/English via text input)
-            multipleChoiceContainer.classList.add('hidden');
-            romanActionRow.style.display = 'flex'; // Romanized input always visible in Devanagari mode
-
-            // Only hide English input if it's a letter (as Romanized alone is the answer)
-            englishActionRow.style.display = (card.sort === "letter") ? "none" : "flex";
-
-            // Number type changes placeholder
-            if (card.sort === "number") {
-                englishInput.placeholder = "Numerical Answer";
-            } else {
-                englishInput.placeholder = "English Answer";
-            }
-            romanizedInput.focus();
-        }
+        }, animationClass ? 50 : 0); // 50ms delay if animating, 0 otherwise (initial load)
     }
 
     function generateMultipleChoice(card) {
         multipleChoiceContainer.innerHTML = '';
-        // Clear input in case user decides to use MC after typing a bit
         romanizedInput.value = '';    
-
-        // In English mode, the answer (the question on the button) is always the Devanagari text.
         const correctAnswer = card.devanagari;    
         let options = [correctAnswer];
         
-        // Filter the pool to only include items of the same 'sort' category    
-        // and exclude the correct answer itself.
         const categoryPool = filteredQuizData.filter(
             c => c.sort === card.sort && c.devanagari !== correctAnswer
         );
 
-        // Pick 3 random wrong answers from the category pool
         shuffle(categoryPool);
         for (let i = 0; i < 3 && i < categoryPool.length; i++) {
             options.push(categoryPool[i].devanagari);
         }
         
-        // Fallback: Ensure we always have 4 options if possible by grabbing from a general pool
         while (options.length < 4) {
             const generalPool = quizData.filter(c => c.devanagari !== correctAnswer && !options.includes(c.devanagari));
             shuffle(generalPool);
             if (generalPool.length > 0) {
                 options.push(generalPool[0].devanagari);
             } else {
-                break; // Stop if there are no more unique words
+                break;
             }
         }
         
-        shuffle(options); // Randomize the final positions
+        shuffle(options);
 
         options.forEach(opt => {
             const btn = document.createElement('button');
@@ -167,18 +198,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (opt === correctAnswer) {
                     showFeedback(`✅ Correct! Press 'Next' to continue.`, true);
                     readyForNext = true;
-                    // Visually indicate the correct choice
-                    btn.style.backgroundColor = 'var(--submit-green)';    
-                    // Disable all buttons after a correct answer
+                    // Note: If you have a variable for your correct/submit green color, use it here
+                    btn.style.backgroundColor = 'green'; 
                     Array.from(multipleChoiceContainer.querySelectorAll('button')).forEach(b => b.disabled = true);
-                    // Mark Romanized as correct if it was visible and correct (optional side-check)
                     if (romanActionRow.style.display !== 'none' && isAnswerCorrect(romanizedInput.value, card.roman)) {
                         isRomanCorrect = true;
                     }
                 } else {
                     showFeedback(`❌ Incorrect — try again.`, false);
-                    // Visually indicate the incorrect choice
-                    btn.style.backgroundColor = '#e74c3c';    
+                    // Note: If you have a variable for your error red color, use it here
+                    btn.style.backgroundColor = 'red';    
                     btn.disabled = true;
                 }
             });
@@ -195,7 +224,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const romanFieldVisible = romanActionRow.style.display !== "none";
 
         if (isEnglishMode) {
-            // In English mode, only Romanized input is relevant for feedback besides MC
             if (romanFieldVisible && isRomanCorrect) {
                 showFeedback(`${romanAnswer} is correct. Select the Devanagari answer via the options below.`);
             } else if (romanFieldVisible && romanFilled && !isRomanCorrect) {
@@ -206,7 +234,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Devanagari Mode (Word/Number types - Both Romanized and English are expected)
         if (englishFieldVisible) {
             if (isRomanCorrect && isEnglishCorrect) {
                 showFeedback(`${romanAnswer} and ${englishAnswer} are correct. Press Enter to continue.`);
@@ -227,7 +254,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Devanagari Mode (Letter type - Only Romanized is expected)
         if (isRomanCorrect) {
             showFeedback(`${romanAnswer} is correct. Press Enter to continue.`);
             readyForNext = true;
@@ -249,10 +275,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (isEnglishMode) {
                 showFeedback(`${underlined} is correct. Now choose the Devanagari option.`, true);
             } else if (!englishFieldVisible) {
-                // Devanagari Letter type
                 showFeedback(`${underlined} is correct. Press Enter to continue.`, true);
             } else {
-                // Devanagari Word/Number type
                 showFeedback(`${underlined} is correct. Enter English answer.`, true);
                 setTimeout(() => { englishInput.focus(); }, 100);
             }
@@ -281,8 +305,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key !== 'Enter') return;
         e.preventDefault();
         if (readyForNext) {
-            currentCardIndex = (currentCardIndex + 1) % filteredQuizData.length;
-            displayCard();
+            // Trigger animation for NEXT card
+            animateAndDisplayCard('next');
         } else {
             if (document.activeElement === romanizedInput) checkRomanizedAnswer();
             else if (document.activeElement === englishInput) checkEnglishAnswer();
@@ -376,19 +400,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // UPDATED BUTTON LISTENERS TO USE ANIMATION FUNCTION
     prevBtn.addEventListener('click', () => {
-        currentCardIndex = (currentCardIndex - 1 + filteredQuizData.length) % filteredQuizData.length;
-        displayCard();
+        animateAndDisplayCard('prev');
     });
     nextBtn.addEventListener('click', () => {
-        currentCardIndex = (currentCardIndex + 1) % filteredQuizData.length;
-        displayCard();
+        animateAndDisplayCard('next');
     });
 
     englishModeBtn.addEventListener('click', () => {
         isEnglishMode = !isEnglishMode;
         englishModeBtn.textContent = isEnglishMode ? "दे" : "En";    
-        displayCard();
+        displayCard(); 
     });
 
     filterDropdown.addEventListener('change', () => {
@@ -397,41 +420,50 @@ document.addEventListener('DOMContentLoaded', () => {
         else filteredQuizData = quizData.filter(card => card.sort === value);
         if (randomizeToggle.checked) shuffle(filteredQuizData);
         currentCardIndex = 0;
-        displayCard();
+        displayCard(); 
     });
 
     randomizeToggle.addEventListener('change', () => {
         if (randomizeToggle.checked) shuffle(filteredQuizData);
-        displayCard();
+        displayCard(); 
     });
     
-    // --- Swipe Logic ---
+    // --- SAFE SWIPE LOGIC (Excludes Inputs, Buttons, and Hint Box) ---
     quizContent.addEventListener('touchstart', (e) => {
-        // Record the starting X position of the first touch point
+        const target = e.target;
+        const targetTagName = target.tagName;
+
+        // Ignore touches on inputs, buttons, and the hint box
+        if (targetTagName === 'INPUT' || targetTagName === 'BUTTON' || target === answerEl) {
+            startX = 0; 
+            endX = 0;
+            return;
+        }
+
         startX = e.touches[0].clientX;
     });
 
     quizContent.addEventListener('touchmove', (e) => {
-        // Continuously record the current X position
-        endX = e.touches[0].clientX;
+        if (startX !== 0) {
+            endX = e.touches[0].clientX;
+        }
     });
 
     quizContent.addEventListener('touchend', () => {
-        // Calculate the distance and direction of the swipe
+        if (startX === 0) return;
+
         const deltaX = endX - startX;
 
-        // Check if a swipe occurred and is greater than the threshold
         if (Math.abs(deltaX) > threshold) {
             if (deltaX > 0) {
                 // Swipe Right: Go to Previous Card
-                prevBtn.click();
+                animateAndDisplayCard('prev');
             } else {
                 // Swipe Left: Go to Next Card
-                nextBtn.click();
+                animateAndDisplayCard('next');
             }
         }
         
-        // Reset positions after the touch ends
         startX = 0;
         endX = 0;
     });
@@ -444,8 +476,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 quizData = data;
                 filteredQuizData = quizData.slice();
                 if (randomizeToggle.checked) shuffle(filteredQuizData);
-                displayCard();
-                // Set initial text after data loads
+                // Initial load: no animation class passed
+                displayCard(); 
                 englishModeBtn.textContent = 'En';    
             })
             .catch(err => {
