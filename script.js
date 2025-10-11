@@ -30,6 +30,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let isRomanCorrect = false;
     let isEnglishCorrect = false;
     let readyForNext = false;
+    
+    // Swipe feature variables
+    let startX = 0;
+    let endX = 0;
+    const threshold = 75; // Minimum distance (in pixels) for a valid swipe
 
     function shuffle(array) {
         for (let i = array.length - 1; i > 0; i--) {
@@ -94,7 +99,6 @@ document.addEventListener('DOMContentLoaded', () => {
             multipleChoiceContainer.classList.remove('hidden');
             englishActionRow.style.display = 'none'; // English input is always irrelevant here
             
-            // *** UPDATED LOGIC FOR ENGLISH MODE ***
             // Show Romanized input only for non-letter types (where pronunciation is complex)
             if (card.sort === "letter") {
                 romanActionRow.style.display = 'none';
@@ -102,7 +106,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 romanActionRow.style.display = 'flex';
                 romanizedInput.focus();
             }
-            // **************************************
             
             generateMultipleChoice(card);
         } else {
@@ -401,6 +404,38 @@ document.addEventListener('DOMContentLoaded', () => {
         if (randomizeToggle.checked) shuffle(filteredQuizData);
         displayCard();
     });
+    
+    // --- Swipe Logic ---
+    quizContent.addEventListener('touchstart', (e) => {
+        // Record the starting X position of the first touch point
+        startX = e.touches[0].clientX;
+    });
+
+    quizContent.addEventListener('touchmove', (e) => {
+        // Continuously record the current X position
+        endX = e.touches[0].clientX;
+    });
+
+    quizContent.addEventListener('touchend', () => {
+        // Calculate the distance and direction of the swipe
+        const deltaX = endX - startX;
+
+        // Check if a swipe occurred and is greater than the threshold
+        if (Math.abs(deltaX) > threshold) {
+            if (deltaX > 0) {
+                // Swipe Right: Go to Previous Card
+                prevBtn.click();
+            } else {
+                // Swipe Left: Go to Next Card
+                nextBtn.click();
+            }
+        }
+        
+        // Reset positions after the touch ends
+        startX = 0;
+        endX = 0;
+    });
+    // -------------------
 
     function initializeQuiz() {
         fetch("./data.json")
