@@ -12,7 +12,6 @@ body {
     box-sizing: border-box;
 }
 
-/* Define colors */
 :root {
     --subtle-dark-blue: #222c3c; 
     --subtle-dark-blue-hover: #34495e;
@@ -20,10 +19,8 @@ body {
     --very-dark-blue-hover: #222c3c;
     --default-grey: #34495e; 
     --grey-hover: #4a637d;
-    --forest-green: #228B22;
-    --forest-green-hover: #2ca42c;
-    --dark-yellow: #bfa70a;
-    --dark-yellow-hover: #d4bf29;
+    --submit-green: #2ecc71;
+    --reveal-yellow: #d4ac0d;
 }
 
 /* --- TOP CONTAINER & TITLE --- */
@@ -55,54 +52,61 @@ h1 {
 /* --- ROW 1: CONTROL ROW --- */
 .top-controls {
     display: flex;
-    justify-content: space-between; 
-    align-items: stretch;
-    margin-top: 0.8em; 
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-top: 0.8em;
     margin-bottom: 1em;
     width: 100%;
-    gap: 10px; 
 }
 
-select,
-#search-input,
-#english-mode-btn {
-    border-radius: 6px;
-    border: none;
-    font-size: 1rem;
-    color: #f0f0f0;
-    height: 48px;
+.top-controls select,
+.top-controls input,
+.top-controls button {
+    height: 44px; /* uniform height */
     box-sizing: border-box;
+}
+
+.top-controls select,
+.top-controls button {
+    flex: 0 0 auto; /* fixed size for dropdown & button */
+}
+
+.top-controls .search-container {
+    flex: 1 1 auto; /* take remaining space */
+}
+
+.top-controls .search-container input {
+    width: 100%;
+    min-width: 120px;
+    padding: 0.7em 0.8em;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: var(--subtle-dark-blue);
+    color: #f0f0f0;
 }
 
 /* Dropdown */
 select {
-    background-color: var(--very-dark-blue); 
-    padding: 0 0.8em;
+    padding: 0.7em 0.8em;
+    border-radius: 6px;
+    border: none;
+    font-size: 1rem;
+    background-color: var(--very-dark-blue);
+    color: #f0f0f0;
     cursor: pointer;
 }
 
-/* Search box */
-.search-container {
-    flex-grow: 1; 
-}
-
-#search-input {
-    width: 100%; 
-    padding: 0 0.8em; 
-    background-color: var(--subtle-dark-blue);
-}
-
-/* English/Devanagari toggle button */
+/* Mode button */
 #english-mode-btn {
+    padding: 0.7em 1em;
     background-color: var(--very-dark-blue);
     border: 1px solid #555;
-    padding: 0 1em; 
+    color: #f0f0f0;
+    border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-#english-mode-btn:hover {
-    background-color: var(--very-dark-blue-hover);
+    font-size: 1rem;
 }
 
 /* --- CARD CONTENT --- */
@@ -136,7 +140,7 @@ select {
     color: #e74c3c;
 }
 
-/* --- INPUT & BUTTON ROW --- */
+/* --- INPUT ROW --- */
 .input-action-row {
     display: flex;
     gap: 0.4em;
@@ -153,40 +157,25 @@ select {
     min-height: 44px; 
 }
 
-/* Submit button (forest green) */
 .submit-button {
-    background-color: var(--forest-green);
+    background-color: var(--submit-green);
     color: white;
     border: none;
     border-radius: 6px;
     padding: 0.6em 0.8em;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     cursor: pointer;
     min-height: 44px;
-    font-weight: 600;
     white-space: nowrap;
+}
+
+.submit-button.reveal {
+    background-color: var(--reveal-yellow);
+    color: #1b263b;
 }
 
 .submit-button:hover {
-    background-color: var(--forest-green-hover);
-}
-
-/* Reveal button (dark yellow) */
-.reveal-button {
-    background-color: var(--dark-yellow) !important;
-    color: #1b1b1b !important;
-    border: none;
-    border-radius: 6px;
-    padding: 0.6em 0.8em;
-    font-size: 0.95rem;
-    cursor: pointer;
-    min-height: 44px;
-    font-weight: 600;
-    white-space: nowrap;
-}
-
-.reveal-button:hover {
-    background-color: var(--dark-yellow-hover) !important;
+    opacity: 0.85;
 }
 
 /* --- NAV BUTTONS --- */
@@ -211,19 +200,74 @@ select {
     background-color: var(--grey-hover);
 }
 
-/* --- RANDOMIZE TOGGLE --- */
+/* --- MULTIPLE CHOICE GRID --- */
+.multiple-choice-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin: 1em 0;
+}
+
+.multiple-choice-container button {
+    background-color: var(--very-dark-blue);
+    color: #f0f0f0;
+    border: none;
+    border-radius: 6px;
+    padding: 0.6em;
+    font-size: 1rem;
+    cursor: pointer;
+    min-height: 40px;
+}
+
+.multiple-choice-container button:hover {
+    background-color: var(--subtle-dark-blue-hover);
+}
+
+/* --- RANDOMIZE --- */
 #randomize-container {
     margin-top: 1em;
-    font-size: 0.95rem;
-    color: #d0d0d0;
+    text-align: left;
+    font-size: 0.9rem;
 }
 
-#randomize-container input[type="checkbox"] {
-    transform: scale(1.2);
-    margin-right: 0.4em;
+/* --- MOBILE LAYOUT --- */
+@media (max-width: 450px) {
+    .top-controls {
+        flex-direction: column;
+        gap: 0.8em;
+    }
+    
+    .top-controls > * {
+        width: 100%;
+    }
+    
+    .input-action-row {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.4em;
+    }
+
+    .input-action-row input[type="text"] {
+        flex: 1 1 60%;
+    }
+
+    .input-action-row button {
+        flex: 1 1 auto;
+        min-width: 80px;
+    }
+
+    .nav-button-container {
+        flex-direction: row;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .nav-button-container .nav-button {
+        flex: 1;
+    }
 }
 
-/* --- SEARCH RESULTS --- */
+/* Search results */
 .search-results-container {
     background: #1b263b;
     width: 100%;
@@ -251,55 +295,6 @@ select {
     font-size: 1.1rem;
 }
 
-#search-results-list li:hover {
-    background-color: #3d566e;
-}
-
 .hidden {
     display: none !important;
-}
-
-/* --- MOBILE LAYOUT --- */
-@media (max-width: 450px) {
-    .quiz-container {
-        padding: 1em;
-    }
-
-    .top-controls {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0.8em;
-    }
-    
-    select,
-    #search-input,
-    #english-mode-btn {
-        width: 100%;
-        height: 48px;
-    }
-
-    .input-action-row {
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 0.4em;
-    }
-
-    .input-action-row input[type="text"] {
-        flex: 1 1 60%;
-    }
-
-    .input-action-row button {
-        flex: 1 1 auto;
-        min-width: 80px;
-    }
-
-    .nav-button-container {
-        flex-direction: row;
-        gap: 10px;
-        width: 100%;
-    }
-
-    .nav-button-container .nav-button {
-        flex: 1;
-    }
 }
