@@ -14,19 +14,24 @@
         <h1>Nepali Flashcards</h1>
         
         <div class="top-controls">
-            <select id="filter-dropdown">
-                <option value="all">All</option>
-                <option value="letter">Letter</option>
-                <option value="number">Number</option>
-                <option value="verb">Verb</option>
-                <option value="noun">Noun</option>
-                <option value="adjective">Adjective</option>
-                <option value="popular">Popular</option>
-            </select>
+            <!-- grouped row for dropdown + toggle (new minimal wrapper) -->
+            <div class="top-controls-row">
+                <select id="filter-dropdown">
+                    <option value="all">All</option>
+                    <option value="letter">Letter</option>
+                    <option value="number">Number</option>
+                    <option value="verb">Verb</option>
+                    <option value="noun">Noun</option>
+                    <option value="adjective">Adjective</option>
+                    <option value="popular">Popular</option>
+                </select>
+
+                <button id="english-mode-btn">English</button>
+            </div>
+
             <div class="search-container">
                 <input type="text" id="search-input" placeholder="Search here..." autocomplete="off">
             </div>
-            <button id="english-mode-btn">English</button>
         </div>
 
         <div id="search-results-container" class="search-results-container hidden">
@@ -45,14 +50,18 @@
 
             <div class="input-action-row" id="romanized-action-row">
                 <input type="text" id="romanized-answer-input" placeholder="Roman Answer" autocomplete="off">
-                <button id="submit-romanized-btn" class="submit-button">Submit</button>
-                <button id="show-roman-answer-btn" class="submit-button">Reveal</button>
+                <div class="button-group">
+                    <button id="submit-romanized-btn" class="submit-button">Submit</button>
+                    <button id="show-roman-answer-btn" class="submit-button reveal">Reveal</button>
+                </div>
             </div>
 
             <div class="input-action-row" id="english-action-row">
                 <input type="text" id="english-answer-input" placeholder="English Answer" autocomplete="off">
-                <button id="submit-english-btn" class="submit-button">Submit</button>
-                <button id="show-english-answer-btn" class="submit-button">Reveal</button>
+                <div class="button-group">
+                    <button id="submit-english-btn" class="submit-button">Submit</button>
+                    <button id="show-english-answer-btn" class="submit-button reveal">Reveal</button>
+                </div>
             </div>
 
             <div class="multiple-choice-container hidden" id="multiple-choice-container"></div>
