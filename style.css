@@ -1,3 +1,8 @@
+/* GLOBAL RESET: CRITICAL for preventing bleed-out */
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     background-color: #0d1b2a;
@@ -9,7 +14,6 @@ body {
     justify-content: flex-start;
     align-items: center;
     min-height: 100vh;
-    box-sizing: border-box;
 }
 
 :root {
@@ -42,14 +46,33 @@ body {
     margin-bottom: 20px; 
 }
 
-h1 {
+/* CRITICAL FIX: Ensures Previous Button, H1, and Next Button are on the same line. */
+.header-nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    width: 100%;
+    margin-bottom: 0.5em; 
+}
+
+.header-title {
     font-size: 2.2rem;
     color: #f0f0f0;
     margin: 0; 
-    padding: 0 0 0.5em 0; 
+    padding: 0; 
+    flex-grow: 1;
+    text-align: center; 
 }
 
-/* --- ROW 1: CONTROL ROW --- */
+/* Style for the buttons at the top */
+.top-nav-button {
+    flex-shrink: 0; 
+    padding: 0.5em 0.8em;
+    font-size: 0.9rem;
+    min-height: 40px; 
+}
+
+/* --- ROW 1: CONTROL ROW (Now only contains Search/Toggle) --- */
 .top-controls {
     display: flex;
     justify-content: space-between;
@@ -58,26 +81,35 @@ h1 {
     margin-top: 0.8em;
     margin-bottom: 1em;
     width: 100%;
+    /* Keep as column for simple stacking on mobile */
+    flex-direction: column;
+}
+
+/* top-controls-row is now essentially empty in HTML, but we keep the style below for safety */
+.top-controls-row {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    justify-content: space-between;
 }
 
 .top-controls select,
-.top-controls input,
 .top-controls button {
     height: 44px;
-    box-sizing: border-box;
+    flex-shrink: 0;
 }
 
-.top-controls select,
-.top-controls button {
-    flex: 0 0 auto;
-}
-
+/* NEW FLEX LAYOUT FOR SEARCH & TOGGLE BUTTON */
 .top-controls .search-container {
     flex: 1 1 auto;
+    width: 100%; 
+    display: flex;
+    gap: 10px;
 }
 
 .top-controls .search-container input {
     width: 100%;
+    flex-grow: 1; 
     min-width: 120px;
     padding: 0.7em 0.8em;
     border: none;
@@ -96,9 +128,11 @@ select {
     background-color: var(--very-dark-blue);
     color: #f0f0f0;
     cursor: pointer;
+    /* Ensure dropdown doesn't take up too much space in the row */
+    flex-grow: 1; 
 }
 
-/* Mode button */
+/* Mode button - now inside search-container */
 #english-mode-btn {
     padding: 0.7em 1em;
     background-color: var(--very-dark-blue);
@@ -107,6 +141,7 @@ select {
     border-radius: 6px;
     cursor: pointer;
     font-size: 1rem;
+    flex-shrink: 0; /* Prevents button from shrinking */
 }
 
 /* --- CARD CONTENT --- */
@@ -125,7 +160,7 @@ select {
 }
 
 #answer {
-    font-size: 2.0em; /* increased for larger answer text */
+    font-size: 2.0em; 
     color: #16a085;
     margin-top: 0.5em;
 }
@@ -140,12 +175,14 @@ select {
     color: #e74c3c;
 }
 
-/* --- INPUT ROW --- */
+/* --- INPUT ROW (The main area causing issues) --- */
 .input-action-row {
     display: flex;
     gap: 0.4em;
     margin: 0.8em 0;
     align-items: flex-start;
+    /* Ensure the row doesn't force a larger width */
+    min-width: 0; 
 }
 
 .input-action-row input[type="text"] {
@@ -156,13 +193,17 @@ select {
     background-color: #f0f0f0; 
     color: #1b263b;
     min-height: 44px; 
-    font-size: 2.0em; /* increased text size */
+    font-size: 2.0em; 
+    /* Critical: Allows input to shrink below its default size */
+    min-width: 0; 
 }
 
 .input-action-row .button-group {
     display: flex;
     flex-direction: column;
     gap: 0.4em;
+    /* Allows the button group to take up the space it needs */
+    flex-shrink: 0;
 }
 
 .input-action-row button {
@@ -189,14 +230,7 @@ select {
     opacity: 0.85;
 }
 
-/* --- NAV BUTTONS --- */
-.nav-button-container {
-    margin-top: 1em;
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-}
-
+/* --- NAV BUTTONS (General style used by top-nav-button) --- */
 .nav-button {
     background-color: var(--default-grey); 
     border: 1px solid #555;
@@ -210,6 +244,7 @@ select {
 .nav-button:hover {
     background-color: var(--grey-hover);
 }
+
 
 /* --- MULTIPLE CHOICE GRID --- */
 .multiple-choice-container {
@@ -225,7 +260,7 @@ select {
     border: none;
     border-radius: 6px;
     padding: 0.6em;
-    font-size: 1.6rem; /* increased for easier reading in Devanagari mode */
+    font-size: 1.6rem; 
     cursor: pointer;
     min-height: 40px;
 }
@@ -234,25 +269,56 @@ select {
     background-color: var(--subtle-dark-blue-hover);
 }
 
-/* --- RANDOMIZE --- */
+/* --- RANDOMIZE/FILTER ROW --- */
 #randomize-container {
     margin-top: 1em;
-    text-align: left;
+    /* Set to flex to place dropdown and checkbox on the same line */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px; /* Spacing between the dropdown and the checkbox */
     font-size: 0.9rem;
 }
 
-/* --- MOBILE LAYOUT --- */
-@media (max-width: 450px) {
+/* Ensure the dropdown takes available space on the left */
+#randomize-container select {
+    flex-grow: 1;
+    min-width: 0; /* Allows it to shrink nicely */
+}
 
-    .top-controls {
-        flex-direction: column;
+/* Ensure the label/checkbox stays on the right */
+#randomize-container label {
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+
+/* --- MOBILE LAYOUT (Refined to prevent overflow) --- */
+@media (max-width: 450px) {
+    /* * Reduce Quiz Container Padding: 
+     * The internal padding combined with the 90% width could cause overflow on tiny screens. 
+     */
+    .quiz-container {
+        padding: 1em; 
+    }
+
+    /* .top-controls is already set to flex-direction: column */
+    
+    .top-controls-row {
+        /* This row is effectively empty in the new HTML, but we keep the styles */
+        flex-direction: row; 
         gap: 0.8em;
     }
-
-    .top-controls > * {
-        width: 100%;
+    
+    /* This style is no longer strictly needed but kept for structure */
+    .top-controls-row select,
+    .top-controls .search-container {
+        flex: 1 1 50%;
     }
-
+    
+    /* Fix for Input/Action Row: 
+     * Ensures buttons have minimal fixed width and input uses remaining space.
+     */
     .input-action-row {
         flex-wrap: nowrap;
         gap: 0.4em;
@@ -270,21 +336,23 @@ select {
     }
 
     .input-action-row button {
+        /* Set a fixed minimum width for Submit/Reveal buttons */
         flex: none;
-        min-width: 36px;
+        min-width: 38px;
         min-height: 34px;
-        font-size: 0.8rem;
+        font-size: 0.7rem; /* Smaller font on small screens */
         padding: 0.4em 0.6em;
     }
-
-    .nav-button-container {
-        flex-direction: row;
-        gap: 10px;
+    
+    /* Ensure the search input and toggle button stay together */
+    .top-controls .search-container {
         width: 100%;
+        display: flex;
+        gap: 5px;
     }
-
-    .nav-button-container .nav-button {
-        flex: 1;
+    
+    .top-controls .search-container input {
+        flex-grow: 1;
     }
 }
 
