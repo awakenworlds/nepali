@@ -17,7 +17,91 @@
             <h1 class="header-title">Nepali</h1>
             <button id="next-card-btn" class="nav-button top-nav-button">Next</button>
         </div>
+        <div class="top-controls"><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nepali Flashcards and Quiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div class="top-header"></div>
+    
+    <div class="quiz-container">
+        <div id="top-left-title">Nepali Flashcards and Quiz</div>
+        <div id="top-right-random-control">
+            <label>
+                <input type="checkbox" id="random-toggle" checked>
+                Random
+            </label>
+        </div>
+
+        <div class="header-nav-container">
+            <button id="prev-card-btn" class="nav-button top-nav-button">Previous</button>
+            
+            <select id="filter-dropdown">
+                <option value="all">All</option>
+                <option value="letter">Letter</option>
+                <option value="number">Number</option>
+                <option value="verb">Verb</option>
+                <option value="noun">Noun</option>
+                <option value="adjective">Adjective</option>
+                <option value="popular">Popular</option>
+            </select>
+            
+            <button id="next-card-btn" class="nav-button top-nav-button">Next</button>
+        </div>
+        
         <div class="top-controls">
+            <div class="top-controls-row">
+            </div>
+
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Search here..." autocomplete="off">
+                <button id="english-mode-btn">En</button>
+            </div>
+        </div>
+
+        <div id="search-results-container" class="search-results-container hidden">
+            <ul id="search-results-list"></ul>
+            <div class="back-to-quiz-btn-container">
+                <button id="back-to-quiz-btn" class="submit-button">Back to Quiz</button>
+            </div>
+        </div>
+
+        <div id="quiz-content">
+            <div class="card">
+                <div id="question"></div>
+                <div id="answer" class="hidden"></div>
+                <div id="feedback" class="hidden"></div>
+            </div>
+
+            <div class="input-action-row" id="romanized-action-row">
+                <input type="text" id="romanized-answer-input" placeholder="Roman Answer" autocomplete="off">
+                <div class="button-group">
+                    <button id="submit-romanized-btn" class="submit-button">Submit</button>
+                    <button id="show-roman-answer-btn" class="submit-button reveal">Reveal</button>
+                </div>
+            </div>
+
+            <div class="input-action-row" id="english-action-row">
+                <input type="text" id="english-answer-input" placeholder="English Answer" autocomplete="off">
+                <div class="button-group">
+                    <button id="submit-english-btn" class="submit-button">Submit</button>
+                    <button id="show-english-answer-btn" class="submit-button reveal">Reveal</button>
+                </div>
+            </div>
+
+            <div class="multiple-choice-container hidden" id="multiple-choice-container"></div>
+
+            </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
             <div class="top-controls-row">
                 </div>
 
@@ -80,3 +164,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+
