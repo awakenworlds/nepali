@@ -44,25 +44,45 @@ body {
     padding: 1em 1.5em 1.5em 1.5em; 
     text-align: center;
     margin-bottom: 20px; 
+    position: relative; /* CRITICAL: Required for absolute positioning of the Random checkbox */
 }
 
-/* CRITICAL FIX: Ensures Previous Button, H1, and Next Button are on the same line. */
+/* NEW STYLES: TOP LEFT TITLE */
+#top-left-title {
+    position: absolute;
+    top: 5px; /* Minimal padding */
+    left: 10px; /* Minimal padding */
+    font-size: 0.8rem; /* Matches the random toggle */
+    z-index: 10;
+    transform: translateY(-5px); 
+    white-space: nowrap;
+    color: #f0f0f0; /* Ensure visibility */
+}
+
+
+/* NEW STYLES: RANDOM CHECKBOX POSITION */
+#top-right-random-control {
+    position: absolute;
+    top: 5px; /* Minimal padding */
+    right: 10px; /* Minimal padding */
+    font-size: 0.8rem;
+    z-index: 10;
+    /* Move the container slightly up to offset the main quiz-container padding */
+    transform: translateY(-5px); 
+    white-space: nowrap;
+}
+
+/* CRITICAL FIX: Ensures Previous Button, Dropdown, and Next Button are on the same line. */
 .header-nav-container {
     display: flex;
     justify-content: space-between;
     align-items: center; 
     width: 100%;
     margin-bottom: 0.5em; 
+    margin-top: 1.5em; /* Adjusted to account for both top-left and top-right elements */
 }
 
-.header-title {
-    font-size: 2.2rem;
-    color: #f0f0f0;
-    margin: 0; 
-    padding: 0; 
-    flex-grow: 1;
-    text-align: center; 
-}
+/* Removed .header-title style */
 
 /* Style for the buttons at the top */
 .top-nav-button {
@@ -70,6 +90,7 @@ body {
     padding: 0.5em 0.8em;
     font-size: 0.9rem;
     min-height: 40px; 
+    width: 30%; /* Gives them defined space */
 }
 
 /* --- ROW 1: CONTROL ROW (Now only contains Search/Toggle) --- */
@@ -119,7 +140,7 @@ body {
     color: #f0f0f0;
 }
 
-/* Dropdown */
+/* Dropdown - Now in header-nav-container */
 select {
     padding: 0.7em 0.8em;
     border-radius: 6px;
@@ -128,8 +149,9 @@ select {
     background-color: var(--very-dark-blue);
     color: #f0f0f0;
     cursor: pointer;
-    /* Ensure dropdown doesn't take up too much space in the row */
+    /* Ensure dropdown takes available space in the header-nav-container */
     flex-grow: 1; 
+    text-align: center;
 }
 
 /* Mode button - now inside search-container */
@@ -269,41 +291,31 @@ select {
     background-color: var(--subtle-dark-blue-hover);
 }
 
-/* --- RANDOMIZE/FILTER ROW --- */
-#randomize-container {
-    margin-top: 1em;
-    /* Set to flex to place dropdown and checkbox on the same line */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px; /* Spacing between the dropdown and the checkbox */
-    font-size: 0.9rem;
-}
-
-/* Ensure the dropdown takes available space on the left */
-#randomize-container select {
-    flex-grow: 1;
-    min-width: 0; /* Allows it to shrink nicely */
-}
-
-/* Ensure the label/checkbox stays on the right */
-#randomize-container label {
-    flex-shrink: 0;
-    white-space: nowrap;
-}
-
+/* Removed #randomize-container styles entirely */
 
 /* --- MOBILE LAYOUT (Refined to prevent overflow) --- */
 @media (max-width: 450px) {
-    /* * Reduce Quiz Container Padding: 
-     * The internal padding combined with the 90% width could cause overflow on tiny screens. 
-     */
+    /* Reduce Quiz Container Padding */
     .quiz-container {
         padding: 1em; 
     }
-
-    /* .top-controls is already set to flex-direction: column */
     
+    /* Adjust Random Control Position for smaller screens */
+    #top-right-random-control {
+        top: 0px; 
+        right: 5px; 
+        font-size: 0.75rem;
+        transform: translateY(-5px); 
+    }
+
+    /* Adjust Title Position for smaller screens */
+    #top-left-title {
+        top: 0px;
+        left: 5px;
+        font-size: 0.75rem;
+        transform: translateY(-5px);
+    }
+
     .top-controls-row {
         /* This row is effectively empty in the new HTML, but we keep the styles */
         flex-direction: row; 
@@ -316,9 +328,7 @@ select {
         flex: 1 1 50%;
     }
     
-    /* Fix for Input/Action Row: 
-     * Ensures buttons have minimal fixed width and input uses remaining space.
-     */
+    /* Fix for Input/Action Row: */
     .input-action-row {
         flex-wrap: nowrap;
         gap: 0.4em;
@@ -418,4 +428,4 @@ select {
 .slide-in-left {
     transform: translateX(-100%);
     opacity: 0;
-}
+}a
