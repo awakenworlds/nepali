@@ -341,8 +341,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const results = quizData.filter(card => {
             return normalizeAnswer(card.roman).includes(searchTerm) ||
-                       normalizeAnswer(card.english).includes(searchTerm) ||
-                       normalizeAnswer(card.devanagari).includes(searchTerm);
+                         normalizeAnswer(card.english).includes(searchTerm) ||
+                         normalizeAnswer(card.devanagari).includes(searchTerm);
         });
 
         displaySearchResults(results);
