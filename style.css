@@ -25,6 +25,7 @@ body {
     --grey-hover: #4a637d;
     --submit-green: #2ecc71;
     --reveal-yellow: #d4ac0d;
+    --incorrect-orange: #D94B1B; /* Burnt Orange for incorrect feedback */
 }
 
 /* --- TOP CONTAINER & TITLE --- */
@@ -44,104 +45,57 @@ body {
     padding: 1em 1.5em 1.5em 1.5em; 
     text-align: center;
     margin-bottom: 20px; 
-    position: relative; /* CRITICAL: Required for absolute positioning of the Random checkbox */
+    position: relative;
 }
 
-/* NEW STYLES: TOP LEFT TITLE */
 #top-left-title {
     position: absolute;
-    top: 5px; /* Minimal padding */
-    left: 10px; /* Minimal padding */
-    font-size: 0.8rem; /* Matches the random toggle */
-    z-index: 10;
-    transform: translateY(-5px); 
-    white-space: nowrap;
-    color: #f0f0f0; /* Ensure visibility */
-}
-
-
-/* NEW STYLES: RANDOM CHECKBOX POSITION */
-#top-right-random-control {
-    position: absolute;
-    top: 5px; /* Minimal padding */
-    right: 10px; /* Minimal padding */
+    top: 5px;
+    left: 10px;
     font-size: 0.8rem;
     z-index: 10;
-    /* Move the container slightly up to offset the main quiz-container padding */
+    transform: translateY(-5px); 
+    white-space: nowrap;
+    color: #f0f0f0;
+}
+
+#top-right-random-control {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 0.8rem;
+    z-index: 10;
     transform: translateY(-5px); 
     white-space: nowrap;
 }
 
-/* CRITICAL FIX: Ensures Previous Button, Dropdown, and Next Button are on the same line. */
+/* --- HEADER NAVIGATION (Search, Dropdown, Toggle) --- */
 .header-nav-container {
     display: flex;
+    gap: 8px; 
     justify-content: space-between;
     align-items: center; 
     width: 100%;
     margin-bottom: 0.5em; 
-    margin-top: 1.5em; /* Adjusted to account for both top-left and top-right elements */
+    margin-top: 1.5em;
+    flex-wrap: nowrap; /* Default to no wrap for desktop */
 }
 
-/* Removed .header-title style */
-
-/* Style for the buttons at the top */
-.top-nav-button {
-    flex-shrink: 0; 
-    padding: 0.5em 0.8em;
-    font-size: 0.9rem;
-    min-height: 40px; 
-    width: 30%; /* Gives them defined space */
-}
-
-/* --- ROW 1: CONTROL ROW (Now only contains Search/Toggle) --- */
-.top-controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    margin-top: 0.8em;
-    margin-bottom: 1em;
-    width: 100%;
-    /* Keep as column for simple stacking on mobile */
-    flex-direction: column;
-}
-
-/* top-controls-row is now essentially empty in HTML, but we keep the style below for safety */
-.top-controls-row {
-    display: flex;
-    gap: 10px;
-    width: 100%;
-    justify-content: space-between;
-}
-
-.top-controls select,
-.top-controls button {
-    height: 44px;
-    flex-shrink: 0;
-}
-
-/* NEW FLEX LAYOUT FOR SEARCH & TOGGLE BUTTON */
-.top-controls .search-container {
-    flex: 1 1 auto;
-    width: 100%; 
-    display: flex;
-    gap: 10px;
-}
-
-.top-controls .search-container input {
-    width: 100%;
+/* Search Input */
+.header-nav-container #search-input {
     flex-grow: 1; 
-    min-width: 120px;
+    min-width: 100px; 
     padding: 0.7em 0.8em;
     border: none;
     border-radius: 6px;
     font-size: 1rem;
     background-color: var(--subtle-dark-blue);
     color: #f0f0f0;
+    height: 44px;
 }
 
-/* Dropdown - Now in header-nav-container */
-select {
+/* Dropdown */
+.header-nav-container select {
     padding: 0.7em 0.8em;
     border-radius: 6px;
     border: none;
@@ -149,12 +103,14 @@ select {
     background-color: var(--very-dark-blue);
     color: #f0f0f0;
     cursor: pointer;
-    /* Ensure dropdown takes available space in the header-nav-container */
-    flex-grow: 1; 
+    flex-shrink: 0; 
+    width: auto;
+    height: 44px;
+    min-width: 90px;
     text-align: center;
 }
 
-/* Mode button - now inside search-container */
+/* Mode Button */
 #english-mode-btn {
     padding: 0.7em 1em;
     background-color: var(--very-dark-blue);
@@ -163,7 +119,13 @@ select {
     border-radius: 6px;
     cursor: pointer;
     font-size: 1rem;
-    flex-shrink: 0; /* Prevents button from shrinking */
+    flex-shrink: 0; 
+    height: 44px;
+}
+
+/* Hide the now empty top-controls area */
+.top-controls {
+    display: none; 
 }
 
 /* --- CARD CONTENT --- */
@@ -187,23 +149,23 @@ select {
     margin-top: 0.5em;
 }
 
+/* --- FEEDBACK STYLES --- */
 #feedback {
     margin-top: 0.5em;
     font-size: 1rem;
-    color: #2ecc71;
+    color: #2ecc71; /* Green for correct answers */
 }
 
 #feedback.incorrect {
-    color: #e74c3c;
+    color: var(--incorrect-orange); /* Burnt Orange for better visibility */
 }
 
-/* --- INPUT ROW (The main area causing issues) --- */
+/* --- INPUT ROWS & BUTTONS --- */
 .input-action-row {
     display: flex;
     gap: 0.4em;
     margin: 0.8em 0;
     align-items: flex-start;
-    /* Ensure the row doesn't force a larger width */
     min-width: 0; 
 }
 
@@ -216,7 +178,6 @@ select {
     color: #1b263b;
     min-height: 44px; 
     font-size: 2.0em; 
-    /* Critical: Allows input to shrink below its default size */
     min-width: 0; 
 }
 
@@ -224,7 +185,6 @@ select {
     display: flex;
     flex-direction: column;
     gap: 0.4em;
-    /* Allows the button group to take up the space it needs */
     flex-shrink: 0;
 }
 
@@ -252,22 +212,6 @@ select {
     opacity: 0.85;
 }
 
-/* --- NAV BUTTONS (General style used by top-nav-button) --- */
-.nav-button {
-    background-color: var(--default-grey); 
-    border: 1px solid #555;
-    color: #f0f0f0;
-    padding: 0.6em 1em;
-    border-radius: 6px;
-    cursor: pointer;
-    min-height: 44px;
-}
-
-.nav-button:hover {
-    background-color: var(--grey-hover);
-}
-
-
 /* --- MULTIPLE CHOICE GRID --- */
 .multiple-choice-container {
     display: grid;
@@ -291,82 +235,31 @@ select {
     background-color: var(--subtle-dark-blue-hover);
 }
 
-/* Removed #randomize-container styles entirely */
-
-/* --- MOBILE LAYOUT (Refined to prevent overflow) --- */
-@media (max-width: 450px) {
-    /* Reduce Quiz Container Padding */
-    .quiz-container {
-        padding: 1em; 
-    }
-    
-    /* Adjust Random Control Position for smaller screens */
-    #top-right-random-control {
-        top: 0px; 
-        right: 5px; 
-        font-size: 0.75rem;
-        transform: translateY(-5px); 
-    }
-
-    /* Adjust Title Position for smaller screens */
-    #top-left-title {
-        top: 0px;
-        left: 5px;
-        font-size: 0.75rem;
-        transform: translateY(-5px);
-    }
-
-    .top-controls-row {
-        /* This row is effectively empty in the new HTML, but we keep the styles */
-        flex-direction: row; 
-        gap: 0.8em;
-    }
-    
-    /* This style is no longer strictly needed but kept for structure */
-    .top-controls-row select,
-    .top-controls .search-container {
-        flex: 1 1 50%;
-    }
-    
-    /* Fix for Input/Action Row: */
-    .input-action-row {
-        flex-wrap: nowrap;
-        gap: 0.4em;
-        align-items: flex-start;
-    }
-
-    .input-action-row .button-group {
-        flex-direction: column;
-        gap: 0.2em;
-    }
-
-    .input-action-row input[type="text"] {
-        flex: 1;
-        min-width: 55%;
-    }
-
-    .input-action-row button {
-        /* Set a fixed minimum width for Submit/Reveal buttons */
-        flex: none;
-        min-width: 38px;
-        min-height: 34px;
-        font-size: 0.7rem; /* Smaller font on small screens */
-        padding: 0.4em 0.6em;
-    }
-    
-    /* Ensure the search input and toggle button stay together */
-    .top-controls .search-container {
-        width: 100%;
-        display: flex;
-        gap: 5px;
-    }
-    
-    .top-controls .search-container input {
-        flex-grow: 1;
-    }
+/* --- BOTTOM NAVIGATION (Previous/Next) --- */
+.bottom-nav-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 1em;
+    width: 100%;
 }
 
-/* Search results */
+.nav-button {
+    background-color: var(--default-grey); 
+    border: 1px solid #555;
+    color: #f0f0f0;
+    padding: 0.6em 1em;
+    border-radius: 6px;
+    cursor: pointer;
+    min-height: 44px;
+    flex: 1; /* Ensures they split the space 50/50 */
+}
+
+.nav-button:hover {
+    background-color: var(--grey-hover);
+}
+
+/* --- SEARCH RESULTS --- */
 .search-results-container {
     background: #1b263b;
     width: 100%;
@@ -394,38 +287,81 @@ select {
     font-size: 1.1rem;
 }
 
+/* --- MOBILE LAYOUT REFINEMENT --- */
+@media (max-width: 450px) {
+    .quiz-container {
+        padding: 1em; 
+    }
+    
+    /* Header elements wrap on small screens */
+    .header-nav-container {
+        flex-wrap: wrap; 
+        gap: 5px;
+    }
+
+    .header-nav-container #search-input {
+        /* Search bar spans the full width of the top row on mobile */
+        flex-basis: 100%; 
+        order: 1; 
+    }
+    
+    .header-nav-container select {
+        /* Dropdown takes about half the width on the second row */
+        flex-basis: calc(50% - 3px); 
+        min-width: unset;
+        order: 2;
+    }
+    
+    #english-mode-btn {
+        /* Toggle button takes the other half */
+        flex-basis: calc(50% - 3px); 
+        order: 3;
+    }
+    
+    .bottom-nav-container {
+        gap: 5px;
+    }
+
+    /* Input action row button scaling for mobile */
+    .input-action-row .button-group {
+        flex-direction: column;
+        gap: 0.2em;
+    }
+
+    .input-action-row button {
+        flex: none;
+        min-width: 38px;
+        min-height: 34px;
+        font-size: 0.7rem;
+        padding: 0.4em 0.6em;
+    }
+}
+
+/* --- CARD ANIMATION CLASSES --- */
 .hidden {
     display: none !important;
 }
 
-/* * --- CARD ANIMATION CLASSES ---
- * Added to enable the smooth card swipe effect using the JavaScript.
- */
 #quiz-content {
-    /* Set the transition duration to match the 300ms used in script.js */
     transition: transform 0.3s ease-out, opacity 0.3s ease-out;
 }
 
-/* Class applied when moving to the NEXT card (swipes left/out) */
 .slide-out-left {
     transform: translateX(-100%);
     opacity: 0;
 }
 
-/* Class applied when moving to the PREVIOUS card (swipes right/out) */
 .slide-out-right {
     transform: translateX(100%);
     opacity: 0;
 }
 
-/* Base state for the new card *before* it slides in (coming from the right) */
 .slide-in-right {
     transform: translateX(100%);
     opacity: 0;
 }
 
-/* Base state for the new card *before* it slides in (coming from the left) */
 .slide-in-left {
     transform: translateX(-100%);
     opacity: 0;
-}a
+}
