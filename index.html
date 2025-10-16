@@ -20,7 +20,7 @@
         </div>
 
         <div class="header-nav-container">
-            <button id="prev-card-btn" class="nav-button top-nav-button">Previous</button>
+            <input type="text" id="search-input" placeholder="Search here..." autocomplete="off">
             
             <select id="filter-dropdown">
                 <option value="all">All</option>
@@ -32,18 +32,13 @@
                 <option value="popular">Popular</option>
             </select>
             
-            <button id="next-card-btn" class="nav-button top-nav-button">Next</button>
+            <button id="english-mode-btn">En</button>
         </div>
         
-        <div class="top-controls">
+        <div class="top-controls" style="display: none;"> 
             <div class="top-controls-row">
             </div>
-
-            <div class="search-container">
-                <input type="text" id="search-input" placeholder="Search here..." autocomplete="off">
-                <button id="english-mode-btn">En</button>
             </div>
-        </div>
 
         <div id="search-results-container" class="search-results-container hidden">
             <ul id="search-results-list"></ul>
@@ -76,8 +71,13 @@
             </div>
 
             <div class="multiple-choice-container hidden" id="multiple-choice-container"></div>
-
+            
+            <div class="bottom-nav-container">
+                <button id="prev-card-btn" class="nav-button bottom-nav-button">Previous</button>
+                <button id="next-card-btn" class="nav-button bottom-nav-button">Next</button>
             </div>
+            
+        </div>
     </div>
 
     <script src="script.js"></script>
