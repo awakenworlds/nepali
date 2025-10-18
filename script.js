@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('search-input');
     const searchResultsContainer = document.getElementById('search-results-container');
     const searchResultsList = document.getElementById('search-results-list');
-    const quizContent = document.getElementById('quiz-content');    
-    const backToQuizBtn = document.getElementById('back-to-quiz-btn');    
+    const quizContent = document.getElementById('quiz-content');    
+    const backToQuizBtn = document.getElementById('back-to-quiz-btn');    
     const multipleChoiceContainer = document.getElementById('multiple-choice-container');
     const romanActionRow = document.getElementById('romanized-action-row');
     const englishActionRow = document.getElementById('english-action-row');
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let quizData = [];
     let filteredQuizData = [];
     let currentCardIndex = 0;
-    let isEnglishMode = false;    
+    let isEnglishMode = false;    
     let isRomanCorrect = false;
     let isEnglishCorrect = false;
     let isMultipleChoiceCorrect = false;
@@ -41,16 +41,37 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Function to normalize strings for comparison (search and answer checking)
     function normalizeAnswer(ans) {
-        return String(ans || '').toLowerCase().trim();
+        // 1. Convert to string, lowercase, trim.
+        let normalized = String(ans || '').toLowerCase().trim();
+
+        // 2. Replace accented Roman characters with simple English equivalents
+        normalized = normalized.replace(/[āīūṛṭḍñ]/g, match => {
+            if (match === 'ā') return 'a';
+            if (match === 'ī') return 'i';
+            if (match === 'ū') return 'u';
+            if (match === 'ṛ') return 'r';
+            if (match === 'ṭ') return 't';
+            if (match === 'ḍ') return 'd';
+            if (match === 'ñ') return 'n';
+            return match;
+        });
+
+        return normalized;
     }
 
+    // Updated function for checking answer correctness
     function isAnswerCorrect(userAnswer, cardAnswer) {
-        userAnswer = normalizeAnswer(userAnswer).replace(/ā/g, 'a');
-        cardAnswer = normalizeAnswer(cardAnswer).replace(/ā/g, 'a');
+        // normalizeAnswer now handles all lowercasing, trimming, and accented character conversion
+        userAnswer = normalizeAnswer(userAnswer);
+        cardAnswer = normalizeAnswer(cardAnswer);
+        
+        // Keep logic for handling multiple/bracketed answers
         const bracketIndex = cardAnswer.indexOf('(');
         if (bracketIndex !== -1) cardAnswer = cardAnswer.slice(0, bracketIndex).trim();
         const acceptableAnswers = cardAnswer.split('/').map(e => e.trim());
+        
         return acceptableAnswers.includes(userAnswer);
     }
 
@@ -213,8 +234,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Revised searchFlashcards function for flexible and cross-field searching
     function searchFlashcards() {
+        // Use the comprehensive normalizeAnswer for the search term
         const searchTerm = normalizeAnswer(searchInput.value);
+
         if (searchTerm.length > 0) {
             quizContent.style.display = 'none';
             searchResultsContainer.classList.remove('hidden');
@@ -223,14 +247,18 @@ document.addEventListener('DOMContentLoaded', () => {
             searchResultsContainer.classList.add('hidden');
             return;
         }
-        const results = quizData.filter(card =>
-            normalizeAnswer(card.roman).includes(searchTerm) ||
-            normalizeAnswer(card.english).includes(searchTerm) ||
-            normalizeAnswer(card.devanagari).includes(searchTerm)
-        );
+
+        // Filter logic: apply normalization to card fields for reliable substring matching
+        const results = quizData.filter(card => {
+            return normalizeAnswer(card.roman).includes(searchTerm) ||
+                   normalizeAnswer(card.english).includes(searchTerm) ||
+                   card.devanagari.includes(searchTerm);
+        });
+
         displaySearchResults(results);
     }
 
+    // Revised displaySearchResults to ensure clicked results load regardless of filter
     function displaySearchResults(results) {
         searchResultsList.innerHTML = '';
         if (results.length === 0 && searchInput.value.length > 0) {
@@ -240,8 +268,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 const li = document.createElement('li');
                 li.innerHTML = `<span class="result-nepali">${card.devanagari}</span> <span class="result-english">(${card.roman} / ${card.english})</span>`;
                 li.addEventListener('click', () => {
+                    // 1. Update the filter based on the clicked card's category
+                    filterDropdown.value = card.sort; 
+                    const value = filterDropdown.value;
+                    
+                    // 2. Re-filter the array to the selected category (or 'all')
+                    filteredQuizData = value === "all" ? quizData.slice() : quizData.filter(item => item.sort === value);
+                    
+                    // 3. Re-shuffle if the toggle is on
+                    if (randomizeToggle.checked) shuffle(filteredQuizData);
+
+                    // 4. Find the card's index within the newly filtered/shuffled array
                     const newIndex = filteredQuizData.findIndex(item => item.devanagari === card.devanagari);
-                    if (newIndex !== -1) currentCardIndex = newIndex;
+                    
+                    if (newIndex !== -1) {
+                        currentCardIndex = newIndex;
+                    } else {
+                        // Fallback, though should not be hit if logic is correct
+                        currentCardIndex = 0; 
+                    }
+                    
                     resetSearchAndGoToQuiz();
                     displayCard();
                 });
@@ -254,7 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
         searchInput.value = '';
         searchResultsContainer.classList.add('hidden');
         quizContent.style.display = 'block';
-        romanizedInput.focus();    
+        romanizedInput.focus();    
     }
 
     searchInput.addEventListener('input', searchFlashcards);
@@ -287,7 +333,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     englishModeBtn.addEventListener('click', () => {
         isEnglishMode = !isEnglishMode;
-        englishModeBtn.textContent = isEnglishMode ? "दे" : "En";    
+        englishModeBtn.textContent = isEnglishMode ? "दे" : "En";    
         displayCard(); 
     });
 
@@ -326,7 +372,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 filteredQuizData = quizData.slice();
                 if (randomizeToggle.checked) shuffle(filteredQuizData);
                 displayCard(); 
-                englishModeBtn.textContent = 'En';    
+                englishModeBtn.textContent = 'En';    
             })
             .catch(err => {
                 console.error("Error loading data.json:", err);
