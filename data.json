@@ -205,7 +205,7 @@
     {
         "devanagari": "नजिक",
         "roman": "najik",
-        "english": "near",
+        "english": "near / close",
         "sort": "adjective",
         "popular": null
     },
@@ -294,13 +294,6 @@
         "popular": null
     },
     {
-        "devanagari": "सम्पदाको",
-        "roman": "sampadako",
-        "english": "of the wealth/resources/heritage",
-        "sort": "adjective",
-        "popular": null
-    },
-    {
         "devanagari": "सानो",
         "roman": "sano",
         "english": "small",
@@ -340,7 +333,7 @@
         "roman": "sidha",
         "english": "straight",
         "sort": "adjective",
-        "popular": null
+        "popular": "TRUE"
     },
     {
         "devanagari": "सुन्दर",
@@ -359,7 +352,7 @@
     {
         "devanagari": "स्वतन्त्र",
         "roman": "svatantra",
-        "english": "free/independent",
+        "english": "free / independent",
         "sort": "adjective",
         "popular": null
     },
@@ -424,7 +417,7 @@
         "roman": "budho",
         "english": "old (man)",
         "sort": "adjective",
-        "popular": null
+        "popular": "TRUE"
     },
     {
         "devanagari": "पुरानो",
@@ -466,7 +459,7 @@
         "roman": "bistari",
         "english": "slowly",
         "sort": "adverb",
-        "popular": null
+        "popular": "TRUE"
     },
     {
         "devanagari": "चाँडो",
@@ -478,7 +471,7 @@
     {
         "devanagari": "धेरै",
         "roman": "dherai",
-        "english": "very",
+        "english": "a lot",
         "sort": "adverb",
         "popular": null
     },
@@ -571,13 +564,6 @@
         "roman": "yaha",
         "english": "here",
         "sort": "adverb",
-        "popular": null
-    },
-    {
-        "devanagari": "जब",
-        "roman": "jaba",
-        "english": "when",
-        "sort": "conjunction",
         "popular": null
     },
     {
@@ -982,7 +968,7 @@
     {
         "devanagari": "आँचल",
         "roman": "aanchal",
-        "english": "corner/fold of a shawl",
+        "english": "corner / fold of a shawl",
         "sort": "noun",
         "popular": null
     },
@@ -1752,7 +1738,7 @@
     {
         "devanagari": "मोबाइल",
         "roman": "mobail",
-        "english": "mobile",
+        "english": "mobile / cell phone",
         "sort": "noun",
         "popular": null
     },
@@ -3115,13 +3101,6 @@
         "popular": null
     },
     {
-        "devanagari": "कसरी?",
-        "roman": "kasari?",
-        "english": "how?",
-        "sort": "Popular",
-        "popular": null
-    },
-    {
         "devanagari": "के",
         "roman": "ke",
         "english": "what",
@@ -3647,13 +3626,6 @@
         "popular": null
     },
     {
-        "devanagari": "बनाउनु",
-        "roman": "banaunu",
-        "english": "to make/build",
-        "sort": "verb",
-        "popular": null
-    },
-    {
         "devanagari": "बन्द गर्नु",
         "roman": "banda garnu",
         "english": "to close",
@@ -3780,8 +3752,8 @@
         "popular": null
     },
     {
-        "devanagari": "छाड्नु",
-        "roman": "chhadnu",
+        "devanagari": "छोड्नु",
+        "roman": "chhodnu",
         "english": "to leave",
         "sort": "verb",
         "popular": null
@@ -3943,7 +3915,7 @@
     {
         "devanagari": "जोड्नु",
         "roman": "jodnu",
-        "english": "to connect/add",
+        "english": "to connect / add",
         "sort": "verb",
         "popular": null
     },
@@ -4096,8 +4068,8 @@
     },
     {
         "devanagari": "पाउनु",
-        "roman": "paunu",
-        "english": "to get",
+        "roman": "paaunu",
+        "english": "to get / to receive",
         "sort": "verb",
         "popular": null
     },
@@ -4132,7 +4104,7 @@
     {
         "devanagari": "पुग्नु",
         "roman": "pugnu",
-        "english": "to arrive",
+        "english": "to arrive / to reach destination",
         "sort": "verb",
         "popular": null
     },
@@ -4282,5 +4254,68 @@
         "english": "to wake up",
         "sort": "verb",
         "popular": null
+    },
+    {
+        "devanagari": "उमाल्नु",
+        "roman": "umaalnu",
+        "english": "to boil (a liquid)",
+        "sort": "verb",
+        "popular": null
+    },
+    {
+        "devanagari": "लुगा धुनु",
+        "roman": "lugaa dhunu",
+        "english": "to wash clothes",
+        "sort": "verb",
+        "popular": "TRUE"
+    },
+    {
+        "devanagari": "हेर्नु",
+        "roman": "hernu",
+        "english": "to watch",
+        "sort": "verb",
+        "popular": null
+    },
+    {
+        "devanagari": "देख्नु",
+        "roman": "dekhnu",
+        "english": "to see / to look",
+        "sort": "verb",
+        "popular": "TRUE"
+    },
+    {
+        "devanagari": "गाउनु",
+        "roman": "gaaunu",
+        "english": "to sing",
+        "sort": "verb",
+        "popular": null
+    },
+    {
+        "devanagari": "खाजा खानु",
+        "roman": "khaja khanu",
+        "english": "to eat snacks",
+        "sort": "verb",
+        "popular": null
+    },
+    {
+        "devanagari": "हुनु",
+        "roman": "hunu",
+        "english": "to be/ to become / to happen",
+        "sort": "verb",
+        "popular": null
+    },
+    {
+        "devanagari": "मेट्नु",
+        "roman": "metnu",
+        "english": "to erase",
+        "sort": "verb",
+        "popular": "TRUE"
+    },
+    {
+        "devanagari": "घुम्नु",
+        "roman": "ghumnu",
+        "english": "to travel",
+        "sort": "verb",
+        "popular": "TRUE"
     }
 ]
