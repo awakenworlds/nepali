@@ -413,13 +413,6 @@
         "popular": null
     },
     {
-        "devanagari": "वीरहरूका",
-        "roman": "virharuka",
-        "english": "of the heroes / the heroes'",
-        "sort": "adjective",
-        "popular": null
-    },
-    {
         "devanagari": "नयाँ",
         "roman": "naya",
         "english": "new",
@@ -1396,6 +1389,13 @@
         "devanagari": "घिउ",
         "roman": "ghiu",
         "english": "ghee",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "दानो",
+        "roman": "dano",
+        "english": "seed / grain",
         "sort": "noun",
         "popular": null
     },
@@ -3822,7 +3822,7 @@
         "popular": null
     },
     {
-        "devanagari": "धुने",
+        "devanagari": "धुनु",
         "roman": "dhunu",
         "english": "to wash",
         "sort": "verb",
