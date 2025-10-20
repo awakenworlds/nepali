@@ -105,13 +105,6 @@
         "popular": null
     },
     {
-        "devanagari": "गरम",
-        "roman": "garam",
-        "english": "hot (weather)",
-        "sort": "adjective",
-        "popular": null
-    },
-    {
         "devanagari": "गरिब",
         "roman": "garib",
         "english": "poor",
@@ -183,7 +176,7 @@
     },
     {
         "devanagari": "लामो",
-        "roman": "lamo",
+        "roman": "laamo",
         "english": "long",
         "sort": "adjective",
         "popular": null
@@ -423,6 +416,34 @@
         "devanagari": "पुरानो",
         "roman": "purano",
         "english": "old (thing)",
+        "sort": "adjective",
+        "popular": null
+    },
+    {
+        "devanagari": "अग्लो",
+        "roman": "aaglo",
+        "english": "tall",
+        "sort": "adjective",
+        "popular": null
+    },
+    {
+        "devanagari": "गर्मी",
+        "roman": "garmi",
+        "english": "hot (weather)",
+        "sort": "adjective",
+        "popular": null
+    },
+    {
+        "devanagari": "जाडो",
+        "roman": "jaado",
+        "english": "cold (weather)",
+        "sort": "adjective",
+        "popular": null
+    },
+    {
+        "devanagari": "सु्खा",
+        "roman": "sukha",
+        "english": "dry",
         "sort": "adjective",
         "popular": null
     },
@@ -1415,7 +1436,7 @@
     },
     {
         "devanagari": "हात",
-        "roman": "haat",
+        "roman": "haat / arm",
         "english": "hand",
         "sort": "noun",
         "popular": null
@@ -1865,6 +1886,125 @@
         "devanagari": "पेट",
         "roman": "pet",
         "english": "stomach",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "खुट्टाको गोढी",
+        "roman": "khuttako godhi",
+        "english": "ankle",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "दाह्री",
+        "roman": "daarhi",
+        "english": "beard",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "स्तन",
+        "roman": "stan",
+        "english": "breast",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "पिंडली",
+        "roman": "pindali",
+        "english": "calf",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "छाती",
+        "roman": "chhati",
+        "english": "chest",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "चिउँडो",
+        "roman": "chiundo",
+        "english": "chin",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "कान",
+        "roman": "kaan",
+        "english": "ear",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "कुहिनो",
+        "roman": "kuhino",
+        "english": "elbow",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "आँखा",
+        "roman": "aankha",
+        "english": "eye",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "अनुहार",
+        "roman": "anuhar",
+        "english": "face",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "आँगुली",
+        "roman": "aanguli",
+        "english": "finger",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "नङ",
+        "roman": "nang",
+        "english": "fingernail / toenail",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "निधार",
+        "roman": "nidhaar",
+        "english": "forehead",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "कपाल",
+        "roman": "kapal",
+        "english": "hair",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "टाउको",
+        "roman": "tauko",
+        "english": "head",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "एड़ी",
+        "roman": "edi",
+        "english": "heel",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "घुँडा",
+        "roman": "ghundaa",
+        "english": "knee",
         "sort": "noun",
         "popular": null
     },
