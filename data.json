@@ -3837,7 +3837,7 @@
     },
     {
         "devanagari": "घुम्नु",
-        "roman": "ghumnu",
+        "roman": "gumnu",
         "english": "to roam",
         "sort": "verb",
         "popular": null
@@ -3846,13 +3846,6 @@
         "devanagari": "गुणा गर्नु",
         "roman": "guna garnu",
         "english": "to multiply",
-        "sort": "verb",
-        "popular": null
-    },
-    {
-        "devanagari": "हार्नु",
-        "roman": "haarnu",
-        "english": "to lose",
         "sort": "verb",
         "popular": null
     },
@@ -3873,7 +3866,7 @@
     {
         "devanagari": "हेर्नु",
         "roman": "hernu",
-        "english": "to see",
+        "english": "to watch",
         "sort": "verb",
         "popular": "TRUE"
     },
@@ -3886,7 +3879,7 @@
     },
     {
         "devanagari": "जानु",
-        "roman": "janu",
+        "roman": "jaanu",
         "english": "to go",
         "sort": "verb",
         "popular": "TRUE"
@@ -4293,7 +4286,7 @@
     {
         "devanagari": "हुनु",
         "roman": "hunu",
-        "english": "to be/ to become / to happen",
+        "english": "to be / to become / to happen",
         "sort": "verb",
         "popular": null
     },
@@ -4310,5 +4303,117 @@
         "english": "to travel",
         "sort": "verb",
         "popular": "TRUE"
+    },
+    {
+        "devanagari": "मर्नु",
+        "roman": "marnu",
+        "english": "to die",
+        "sort": "verb",
+        "popular": null
+    },
+    {
+        "devanagari": "पूजा गर्नु",
+        "roman": "pujaa garnu",
+        "english": "to worship",
+        "sort": "verb",
+        "popular": null
+    },
+    {
+        "devanagari": "व्रत बस्नु",
+        "roman": "brata basnu",
+        "english": "to fast",
+        "sort": "verb",
+        "popular": null
+    },
+    {
+        "devanagari": "खन्नु)",
+        "roman": "khannu",
+        "english": "to eat",
+        "sort": "verb",
+        "popular": null
+    },
+    {
+        "devanagari": "मनाउनु",
+        "roman": "manaaunu",
+        "english": "to celebrate",
+        "sort": "verb",
+        "popular": null
+    },
+    {
+        "devanagari": "रोक्नु",
+        "roman": "roknu",
+        "english": "to stop",
+        "sort": "verb",
+        "popular": null
+    },
+    {
+        "devanagari": "बलि दिनु",
+        "roman": "bali dinu",
+        "english": "to sacrafice",
+        "sort": "verb",
+        "popular": null
+    },
+    {
+        "devanagari": "देखाउनु",
+        "roman": "dekhaunu",
+        "english": "to show",
+        "sort": "verb",
+        "popular": null
+    },
+    {
+        "devanagari": "सफाई गर्नु",
+        "roman": "safai garnu",
+        "english": "to clean",
+        "sort": "verb",
+        "popular": null
+    },
+    {
+        "devanagari": "चार्पी जानु",
+        "roman": "charpi jaanu",
+        "english": "to go to the bathroom",
+        "sort": "verb",
+        "popular": null
+    },
+    {
+        "devanagari": "जनाउनु",
+        "roman": "janmanu",
+        "english": "to be born",
+        "sort": "verb",
+        "popular": null
+    },
+    {
+        "devanagari": "आउनु",
+        "roman": "aaunu",
+        "english": "to come",
+        "sort": "verb",
+        "popular": null
+    },
+    {
+        "devanagari": "पढाउनु",
+        "roman": "padhaaunu",
+        "english": "to teach",
+        "sort": "verb",
+        "popular": null
+    },
+    {
+        "devanagari": "सिकाउनु",
+        "roman": "sikaaunu",
+        "english": "to teach / to instruct",
+        "sort": "verb",
+        "popular": null
+    },
+    {
+        "devanagari": "बजाउनु",
+        "roman": "bajaaunu",
+        "english": "tp play (an instrument)",
+        "sort": "verb",
+        "popular": null
+    },
+    {
+        "devanagari": "नाच्नु",
+        "roman": "naachnu",
+        "english": "to dance",
+        "sort": "verb",
+        "popular": null
     }
 ]
