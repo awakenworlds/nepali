@@ -1981,13 +1981,6 @@
         "popular": null
     },
     {
-        "devanagari": "कपाल",
-        "roman": "kapal",
-        "english": "hair",
-        "sort": "noun",
-        "popular": null
-    },
-    {
         "devanagari": "टाउको",
         "roman": "tauko",
         "english": "head",
@@ -2149,13 +2142,6 @@
         "popular": null
     },
     {
-        "devanagari": "समय",
-        "roman": "samaya",
-        "english": "time",
-        "sort": "noun",
-        "popular": null
-    },
-    {
         "devanagari": "समुद्र",
         "roman": "samudra",
         "english": "sea",
@@ -2292,13 +2278,6 @@
         "devanagari": "तरकारी",
         "roman": "tarkari",
         "english": "vegetable",
-        "sort": "noun",
-        "popular": null
-    },
-    {
-        "devanagari": "टाउको",
-        "roman": "tauko",
-        "english": "head",
         "sort": "noun",
         "popular": null
     },
@@ -3124,7 +3103,7 @@
     {
         "devanagari": "छ",
         "roman": "chha",
-        "english": "has",
+        "english": "have / has",
         "sort": "popular",
         "popular": null
     },
@@ -3822,13 +3801,6 @@
         "popular": null
     },
     {
-        "devanagari": "बिर्सनु",
-        "roman": "birsanu",
-        "english": "to forget",
-        "sort": "verb",
-        "popular": null
-    },
-    {
         "devanagari": "बिताउनु",
         "roman": "bitaunu",
         "english": "to spend time",
@@ -4070,13 +4042,6 @@
         "devanagari": "खेल्नु",
         "roman": "khelnu",
         "english": "to play",
-        "sort": "verb",
-        "popular": null
-    },
-    {
-        "devanagari": "खोज्नु",
-        "roman": "khojnu",
-        "english": "to search",
         "sort": "verb",
         "popular": null
     },
