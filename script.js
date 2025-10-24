@@ -77,6 +77,8 @@ document.addEventListener('DOMContentLoaded', () => {
         englishActionRow.style.display = 'none';
         multipleChoiceContainer.classList.add('hidden');
         secondaryMCContainer.classList.add('hidden');
+        multipleChoiceContainer.classList.remove('mc-style-2');
+        secondaryMCContainer.classList.remove('mc-style-2');
         multipleChoiceContainer.innerHTML = '';
         secondaryMCContainer.innerHTML = '';
         romanizedInput.value = '';
@@ -85,41 +87,34 @@ document.addEventListener('DOMContentLoaded', () => {
         const useMC = multipleChoiceToggle.checked;
 
         if (card.sort === 'letter') {
-            // ---------------------------
-            // LETTER TYPE SPECIFIC LOGIC
-            // ---------------------------
             if (useMC) {
-                // MC mode for letters
                 if (isEnglishMode) {
-                    // For letter cards in English main card: show Devanagari MC
                     generateMC(card, 'devanagari', multipleChoiceContainer);
                 } else {
-                    // For letter cards in Devanagari main card: show Roman MC
                     generateMC(card, 'roman', multipleChoiceContainer);
                 }
             } else {
-                // NOT in MC mode
                 if (isEnglishMode) {
-                    // English main: only Devanagari MC
                     generateMC(card, 'devanagari', multipleChoiceContainer);
                 } else {
-                    // Devanagari main: only Roman textbox
                     romanActionRow.style.display = 'flex';
                 }
             }
         } else {
-            // Non-letter cards: existing logic
             if (useMC) {
                 if (isEnglishMode) {
                     generateMC(card, 'roman', multipleChoiceContainer);
+                    secondaryMCContainer.classList.add('mc-style-2');
                     generateMC(card, 'devanagari', secondaryMCContainer);
                 } else {
                     generateMC(card, 'roman', multipleChoiceContainer);
+                    secondaryMCContainer.classList.add('mc-style-2');
                     generateMC(card, 'english', secondaryMCContainer);
                 }
             } else {
                 if (isEnglishMode) {
                     romanActionRow.style.display = 'flex';
+                    secondaryMCContainer.classList.add('mc-style-2');
                     generateMC(card, 'devanagari', secondaryMCContainer);
                 } else {
                     romanActionRow.style.display = 'flex';
@@ -150,6 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.addEventListener('click', () => {
                 if (opt === correctAnswer) {
                     btn.style.backgroundColor = 'green';
+                    btn.style.color = 'white'; // ✅ NEW LINE: make text white for correct answers
                     Array.from(container.querySelectorAll('button')).forEach(b => b.disabled = true);
                 } else {
                     btn.style.backgroundColor = 'red';
@@ -226,26 +222,18 @@ document.addEventListener('DOMContentLoaded', () => {
         displayCard();
     });
 
-    // --------------------------
-    // SEARCH: hide dropdown & En when active
-    // --------------------------
     searchInput.addEventListener('input', () => {
         const term = normalizeAnswer(searchInput.value);
         if (!term) {
-            // exit search mode
             searchResultsContainer.classList.add('hidden');
             quizContent.style.display = 'block';
-            // show dropdown & english toggle again
             filterDropdown.style.display = '';
             englishModeBtn.style.display = '';
             return;
         }
 
-        // hide main quiz and show search results
         quizContent.style.display = 'none';
         searchResultsContainer.classList.remove('hidden');
-
-        // hide dropdown & english toggle when in search mode
         filterDropdown.style.display = 'none';
         englishModeBtn.style.display = 'none';
 
@@ -286,7 +274,6 @@ document.addEventListener('DOMContentLoaded', () => {
         searchInput.value = '';
         searchResultsContainer.classList.add('hidden');
         quizContent.style.display = 'block';
-        // show dropdown & english toggle again
         filterDropdown.style.display = '';
         englishModeBtn.style.display = '';
         displayCard();
@@ -307,7 +294,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // touch navigation (swipe) - keep existing behavior
     let startX = 0;
     let endX = 0;
     const threshold = 75;
@@ -326,7 +312,6 @@ document.addEventListener('DOMContentLoaded', () => {
         startX = 0; endX = 0;
     });
 
-    // search helper: keep old behavior of pressing up to reveal answers
     document.addEventListener('keydown', (e) => {
         if (e.key === 'ArrowUp') {
             const card = filteredQuizData[currentCardIndex];
@@ -356,4 +341,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initializeQuiz();
 });
-
