@@ -81,46 +81,34 @@ document.addEventListener('DOMContentLoaded', () => {
         secondaryMCContainer.innerHTML = '';
         romanizedInput.value = '';
         englishInput.value = '';
-        englishInput.placeholder = "English Answer"; // default
 
         const useMC = multipleChoiceToggle.checked;
 
         if (card.sort === 'letter') {
+            // ---------------------------
+            // LETTER TYPE SPECIFIC LOGIC
+            // ---------------------------
             if (useMC) {
+                // MC mode for letters
                 if (isEnglishMode) {
+                    // For letter cards in English main card: show Devanagari MC
                     generateMC(card, 'devanagari', multipleChoiceContainer);
                 } else {
+                    // For letter cards in Devanagari main card: show Roman MC
                     generateMC(card, 'roman', multipleChoiceContainer);
                 }
             } else {
+                // NOT in MC mode
                 if (isEnglishMode) {
+                    // English main: only Devanagari MC
                     generateMC(card, 'devanagari', multipleChoiceContainer);
                 } else {
+                    // Devanagari main: only Roman textbox
                     romanActionRow.style.display = 'flex';
-                }
-            }
-        } else if (card.sort === 'number') {
-            if (useMC) {
-                if (isEnglishMode) {
-                    generateMC(card, 'roman', multipleChoiceContainer);
-                    generateMC(card, 'devanagari', secondaryMCContainer);
-                } else {
-                    generateMC(card, 'roman', multipleChoiceContainer);
-                    generateMC(card, 'english', secondaryMCContainer);
-                }
-            } else {
-                if (isEnglishMode) {
-                    // NEW: number card, English main, non-MC
-                    romanActionRow.style.display = 'flex';
-                    generateMC(card, 'devanagari', secondaryMCContainer); // show Devanagari MC instead of English/Numerical input
-                } else {
-                    // Non-English main (Devanagari) non-MC
-                    romanActionRow.style.display = 'flex';
-                    englishActionRow.style.display = 'flex';
-                    englishInput.placeholder = "Numerical Answer";
                 }
             }
         } else {
+            // Non-letter cards: existing logic
             if (useMC) {
                 if (isEnglishMode) {
                     generateMC(card, 'roman', multipleChoiceContainer);
@@ -238,22 +226,41 @@ document.addEventListener('DOMContentLoaded', () => {
         displayCard();
     });
 
+    // --------------------------
+    // SEARCH: hide dropdown & En when active
+    // --------------------------
     searchInput.addEventListener('input', () => {
         const term = normalizeAnswer(searchInput.value);
         if (!term) {
+            // exit search mode
             searchResultsContainer.classList.add('hidden');
             quizContent.style.display = 'block';
+            // show dropdown & english toggle again
+            filterDropdown.style.display = '';
+            englishModeBtn.style.display = '';
             return;
         }
+
+        // hide main quiz and show search results
         quizContent.style.display = 'none';
         searchResultsContainer.classList.remove('hidden');
+
+        // hide dropdown & english toggle when in search mode
+        filterDropdown.style.display = 'none';
+        englishModeBtn.style.display = 'none';
+
         const results = quizData.filter(card =>
             normalizeAnswer(card.roman).includes(term) ||
             normalizeAnswer(card.english).includes(term) ||
             card.devanagari.includes(term)
         );
+
+        displaySearchResults(results);
+    });
+
+    function displaySearchResults(results) {
         searchResultsList.innerHTML = '';
-        if (results.length === 0) {
+        if (results.length === 0 && searchInput.value.length > 0) {
             searchResultsList.innerHTML = '<li>No matches found.</li>';
         } else {
             results.forEach(card => {
@@ -262,21 +269,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 li.addEventListener('click', () => {
                     filterDropdown.value = card.sort;
                     filteredQuizData = filterDropdown.value === 'all' ? quizData.slice() : quizData.filter(c => c.sort === card.sort);
-                    currentCardIndex = filteredQuizData.findIndex(c => c.devanagari === card.devanagari);
-                    resetSearch();
+                    if (randomizeToggle.checked) shuffle(filteredQuizData);
+                    const newIndex = filteredQuizData.findIndex(item => item.devanagari === card.devanagari);
+                    currentCardIndex = newIndex !== -1 ? newIndex : 0;
+                    resetSearchAndGoToQuiz();
                     displayCard();
                 });
                 searchResultsList.appendChild(li);
             });
         }
-    });
+    }
 
-    backToQuizBtn.addEventListener('click', resetSearch);
+    backToQuizBtn.addEventListener('click', resetSearchAndGoToQuiz);
 
-    function resetSearch() {
+    function resetSearchAndGoToQuiz() {
         searchInput.value = '';
         searchResultsContainer.classList.add('hidden');
         quizContent.style.display = 'block';
+        // show dropdown & english toggle again
+        filterDropdown.style.display = '';
+        englishModeBtn.style.display = '';
         displayCard();
     }
 
@@ -287,12 +299,43 @@ document.addEventListener('DOMContentLoaded', () => {
             answerEl.classList.remove('hidden');
         }
     });
-
     showEnglishBtn.addEventListener('click', () => {
         const card = filteredQuizData[currentCardIndex];
         if (card) {
             answerEl.textContent = card.english;
             answerEl.classList.remove('hidden');
+        }
+    });
+
+    // touch navigation (swipe) - keep existing behavior
+    let startX = 0;
+    let endX = 0;
+    const threshold = 75;
+
+    quizContent.addEventListener('touchstart', (e) => {
+        const target = e.target;
+        const targetTagName = target.tagName;
+        if (targetTagName === 'INPUT' || targetTagName === 'BUTTON' || target === answerEl) { startX = 0; endX = 0; return; }
+        startX = e.touches[0].clientX;
+    });
+    quizContent.addEventListener('touchmove', (e) => { if (startX !== 0) endX = e.touches[0].clientX; });
+    quizContent.addEventListener('touchend', () => {
+        if (startX === 0) return;
+        const deltaX = endX - startX;
+        if (Math.abs(deltaX) > threshold) deltaX > 0 ? (currentCardIndex = (currentCardIndex - 1 + filteredQuizData.length) % filteredQuizData.length, displayCard()) : (currentCardIndex = (currentCardIndex + 1) % filteredQuizData.length, displayCard());
+        startX = 0; endX = 0;
+    });
+
+    // search helper: keep old behavior of pressing up to reveal answers
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowUp') {
+            const card = filteredQuizData[currentCardIndex];
+            if (!card) return;
+            if (document.activeElement === romanizedInput) {
+                romanizedInput.value = card.roman;
+            } else if (document.activeElement === englishInput) {
+                englishInput.value = card.english;
+            }
         }
     });
 
@@ -303,6 +346,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 quizData = data;
                 filteredQuizData = quizData.slice();
                 displayCard();
+                englishModeBtn.textContent = 'En';
             })
             .catch(err => {
                 console.error('Error loading data.json:', err);
