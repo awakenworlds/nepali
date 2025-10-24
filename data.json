@@ -135,7 +135,7 @@
     {
         "devanagari": "झूटो",
         "roman": "jhuto",
-        "english": "jhuto",
+        "english": "false / lie",
         "sort": "adjective",
         "popular": null
     },
@@ -527,14 +527,7 @@
     {
         "devanagari": "पछि",
         "roman": "pachhi",
-        "english": "after",
-        "sort": "adverb",
-        "popular": null
-    },
-    {
-        "devanagari": "पछि",
-        "roman": "pachhi",
-        "english": "later",
+        "english": "after / later",
         "sort": "adverb",
         "popular": null
     },
@@ -588,6 +581,20 @@
         "popular": null
     },
     {
+        "devanagari": "धेरै पटक",
+        "roman": "dherai patak",
+        "english": "often",
+        "sort": "adverb",
+        "popular": null
+    },
+    {
+        "devanagari": "पनि",
+        "roman": "pani",
+        "english": "also",
+        "sort": "adverb",
+        "popular": null
+    },
+    {
         "devanagari": "जति",
         "roman": "jati",
         "english": "as much as",
@@ -598,13 +605,6 @@
         "devanagari": "किनकि",
         "roman": "kinaki",
         "english": "because",
-        "sort": "conjunction",
-        "popular": null
-    },
-    {
-        "devanagari": "पनि",
-        "roman": "pani",
-        "english": "also",
         "sort": "conjunction",
         "popular": null
     },
@@ -2348,6 +2348,13 @@
         "devanagari": "वाक्य",
         "roman": "wakya",
         "english": "sentence",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "सङ्गीत",
+        "roman": "sangit",
+        "english": "music",
         "sort": "noun",
         "popular": null
     },
