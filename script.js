@@ -12,12 +12,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const showEnglishBtn = document.getElementById('show-english-answer-btn');
     const filterDropdown = document.getElementById('filter-dropdown');
     const randomizeToggle = document.getElementById('random-toggle');
+    const multipleChoiceToggle = document.getElementById('multiple-choice-toggle');
     const searchInput = document.getElementById('search-input');
     const searchResultsContainer = document.getElementById('search-results-container');
     const searchResultsList = document.getElementById('search-results-list');
     const quizContent = document.getElementById('quiz-content');
     const backToQuizBtn = document.getElementById('back-to-quiz-btn');
     const multipleChoiceContainer = document.getElementById('multiple-choice-container');
+    const secondaryMCContainer = document.getElementById('secondary-mc-container');
     const romanActionRow = document.getElementById('romanized-action-row');
     const englishActionRow = document.getElementById('english-action-row');
 
@@ -25,14 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let filteredQuizData = [];
     let currentCardIndex = 0;
     let isEnglishMode = false;
-    let isRomanCorrect = false;
-    let isEnglishCorrect = false;
-    let isMultipleChoiceCorrect = false;
-    let readyForNext = false;
-
-    let startX = 0;
-    let endX = 0;
-    const threshold = 75;
 
     function shuffle(array) {
         for (let i = array.length - 1; i > 0; i--) {
@@ -42,8 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function normalizeAnswer(ans) {
-        let normalized = String(ans || '').toLowerCase().trim();
-        normalized = normalized.replace(/[āīūṛṭḍñ]/g, match => {
+        return String(ans || '').toLowerCase().trim().replace(/[āīūṛṭḍñ]/g, match => {
             if (match === 'ā') return 'a';
             if (match === 'ī') return 'i';
             if (match === 'ū') return 'u';
@@ -53,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (match === 'ñ') return 'n';
             return match;
         });
-        return normalized;
     }
 
     function isAnswerCorrect(userAnswer, cardAnswer) {
@@ -61,259 +53,177 @@ document.addEventListener('DOMContentLoaded', () => {
         cardAnswer = normalizeAnswer(cardAnswer);
         const bracketIndex = cardAnswer.indexOf('(');
         if (bracketIndex !== -1) cardAnswer = cardAnswer.slice(0, bracketIndex).trim();
-        const acceptableAnswers = cardAnswer.split('/').map(e => e.trim());
-        return acceptableAnswers.includes(userAnswer);
+        return cardAnswer.split('/').map(e => e.trim()).includes(userAnswer);
     }
 
-    function animateAndDisplayCard(direction) {
-        const isNext = direction === 'next';
-        const slideOutClass = isNext ? 'slide-out-left' : 'slide-out-right';
-        const slideInClass = isNext ? 'slide-in-right' : 'slide-in-left';
-        quizContent.classList.add(slideOutClass);
-
-        setTimeout(() => {
-            quizContent.classList.remove(slideOutClass);
-            currentCardIndex = isNext
-                ? (currentCardIndex + 1) % filteredQuizData.length
-                : (currentCardIndex - 1 + filteredQuizData.length) % filteredQuizData.length;
-            displayCard(slideInClass);
-        }, 300);
-    }
-
-    function displayCard(animationClass = '') {
-        searchResultsContainer.classList.add('hidden');
-        quizContent.style.display = 'block';
-        quizContent.classList.remove('slide-in-right', 'slide-in-left', 'slide-out-left', 'slide-out-right');
-
-        if (!filteredQuizData || filteredQuizData.length === 0) {
-            questionEl.textContent = 'No flashcards with current filters.';
+    function displayCard() {
+        const card = filteredQuizData[currentCardIndex];
+        if (!card) {
+            questionEl.textContent = "No flashcards with current filters.";
             answerEl.classList.add('hidden');
+            romanActionRow.style.display = 'none';
+            englishActionRow.style.display = 'none';
+            multipleChoiceContainer.classList.add('hidden');
+            secondaryMCContainer.classList.add('hidden');
             return;
         }
 
-        const card = filteredQuizData[currentCardIndex];
-
         questionEl.textContent = isEnglishMode ? card.english : card.devanagari;
-        answerEl.classList.add('hidden');
         answerEl.textContent = '';
+        answerEl.classList.add('hidden');
+
+        // Reset all rows/containers
+        romanActionRow.style.display = 'none';
+        englishActionRow.style.display = 'none';
+        multipleChoiceContainer.classList.add('hidden');
+        secondaryMCContainer.classList.add('hidden');
+        multipleChoiceContainer.innerHTML = '';
+        secondaryMCContainer.innerHTML = '';
         romanizedInput.value = '';
         englishInput.value = '';
-        isRomanCorrect = false;
-        isEnglishCorrect = false;
-        isMultipleChoiceCorrect = false;
-        readyForNext = false;
+        englishInput.placeholder = "English Answer"; // default
 
-        // Reset displays
-        romanActionRow.style.display = 'flex';
-        multipleChoiceContainer.classList.add('hidden');
-        englishActionRow.style.display = 'none';
+        const useMC = multipleChoiceToggle.checked;
 
-        // 🔹 Main logic controlling what input/mode to show
-        if (isEnglishMode) {
-            // ✅ When Romanized is shown in card and it's a "letter"
-            if (card.sort === 'letter') {
-                // Roman is redundant — show multigrid instead
-                romanActionRow.style.display = 'none';
-                multipleChoiceContainer.classList.remove('hidden');
-                generateMultipleChoice(card);
+        if (card.sort === 'letter') {
+            if (useMC) {
+                if (isEnglishMode) {
+                    generateMC(card, 'devanagari', multipleChoiceContainer);
+                } else {
+                    generateMC(card, 'roman', multipleChoiceContainer);
+                }
             } else {
-                // Non-letter cards behave as before
-                multipleChoiceContainer.classList.remove('hidden');
-                generateMultipleChoice(card);
+                if (isEnglishMode) {
+                    generateMC(card, 'devanagari', multipleChoiceContainer);
+                } else {
+                    romanActionRow.style.display = 'flex';
+                }
+            }
+        } else if (card.sort === 'number') {
+            if (useMC) {
+                if (isEnglishMode) {
+                    generateMC(card, 'roman', multipleChoiceContainer);
+                    generateMC(card, 'devanagari', secondaryMCContainer);
+                } else {
+                    generateMC(card, 'roman', multipleChoiceContainer);
+                    generateMC(card, 'english', secondaryMCContainer);
+                }
+            } else {
+                if (isEnglishMode) {
+                    // NEW: number card, English main, non-MC
+                    romanActionRow.style.display = 'flex';
+                    generateMC(card, 'devanagari', secondaryMCContainer); // show Devanagari MC instead of English/Numerical input
+                } else {
+                    // Non-English main (Devanagari) non-MC
+                    romanActionRow.style.display = 'flex';
+                    englishActionRow.style.display = 'flex';
+                    englishInput.placeholder = "Numerical Answer";
+                }
             }
         } else {
-            // Nepali (Devanagari) mode
-            if (card.sort !== 'letter') englishActionRow.style.display = 'flex';
-            if (card.sort !== 'letter') multipleChoiceContainer.classList.add('hidden');
+            if (useMC) {
+                if (isEnglishMode) {
+                    generateMC(card, 'roman', multipleChoiceContainer);
+                    generateMC(card, 'devanagari', secondaryMCContainer);
+                } else {
+                    generateMC(card, 'roman', multipleChoiceContainer);
+                    generateMC(card, 'english', secondaryMCContainer);
+                }
+            } else {
+                if (isEnglishMode) {
+                    romanActionRow.style.display = 'flex';
+                    generateMC(card, 'devanagari', secondaryMCContainer);
+                } else {
+                    romanActionRow.style.display = 'flex';
+                    englishActionRow.style.display = 'flex';
+                }
+            }
         }
-
-        if (animationClass) quizContent.classList.add(animationClass);
-        setTimeout(() => {
-            quizContent.classList.remove(animationClass);
-            quizContent.style.transform = 'translateX(0)';
-            quizContent.style.opacity = '1';
-        }, animationClass ? 50 : 0);
     }
 
-    function generateMultipleChoice(card) {
-        multipleChoiceContainer.innerHTML = '';
-        isMultipleChoiceCorrect = false;
-        const correctAnswer = card.devanagari;
+    function generateMC(card, key, container) {
+        container.innerHTML = '';
+        container.classList.remove('hidden');
+
+        const correctAnswer = card[key];
         let options = [correctAnswer];
 
-        const categoryPool = filteredQuizData.filter(c => c.sort === card.sort && c.devanagari !== correctAnswer);
-        shuffle(categoryPool);
-        for (let i = 0; i < 3 && i < categoryPool.length; i++) options.push(categoryPool[i].devanagari);
-        while (options.length < 4) {
-            const generalPool = quizData.filter(c => c.devanagari !== correctAnswer && !options.includes(c.devanagari));
-            shuffle(generalPool);
-            if (generalPool.length > 0) options.push(generalPool[0].devanagari);
-            else break;
-        }
+        const pool = quizData
+            .filter(c => c[key] !== correctAnswer && c.sort === card.sort)
+            .map(c => c[key]);
 
+        shuffle(pool);
+        while (options.length < 4 && pool.length > 0) options.push(pool.pop());
         shuffle(options);
+
         options.forEach(opt => {
             const btn = document.createElement('button');
             btn.textContent = opt;
             btn.addEventListener('click', () => {
                 if (opt === correctAnswer) {
-                    isMultipleChoiceCorrect = true;
                     btn.style.backgroundColor = 'green';
-                    Array.from(multipleChoiceContainer.querySelectorAll('button')).forEach(b => b.disabled = true);
-                    checkReadyForNext();
+                    Array.from(container.querySelectorAll('button')).forEach(b => b.disabled = true);
                 } else {
                     btn.style.backgroundColor = 'red';
                     btn.disabled = true;
                 }
             });
-            multipleChoiceContainer.appendChild(btn);
+            container.appendChild(btn);
         });
-    }
-
-    function checkReadyForNext() {
-        const card = filteredQuizData[currentCardIndex];
-        readyForNext = isRomanCorrect && ((card.sort !== 'letter' && isMultipleChoiceCorrect) || card.sort === 'letter');
     }
 
     function checkRomanizedAnswer() {
         const card = filteredQuizData[currentCardIndex];
         if (!card) return;
-        let userAnswer = romanizedInput.value.replace(/[✅❌]/g, '').trim();
-        if (userAnswer === '') return;
+        const userAnswer = romanizedInput.value.replace(/[✅❌]/g, '').trim();
+        if (!userAnswer) return;
 
         if (isAnswerCorrect(userAnswer, card.roman)) {
             romanizedInput.value = userAnswer + ' ✅';
-            isRomanCorrect = true;
         } else {
             romanizedInput.value = userAnswer + ' ❌';
-            isRomanCorrect = false;
         }
-        checkReadyForNext();
     }
 
     function checkEnglishAnswer() {
         const card = filteredQuizData[currentCardIndex];
         if (!card) return;
-        let userAnswer = englishInput.value.replace(/[✅❌]/g, '').trim();
-        if (userAnswer === '') return;
+        const userAnswer = englishInput.value.replace(/[✅❌]/g, '').trim();
+        if (!userAnswer) return;
 
         if (isAnswerCorrect(userAnswer, card.english)) {
             englishInput.value = userAnswer + ' ✅';
-            isEnglishCorrect = true;
         } else {
             englishInput.value = userAnswer + ' ❌';
-            isEnglishCorrect = false;
-        }
-        checkReadyForNext();
-    }
-
-    function handleEnterKey(e) {
-        if (e.key !== 'Enter') return;
-        e.preventDefault();
-        if (readyForNext) animateAndDisplayCard('next');
-        else {
-            if (document.activeElement === romanizedInput) checkRomanizedAnswer();
-            else if (document.activeElement === englishInput) checkEnglishAnswer();
         }
     }
 
-    function handleArrowUp(e) {
-        if (e.key !== 'ArrowUp') return;
-        e.preventDefault();
-        const card = filteredQuizData[currentCardIndex];
-        if (!card) return;
-        if (document.activeElement === romanizedInput) {
-            romanizedInput.value = card.roman;
-            checkRomanizedAnswer();
-        } else if (document.activeElement === englishInput) {
-            englishInput.value = card.english;
-            checkEnglishAnswer();
-        }
-    }
-
-    function searchFlashcards() {
-        const searchTerm = normalizeAnswer(searchInput.value);
-        if (searchTerm.length > 0) {
-            quizContent.style.display = 'none';
-            searchResultsContainer.classList.remove('hidden');
-        } else {
-            quizContent.style.display = 'block';
-            searchResultsContainer.classList.add('hidden');
-            return;
-        }
-
-        const results = quizData.filter(card => {
-            return normalizeAnswer(card.roman).includes(searchTerm) ||
-                normalizeAnswer(card.english).includes(searchTerm) ||
-                card.devanagari.includes(searchTerm);
-        });
-
-        displaySearchResults(results);
-    }
-
-    function displaySearchResults(results) {
-        searchResultsList.innerHTML = '';
-        if (results.length === 0 && searchInput.value.length > 0) {
-            searchResultsList.innerHTML = '<li>No matches found.</li>';
-        } else {
-            results.forEach(card => {
-                const li = document.createElement('li');
-                li.innerHTML = `<span class="result-nepali">${card.devanagari}</span> <span class="result-english">(${card.roman} / ${card.english})</span>`;
-                li.addEventListener('click', () => {
-                    filterDropdown.value = card.sort;
-                    const value = filterDropdown.value;
-                    filteredQuizData = value === "all" ? quizData.slice() : quizData.filter(item => item.sort === value);
-                    if (randomizeToggle.checked) shuffle(filteredQuizData);
-                    const newIndex = filteredQuizData.findIndex(item => item.devanagari === card.devanagari);
-                    currentCardIndex = newIndex !== -1 ? newIndex : 0;
-                    resetSearchAndGoToQuiz();
-                    displayCard();
-                });
-                searchResultsList.appendChild(li);
-            });
-        }
-    }
-
-    function resetSearchAndGoToQuiz() {
-        searchInput.value = '';
-        searchResultsContainer.classList.add('hidden');
-        quizContent.style.display = 'block';
-        romanizedInput.focus();
-    }
-
-    searchInput.addEventListener('input', searchFlashcards);
-    backToQuizBtn.addEventListener('click', resetSearchAndGoToQuiz);
     submitRomanizedBtn.addEventListener('click', checkRomanizedAnswer);
     submitEnglishBtn.addEventListener('click', checkEnglishAnswer);
+
+    romanizedInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') checkRomanizedAnswer(); });
+    englishInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') checkEnglishAnswer(); });
+
     romanizedInput.addEventListener('input', () => { romanizedInput.value = romanizedInput.value.replace(/[✅❌]/g, ''); });
     englishInput.addEventListener('input', () => { englishInput.value = englishInput.value.replace(/[✅❌]/g, ''); });
-    romanizedInput.addEventListener('keypress', handleEnterKey);
-    englishInput.addEventListener('keypress', handleEnterKey);
-    document.addEventListener('keydown', handleArrowUp);
 
-    showRomanBtn.addEventListener('click', () => {
-        const card = filteredQuizData[currentCardIndex];
-        if (card) {
-            answerEl.textContent = card.roman;
-            answerEl.classList.remove('hidden');
-        }
-    });
-    showEnglishBtn.addEventListener('click', () => {
-        const card = filteredQuizData[currentCardIndex];
-        if (card) {
-            answerEl.textContent = card.english;
-            answerEl.classList.remove('hidden');
-        }
+    prevBtn.addEventListener('click', () => {
+        currentCardIndex = (currentCardIndex - 1 + filteredQuizData.length) % filteredQuizData.length;
+        displayCard();
     });
 
-    prevBtn.addEventListener('click', () => { animateAndDisplayCard('prev'); });
-    nextBtn.addEventListener('click', () => { animateAndDisplayCard('next'); });
+    nextBtn.addEventListener('click', () => {
+        currentCardIndex = (currentCardIndex + 1) % filteredQuizData.length;
+        displayCard();
+    });
 
     englishModeBtn.addEventListener('click', () => {
         isEnglishMode = !isEnglishMode;
         englishModeBtn.textContent = isEnglishMode ? "दे" : "En";
         displayCard();
     });
+
+    multipleChoiceToggle.addEventListener('change', displayCard);
 
     filterDropdown.addEventListener('change', () => {
         const value = filterDropdown.value;
@@ -328,33 +238,75 @@ document.addEventListener('DOMContentLoaded', () => {
         displayCard();
     });
 
-    quizContent.addEventListener('touchstart', (e) => {
-        const target = e.target;
-        const targetTagName = target.tagName;
-        if (targetTagName === 'INPUT' || targetTagName === 'BUTTON' || target === answerEl) { startX = 0; endX = 0; return; }
-        startX = e.touches[0].clientX;
+    searchInput.addEventListener('input', () => {
+        const term = normalizeAnswer(searchInput.value);
+        if (!term) {
+            searchResultsContainer.classList.add('hidden');
+            quizContent.style.display = 'block';
+            return;
+        }
+        quizContent.style.display = 'none';
+        searchResultsContainer.classList.remove('hidden');
+        const results = quizData.filter(card =>
+            normalizeAnswer(card.roman).includes(term) ||
+            normalizeAnswer(card.english).includes(term) ||
+            card.devanagari.includes(term)
+        );
+        searchResultsList.innerHTML = '';
+        if (results.length === 0) {
+            searchResultsList.innerHTML = '<li>No matches found.</li>';
+        } else {
+            results.forEach(card => {
+                const li = document.createElement('li');
+                li.innerHTML = `<span class="result-nepali">${card.devanagari}</span> <span class="result-english">(${card.roman} / ${card.english})</span>`;
+                li.addEventListener('click', () => {
+                    filterDropdown.value = card.sort;
+                    filteredQuizData = filterDropdown.value === 'all' ? quizData.slice() : quizData.filter(c => c.sort === card.sort);
+                    currentCardIndex = filteredQuizData.findIndex(c => c.devanagari === card.devanagari);
+                    resetSearch();
+                    displayCard();
+                });
+                searchResultsList.appendChild(li);
+            });
+        }
     });
-    quizContent.addEventListener('touchmove', (e) => { if (startX !== 0) endX = e.touches[0].clientX; });
-    quizContent.addEventListener('touchend', () => {
-        if (startX === 0) return;
-        const deltaX = endX - startX;
-        if (Math.abs(deltaX) > threshold) deltaX > 0 ? animateAndDisplayCard('prev') : animateAndDisplayCard('next');
-        startX = 0; endX = 0;
+
+    backToQuizBtn.addEventListener('click', resetSearch);
+
+    function resetSearch() {
+        searchInput.value = '';
+        searchResultsContainer.classList.add('hidden');
+        quizContent.style.display = 'block';
+        displayCard();
+    }
+
+    showRomanBtn.addEventListener('click', () => {
+        const card = filteredQuizData[currentCardIndex];
+        if (card) {
+            answerEl.textContent = card.roman;
+            answerEl.classList.remove('hidden');
+        }
+    });
+
+    showEnglishBtn.addEventListener('click', () => {
+        const card = filteredQuizData[currentCardIndex];
+        if (card) {
+            answerEl.textContent = card.english;
+            answerEl.classList.remove('hidden');
+        }
     });
 
     function initializeQuiz() {
-        fetch("./data.json")
+        fetch('./data.json')
             .then(res => res.json())
             .then(data => {
                 quizData = data;
                 filteredQuizData = quizData.slice();
-                if (randomizeToggle.checked) shuffle(filteredQuizData);
                 displayCard();
-                englishModeBtn.textContent = 'En';
             })
             .catch(err => {
-                console.error("Error loading data.json:", err);
-                questionEl.textContent = "Failed to load flashcards.";
+                console.error('Error loading data.json:', err);
+                questionEl.textContent = 'Failed to load flashcards.';
             });
     }
 
