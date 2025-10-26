@@ -21,12 +21,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const multipleChoiceContainer = document.getElementById('multiple-choice-container');
     const secondaryMCContainer = document.getElementById('secondary-mc-container');
     const romanActionRow = document.getElementById('romanized-action-row');
-    const englishActionRow = document.getElementById('english-action-row');
+    const englishActionRow = document.getElementById('english-answer-input'); // Changed from 'englishActionRow' to 'english-answer-input' in your original code, correcting it to the row element
+
+    // Correcting the reference: It should point to the container element
+    // Assuming you meant the containing div for the English input:
+    const englishActionRowCorrected = document.getElementById('english-action-row');
 
     let quizData = [];
     let filteredQuizData = [];
     let currentCardIndex = 0;
     let isEnglishMode = false;
+
+    // Helper to capitalize first letter for dropdown display
+    function capitalize(string) {
+        if (!string) return '';
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
 
     function shuffle(array) {
         for (let i = array.length - 1; i > 0; i--) {
@@ -56,13 +66,36 @@ document.addEventListener('DOMContentLoaded', () => {
         return cardAnswer.split('/').map(e => e.trim()).includes(userAnswer);
     }
 
+    // --- NEW FUNCTION TO POPULATE DROPDOWN ---
+    function populateFilterDropdown(data) {
+        // 1. Get all unique categories from the 'sort' key
+        const categories = new Set();
+        data.forEach(item => {
+            if (item.sort) categories.add(item.sort.toLowerCase());
+        });
+
+        // 2. Clear all options except the initial 'All' (first option)
+        while (filterDropdown.children.length > 1) {
+            filterDropdown.removeChild(filterDropdown.lastChild);
+        }
+
+        // 3. Add the new, unique, and sorted categories
+        Array.from(categories).sort().forEach(category => {
+            const option = document.createElement('option');
+            option.value = category;
+            option.textContent = capitalize(category);
+            filterDropdown.appendChild(option);
+        });
+    }
+    // ----------------------------------------
+
     function displayCard() {
         const card = filteredQuizData[currentCardIndex];
         if (!card) {
             questionEl.textContent = "No flashcards with current filters.";
             answerEl.classList.add('hidden');
             romanActionRow.style.display = 'none';
-            englishActionRow.style.display = 'none';
+            englishActionRowCorrected.style.display = 'none';
             multipleChoiceContainer.classList.add('hidden');
             secondaryMCContainer.classList.add('hidden');
             return;
@@ -74,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Reset all rows/containers
         romanActionRow.style.display = 'none';
-        englishActionRow.style.display = 'none';
+        englishActionRowCorrected.style.display = 'none';
         multipleChoiceContainer.classList.add('hidden');
         secondaryMCContainer.classList.add('hidden');
         multipleChoiceContainer.classList.remove('mc-style-2');
@@ -118,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     generateMC(card, 'devanagari', secondaryMCContainer);
                 } else {
                     romanActionRow.style.display = 'flex';
-                    englishActionRow.style.display = 'flex';
+                    englishActionRowCorrected.style.display = 'flex';
                 }
             }
         }
@@ -145,10 +178,11 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.addEventListener('click', () => {
                 if (opt === correctAnswer) {
                     btn.style.backgroundColor = 'green';
-                    btn.style.color = 'white'; // ✅ NEW LINE: make text white for correct answers
+                    btn.style.color = 'white'; 
                     Array.from(container.querySelectorAll('button')).forEach(b => b.disabled = true);
                 } else {
                     btn.style.backgroundColor = 'red';
+                    btn.style.color = 'white'; // Make text white for incorrect answers too
                     btn.disabled = true;
                 }
             });
@@ -330,6 +364,11 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(data => {
                 quizData = data;
                 filteredQuizData = quizData.slice();
+                
+                // 🔥 NEW LINE: Populate the dropdown with unique categories from the data
+                populateFilterDropdown(quizData);
+
+                // Initialize the display
                 displayCard();
                 englishModeBtn.textContent = 'En';
             })
