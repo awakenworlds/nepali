@@ -3,38 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nepali Flashcards and Quiz</title>
+    <title>Nepali Vocab</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="images/x-icon" href="images/favicon.ico">
 </head>
 <body>
     
-    <div class="top-header">
-        <div id="top-left-title">Nepali Flashcards and Quiz</div>
-        <div id="top-right-random-control">
-            <label>
-                <input type="checkbox" id="multiple-choice-toggle">
-                Multiple Choice
-            </label>
-            <label>
-                <input type="checkbox" id="random-toggle" checked>
-                Random
-            </label>
-        </div>
-    </div>
-    
     <div class="quiz-container">
+        <!-- Heading + Checkboxes inside the lighter blue container -->
+        <div class="title-checkbox-container">
+            <div id="top-left-title">Nepali Vocab</div>
+            <div class="checkbox-container">
+                <label>
+                    <input type="checkbox" id="multiple-choice-toggle">
+                    Multiple Choice
+                </label>
+                <label>
+                    <input type="checkbox" id="random-toggle" checked>
+                    Random
+                </label>
+            </div>
+        </div>
+        
         <div class="header-nav-container">
             <input type="text" id="search-input" placeholder="Search here..." autocomplete="off">
             
             <select id="filter-dropdown">
                 <option value="all">All</option>
-                <option value="letter">Letter</option>
-                <option value="number">Number</option>
-                <option value="verb">Verb</option>
-                <option value="noun">Noun</option>
-                <option value="adjective">Adjective</option>
-                <option value="popular">Popular</option>
             </select>
             
             <button id="english-mode-btn">En</button>
@@ -70,7 +65,6 @@
                 </div>
             </div>
 
-            <!-- Multiple Choice Containers -->
             <div class="multiple-choice-container hidden" id="multiple-choice-container"></div>
             <div class="multiple-choice-container hidden mc-style-2" id="secondary-mc-container"></div>
             
