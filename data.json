@@ -469,6 +469,20 @@
         "popular": null
     },
     {
+        "devanagari": "गीलो",
+        "roman": "gilo",
+        "english": "damp / moist",
+        "sort": "adjective",
+        "popular": null
+    },
+    {
+        "devanagari": "उमसिलो",
+        "roman": "umasilo",
+        "english": "humid",
+        "sort": "adjective",
+        "popular": null
+    },
+    {
         "devanagari": "आजकल",
         "roman": "aajakal",
         "english": "nowadays",
@@ -1855,6 +1869,27 @@
         "popular": null
     },
     {
+        "devanagari": "शर्ट",
+        "roman": "shart",
+        "english": "shirt",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "पाइन्ट",
+        "roman": "paint",
+        "english": "pants",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "सर्ट",
+        "roman": "shorts",
+        "english": "sart",
+        "sort": "noun",
+        "popular": null
+    },
+    {
         "devanagari": "नदी",
         "roman": "nadi",
         "english": "river",
@@ -1879,6 +1914,20 @@
         "devanagari": "नुन",
         "roman": "nun",
         "english": "salt",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "प्लेट",
+        "roman": "plet",
+        "english": "plate",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "थाली",
+        "roman": "thali",
+        "english": "plate (traditional)",
         "sort": "noun",
         "popular": null
     },
@@ -3572,14 +3621,14 @@
     {
         "devanagari": "मा",
         "roman": "ma",
-        "english": "in/at",
+        "english": "in / at",
         "sort": "preposition",
         "popular": null
     },
     {
         "devanagari": "माथि",
         "roman": "mathi",
-        "english": "on/upon",
+        "english": "on / upon",
         "sort": "preposition",
         "popular": null
     },
@@ -4326,13 +4375,6 @@
         "popular": "TRUE"
     },
     {
-        "devanagari": "हेर्नु",
-        "roman": "hernu",
-        "english": "to watch",
-        "sort": "verb",
-        "popular": null
-    },
-    {
         "devanagari": "देख्नु",
         "roman": "dekhnu",
         "english": "to see / to look",
@@ -4488,7 +4530,7 @@
     },
     {
         "devanagari": "यो बस कहाँ जान्छ?",
-        "roman": "yo bus kaha jancha?",
+        "roman": "yo bus kahaa jancha?",
         "english": "where does this bus go?",
         "sort": "question",
         "popular": null
@@ -4509,7 +4551,7 @@
     },
     {
         "devanagari": "तपाइँ कहाँबाट आउनुभयो?",
-        "roman": "tapai kahan bata aunu bhayo?",
+        "roman": "tapai kahaa bata aunu bhayo?",
         "english": "where are you from?",
         "sort": "question",
         "popular": null
@@ -4530,15 +4572,8 @@
     },
     {
         "devanagari": "शौचालय कहाँ छ?",
-        "roman": "shauchalaya kaha cha?",
+        "roman": "shauchalaya kahaa cha?",
         "english": "where is the restroom?",
-        "sort": "question",
-        "popular": null
-    },
-    {
-        "devanagari": "कहाँ?",
-        "roman": "kaha?",
-        "english": "where?",
         "sort": "question",
         "popular": null
     },
@@ -4558,7 +4593,7 @@
     },
     {
         "devanagari": "के",
-        "roman": "ke",
+        "roman": "ke?",
         "english": "what?",
         "sort": "question",
         "popular": null
@@ -4572,14 +4607,14 @@
     },
     {
         "devanagari": "को",
-        "roman": "ko",
+        "roman": "ko?",
         "english": "who?",
         "sort": "question",
         "popular": null
     },
     {
         "devanagari": "कहाँ",
-        "roman": "kahaa",
+        "roman": "kahaa?",
         "english": "where?",
         "sort": "question",
         "popular": null
@@ -4593,21 +4628,21 @@
     },
     {
         "devanagari": "चिकित्सक कहाँ हुनुहुन्छ?",
-        "roman": "chikitsak kaha hunuhunchha?",
+        "roman": "chikitsak kahaa hunuhunchha?",
         "english": "where is the doctor?",
         "sort": "question",
         "popular": null
     },
     {
         "devanagari": "बाटो कहाँ छ?",
-        "roman": "bato kaha cha?",
+        "roman": "bato kahaa cha?",
         "english": "where is the path?",
         "sort": "question",
         "popular": null
     },
     {
         "devanagari": "अस्पताल कहाँ छ?",
-        "roman": "aspataal kaha cha?",
+        "roman": "aspataal kahaa cha?",
         "english": "where is the hospital?",
         "sort": "question",
         "popular": null
