@@ -8,7 +8,7 @@ body {
     background-color: #1a202c; 
     color: #a0aec0; 
     margin: 0;
-    padding: 20px 0 0 0;
+    padding: 5px 0; /* minimal outside padding */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -31,48 +31,45 @@ body {
     --incorrect-orange: #e53e3e;
 }
 
-/* --- TOP HEADER --- */
-.top-header {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    width: 90%;
-    max-width: 500px;
-    margin-bottom: 1em;
-}
-
-#top-left-title {
-    font-size: 1.2rem;
-    color: var(--primary-accent); 
-    flex: 1 1 100%;
-    margin-bottom: 5px;
-}
-
-#top-right-random-control {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: flex-start;
-    flex: 1 1 100%;
-}
-
-#top-right-random-control label {
-    cursor: pointer;
-    font-size: 0.85rem;
-}
-
 /* --- QUIZ CONTAINER --- */
 .quiz-container {
     background: var(--very-dark-blue); 
     max-width: 500px;
-    width: 90%;
+    width: 95%;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.4); 
-    border: 2px solid #2b3a67; /* Dark blue outer border */
-    padding: 1.2em 1.5em 1.5em 1.5em;
+    border: 2px solid #2b3a67;
+    padding: 0.8em 1em 1em 1em; /* reduced padding */
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+}
+
+/* --- TITLE + CHECKBOX CONTAINER --- */
+.title-checkbox-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 0.5em;
+}
+
+#top-left-title {
+    font-size: 1.3rem;
+    color: var(--primary-accent);
+    text-align: center;
+}
+
+.checkbox-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    color: #ffffff;
+}
+
+.checkbox-container label {
+    cursor: pointer;
+    font-size: 0.85rem;
 }
 
 /* --- HEADER NAVIGATION --- */
@@ -94,8 +91,8 @@ body {
     border: none;
     border-radius: 6px;
     font-size: 1rem;
-    background-color: transparent; /* matches card */
-    color: #e0e0e0; /* lighter gray text */
+    background-color: transparent;
+    color: #e0e0e0;
     height: 44px;
 }
 
@@ -114,6 +111,7 @@ body {
     text-align: left;
 }
 
+/* --- ENGLISH TOGGLE BUTTON --- */
 #english-mode-btn {
     padding: 0.7em 1em;
     background-color: var(--nepali-crimson); 
@@ -122,8 +120,10 @@ body {
     border-radius: 6px;
     cursor: pointer;
     font-size: 1rem;
-    flex-shrink: 0;
+    flex: none;       /* prevents flex-grow */
+    width: 60px;      /* fixed width */
     height: 44px;
+    text-align: center;
 }
 
 #english-mode-btn:hover {
@@ -134,7 +134,7 @@ body {
 .card {
     background: #ffffff; 
     border-radius: 6px;
-    padding: 0.5em 1em 1em 1em; /* reduced top padding */
+    padding: 0.5em 1em 1em 1em;
     margin-bottom: 1em;
 }
 
@@ -174,9 +174,9 @@ body {
 .input-action-row input[type="text"] {
     flex: 1;
     padding: 0.6em;
-    border: 1px solid #718096; 
+    border: 1px solid var(--nepali-crimson); /* changed from grey to nepali crimson */
     border-radius: 6px;
-    background-color: transparent; /* transparent background */
+    background-color: transparent;
     color: var(--text-highlight); 
     min-height: 44px;
     font-size: clamp(1rem, 2.5vw, 2em);
@@ -220,12 +220,11 @@ body {
     grid-template-columns: repeat(2, 1fr);
     gap: 8px;
     margin: 1em 0;
-    border: 2px solid #E36510; /* Updated bright deep orange */
+    border: 2px solid var(--nepali-crimson); /* changed from orange to nepali crimson */
     border-radius: 6px;
     padding: 0.5em;
 }
 
-/* Remove individual button borders */
 .multiple-choice-container button {
     background-color: var(--primary-accent); 
     color: #1a202c; 
@@ -254,7 +253,7 @@ body {
 
 .nav-button {
     background-color: var(--default-grey); 
-    border: 2px solid #ffffff; /* White outline for nav buttons */
+    border: 2px solid #ffffff;
     color: #f0f0f0;
     padding: 0.6em 1em;
     border-radius: 6px;
@@ -299,19 +298,6 @@ body {
 
 /* --- MOBILE LAYOUT REFINEMENT --- */
 @media (max-width: 450px) {
-    .top-header {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    #top-left-title {
-        text-align: center;
-    }
-
-    #top-right-random-control {
-        justify-content: center;
-    }
-
     .header-nav-container {
         flex-wrap: wrap;
         gap: 5px;
@@ -329,8 +315,9 @@ body {
     }
     
     #english-mode-btn {
-        flex-basis: calc(50% - 3px);
+        flex-basis: auto;
         order: 3;
+        width: 60px; /* keep fixed width even on small screens */
     }
     
     .bottom-nav-container {
