@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
+    // ⭐ This is the Fisher-Yates shuffle—it is correct!
     function shuffle(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -170,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         shuffle(pool);
         while (options.length < 4 && pool.length > 0) options.push(pool.pop());
-        shuffle(options);
+        shuffle(options); // ⭐ This shuffle is important for randomizing the button positions!
 
         options.forEach(opt => {
             const btn = document.createElement('button');
@@ -178,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.addEventListener('click', () => {
                 if (opt === correctAnswer) {
                     btn.style.backgroundColor = 'green';
-                    btn.style.color = 'white'; 
+                    btn.style.color = 'white'; 
                     Array.from(container.querySelectorAll('button')).forEach(b => b.disabled = true);
                 } else {
                     btn.style.backgroundColor = 'red';
@@ -253,6 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     randomizeToggle.addEventListener('change', () => {
         if (randomizeToggle.checked) shuffle(filteredQuizData);
+        currentCardIndex = 0; // Reset index to 0 when shuffling to see the first card of the new order
         displayCard();
     });
 
@@ -365,8 +367,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 quizData = data;
                 filteredQuizData = quizData.slice();
                 
-                // 🔥 NEW LINE: Populate the dropdown with unique categories from the data
+                // Populate the dropdown with unique categories from the data
                 populateFilterDropdown(quizData);
+                
+                // ⭐ NEW: Initial shuffle if the randomize toggle is checked by default
+                if (randomizeToggle.checked) {
+                    shuffle(filteredQuizData);
+                }
 
                 // Initialize the display
                 displayCard();
