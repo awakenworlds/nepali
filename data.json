@@ -483,6 +483,27 @@
         "popular": null
     },
     {
+        "devanagari": "चकित",
+        "roman": "cakit",
+        "english": "amazed",
+        "sort": "adjective",
+        "popular": null
+    },
+    {
+        "devanagari": "अनुत्पादक",
+        "roman": "bajho",
+        "english": "barren",
+        "sort": "adjective",
+        "popular": null
+    },
+    {
+        "devanagari": "साहसी",
+        "roman": "saahasi",
+        "english": "bold (adjective)",
+        "sort": "adjective",
+        "popular": null
+    },
+    {
         "devanagari": "आजकल",
         "roman": "aajakal",
         "english": "nowadays",
@@ -626,6 +647,13 @@
         "devanagari": "पनि",
         "roman": "pani",
         "english": "also",
+        "sort": "adverb",
+        "popular": null
+    },
+    {
+        "devanagari": "जम्मा",
+        "roman": "jamma",
+        "english": "altogether",
         "sort": "adverb",
         "popular": null
     },
@@ -2509,6 +2537,76 @@
         "devanagari": "पात्रो",
         "roman": "patro",
         "english": "calendar",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "कलाकृति",
+        "roman": "kalaakri",
+        "english": "artifact",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "खेलाडी",
+        "roman": "khelaadi",
+        "english": "athlete",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "वातावरण",
+        "roman": "vaataavaran",
+        "english": "atmosphere",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "आकर्षण",
+        "roman": "aakarsan",
+        "english": "attraction (place)",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "पुरस्कार",
+        "roman": "puraskaar",
+        "english": "award",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "मोलतोल",
+        "roman": "molatol",
+        "english": "bargain",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "पेय",
+        "roman": "peya",
+        "english": "beverage (not water)",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "ठूलो आगो",
+        "roman": "thulo aago",
+        "english": "bonfire",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "तल्लो भाग",
+        "roman": "tallo bhaag",
+        "english": "bottom / lowest part",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "ब्रान्ड",
+        "roman": "braand",
+        "english": "brand",
         "sort": "noun",
         "popular": null
     },
@@ -4517,7 +4615,7 @@
     {
         "devanagari": "बजाउनु",
         "roman": "bajaaunu",
-        "english": "tp play (an instrument)",
+        "english": "to play (an instrument)",
         "sort": "verb",
         "popular": null
     },
@@ -4525,6 +4623,55 @@
         "devanagari": "नाच्नु",
         "roman": "naachnu",
         "english": "to dance",
+        "sort": "verb",
+        "popular": null
+    },
+    {
+        "devanagari": "अनुकूलन गर्नु",
+        "roman": "anukulan garnu",
+        "english": "to adapt",
+        "sort": "verb",
+        "popular": null
+    },
+    {
+        "devanagari": "माफ गर्नुहोस्",
+        "roman": "maph garnu",
+        "english": "to apologize",
+        "sort": "verb",
+        "popular": null
+    },
+    {
+        "devanagari": "कदर गर्नु",
+        "roman": "kadar garnu",
+        "english": "to appreciate",
+        "sort": "verb",
+        "popular": null
+    },
+    {
+        "devanagari": "टार्नु",
+        "roman": "taarnu",
+        "english": "to avoid",
+        "sort": "verb",
+        "popular": null
+    },
+    {
+        "devanagari": "विश्वास गर्नु",
+        "roman": "viswaas garnu",
+        "english": "to believe",
+        "sort": "verb",
+        "popular": null
+    },
+    {
+        "devanagari": "ढल्नु",
+        "roman": "dhalnu",
+        "english": "to bend / to lean",
+        "sort": "verb",
+        "popular": null
+    },
+    {
+        "devanagari": "दन्कनु",
+        "roman": "jvalanasil hunu",
+        "english": "to blaze / to burn brightly",
         "sort": "verb",
         "popular": null
     },
