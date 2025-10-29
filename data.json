@@ -504,6 +504,62 @@
         "popular": null
     },
     {
+        "devanagari": "शानदार",
+        "roman": "shaandaar",
+        "english": "brilliant",
+        "sort": "adjective",
+        "popular": null
+    },
+    {
+        "devanagari": "तटीय",
+        "roman": "tatiya",
+        "english": "coastal",
+        "sort": "adjective",
+        "popular": null
+    },
+    {
+        "devanagari": "पागल",
+        "roman": "paagal",
+        "english": "crazy",
+        "sort": "adjective",
+        "popular": null
+    },
+    {
+        "devanagari": "उत्सुक",
+        "roman": "utsuk",
+        "english": "curious",
+        "sort": "adjective",
+        "popular": null
+    },
+    {
+        "devanagari": "निराश",
+        "roman": "niraas",
+        "english": "disappointed",
+        "sort": "adjective",
+        "popular": null
+    },
+    {
+        "devanagari": "रिङ्गठा लाएको",
+        "roman": "ringithi laageko",
+        "english": "dizzy",
+        "sort": "adjective",
+        "popular": null
+    },
+    {
+        "devanagari": "उत्साहित",
+        "roman": "utasaahit",
+        "english": "excited",
+        "sort": "adjective",
+        "popular": null
+    },
+    {
+        "devanagari": "महँगो",
+        "roman": "mahaango",
+        "english": "expensive",
+        "sort": "adjective",
+        "popular": null
+    },
+    {
         "devanagari": "आजकल",
         "roman": "aajakal",
         "english": "nowadays",
@@ -1395,7 +1451,7 @@
     {
         "devanagari": "डर",
         "roman": "dar",
-        "english": "fear",
+        "english": "fear / anxiety",
         "sort": "noun",
         "popular": null
     },
@@ -1487,6 +1543,13 @@
         "devanagari": "घडी",
         "roman": "ghadi",
         "english": "watch / clock",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "समारोह",
+        "roman": "samaaroh",
+        "english": "ceremony",
         "sort": "noun",
         "popular": null
     },
@@ -1729,6 +1792,13 @@
         "popular": null
     },
     {
+        "devanagari": "महादेश",
+        "roman": "mahaades",
+        "english": "continent",
+        "sort": "noun",
+        "popular": null
+    },
+    {
         "devanagari": "खोला",
         "roman": "kholaa",
         "english": "stream",
@@ -1767,6 +1837,13 @@
         "devanagari": "कोठा",
         "roman": "kotha",
         "english": "room",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "कोठरी",
+        "roman": "kothari",
+        "english": "closet",
         "sort": "noun",
         "popular": null
     },
@@ -1851,6 +1928,13 @@
         "devanagari": "मातृभूमि",
         "roman": "matribhumi",
         "english": "motherland",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "समुद्र तट",
+        "roman": "samudra tat",
+        "english": "coast",
         "sort": "noun",
         "popular": null
     },
@@ -2026,6 +2110,27 @@
         "devanagari": "पशु",
         "roman": "pashu",
         "english": "animal",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "चौरों",
+        "roman": "chauro",
+        "english": "young animal",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "अपराध",
+        "roman": "aparaadh",
+        "english": "crime",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "जीव",
+        "roman": "jiv",
+        "english": "creature",
         "sort": "noun",
         "popular": null
     },
@@ -2513,9 +2618,23 @@
         "popular": null
     },
     {
+        "devanagari": "महल",
+        "roman": "mahal",
+        "english": "castle",
+        "sort": "noun",
+        "popular": null
+    },
+    {
         "devanagari": "विद्यार्थी",
         "roman": "vidyarthi",
         "english": "student",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "पेशा",
+        "roman": "peshaa",
+        "english": "career",
         "sort": "noun",
         "popular": null
     },
@@ -2607,6 +2726,41 @@
         "devanagari": "ब्रान्ड",
         "roman": "braand",
         "english": "brand",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "गन्तव्य",
+        "roman": "gantavya",
+        "english": "destination",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "अपाङ्गता",
+        "roman": "apaangataa",
+        "english": "disability",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "दूरी",
+        "roman": "duri",
+        "english": "distance",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "बूंद",
+        "roman": "boond",
+        "english": "droplet",
+        "sort": "noun",
+        "popular": null
+    },
+    {
+        "devanagari": "उपकरण",
+        "roman": "upakaran",
+        "english": "equipment",
         "sort": "noun",
         "popular": null
     },
