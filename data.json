@@ -824,6 +824,22 @@
         "": null
     },
     {
+        "devanagari": "अगाडिको",
+        "roman": "agaadiko",
+        "english": "front",
+        "sort": "adjective",
+        "sort2": "sixth grade",
+        "": null
+    },
+    {
+        "devanagari": "उस्तै",
+        "roman": "utai",
+        "english": "same / exactly",
+        "sort": "adjective",
+        "sort2": "sixth grade",
+        "": null
+    },
+    {
         "devanagari": "आजकल",
         "roman": "aajakal",
         "english": "nowadays",
@@ -1067,6 +1083,14 @@
         "devanagari": "त्यस्तै गरी",
         "roman": "tyastai gari",
         "english": "similarily / likewise",
+        "sort": "adverb",
+        "sort2": "sixth grade",
+        "": null
+    },
+    {
+        "devanagari": "ठिक्कै",
+        "roman": "thikkai",
+        "english": "exactly / precisely",
         "sort": "adverb",
         "sort2": "sixth grade",
         "": null
@@ -3712,6 +3736,38 @@
         "": null
     },
     {
+        "devanagari": "दृश्य",
+        "roman": "drishya",
+        "english": "view",
+        "sort": "noun",
+        "sort2": "sixth grade",
+        "": null
+    },
+    {
+        "devanagari": "पहाडहरू",
+        "roman": "pahaadharu",
+        "english": "hills",
+        "sort": "noun",
+        "sort2": "sixth grade",
+        "": null
+    },
+    {
+        "devanagari": "जङ्गल",
+        "roman": "jangal",
+        "english": "forest",
+        "sort": "noun",
+        "sort2": "sixth grade",
+        "": null
+    },
+    {
+        "devanagari": "तस्बिरहरू",
+        "roman": "tasbirhuru",
+        "english": "images",
+        "sort": "noun",
+        "sort2": "sixth grade",
+        "": null
+    },
+    {
         "devanagari": "१",
         "roman": "ek",
         "english": "1",
@@ -6155,6 +6211,14 @@
         "devanagari": "नाउमा हिड्नु",
         "roman": "nauma hidnu",
         "english": "to ride in a boat",
+        "sort": "verb",
+        "sort2": "sixth grade",
+        "": null
+    },
+    {
+        "devanagari": "डुङ्गा बिहार",
+        "roman": "naukaa bihaar",
+        "english": "boating",
         "sort": "verb",
         "sort2": "sixth grade",
         "": null
