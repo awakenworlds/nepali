@@ -29,13 +29,27 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentCardIndex = 0;
     let isEnglishMode = false;
 
+    // Tracker
+    let trackerCorrect = 0;
+    let trackerIncorrect = 0;
+    function updateTracker() {
+        const total = trackerCorrect + trackerIncorrect;
+        const accuracy = total === 0 ? 0 : Math.round((trackerCorrect / total) * 100);
+        document.getElementById('tracker-correct').textContent = trackerCorrect;
+        document.getElementById('tracker-incorrect').textContent = trackerIncorrect;
+        document.getElementById('tracker-accuracy').textContent = accuracy + '%';
+    }
+
+    // Set multiple choice checked by default
+    multipleChoiceToggle.checked = true;
+
     // Helper to capitalize first letter for dropdown display
     function capitalize(string) {
         if (!string) return '';
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
-    // ⭐ This is the Fisher-Yates shuffle—it is correct!
+    // Fisher-Yates shuffle
     function shuffle(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -64,22 +78,15 @@ document.addEventListener('DOMContentLoaded', () => {
         return cardAnswer.split('/').map(e => e.trim()).includes(userAnswer);
     }
 
-    // --- UPDATED FUNCTION TO POPULATE DROPDOWN (Now includes 'sort2') ---
     function populateFilterDropdown(data) {
-        // 1. Get all unique categories from the 'sort' and 'sort2' keys
         const categories = new Set();
         data.forEach(item => {
             if (item.sort) categories.add(item.sort.toLowerCase());
-            // ⭐ NEW: Add sort2 categories
             if (item.sort2) categories.add(item.sort2.toLowerCase());
         });
-
-        // 2. Clear all options except the initial 'All' (first option)
         while (filterDropdown.children.length > 1) {
             filterDropdown.removeChild(filterDropdown.lastChild);
         }
-
-        // 3. Add the new, unique, and sorted categories
         Array.from(categories).sort().forEach(category => {
             const option = document.createElement('option');
             option.value = category;
@@ -87,9 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
             filterDropdown.appendChild(option);
         });
     }
-    // ----------------------------------------
 
-    // Helper: Enables/Disables buttons for a specific input row (used for text input mode)
     function toggleInputRowButtons(inputRow, disabled) {
         const buttons = inputRow.querySelectorAll('button');
         buttons.forEach(btn => btn.disabled = disabled);
@@ -111,13 +116,10 @@ document.addEventListener('DOMContentLoaded', () => {
         questionEl.textContent = isEnglishMode ? card.english : card.devanagari;
         answerEl.textContent = '';
         answerEl.classList.add('hidden');
-        
-        // Reset feedback
         feedbackEl.textContent = '';
         feedbackEl.classList.add('hidden');
         feedbackEl.classList.remove('incorrect');
 
-        // Reset all rows/containers
         romanActionRow.style.display = 'none';
         englishActionRowCorrected.style.display = 'none';
         multipleChoiceContainer.classList.add('hidden');
@@ -128,11 +130,9 @@ document.addEventListener('DOMContentLoaded', () => {
         secondaryMCContainer.innerHTML = '';
         romanizedInput.value = '';
         englishInput.value = '';
-        
-        // Enable all input buttons when a new card loads (for non-MC mode)
+
         toggleInputRowButtons(romanActionRow, false);
         toggleInputRowButtons(englishActionRowCorrected, false);
-
 
         const useMC = multipleChoiceToggle.checked;
 
@@ -193,34 +193,23 @@ document.addEventListener('DOMContentLoaded', () => {
             const btn = document.createElement('button');
             btn.textContent = opt;
             btn.addEventListener('click', () => {
-                // Reveal feedback area and remove previous incorrect state
                 feedbackEl.classList.remove('hidden', 'incorrect'); 
                 
                 if (opt === correctAnswer) {
-                    // Correct Answer logic
                     btn.style.backgroundColor = 'green';
                     btn.style.color = 'white';
                     feedbackEl.textContent = 'Correct'; 
-
-                    // Disable only the buttons in the container that was clicked
+                    trackerCorrect++;
+                    updateTracker();
                     Array.from(container.querySelectorAll('button')).forEach(b => b.disabled = true);
-
                 } else {
-                    // Incorrect Answer logic — mark red but DO NOT disable other buttons
                     btn.style.backgroundColor = 'red';
                     btn.style.color = 'white'; 
                     feedbackEl.textContent = 'Incorrect'; 
                     feedbackEl.classList.add('incorrect'); 
-
-                    // User can continue guessing — do not disable buttons
+                    trackerIncorrect++;
+                    updateTracker();
                 }
-
-                /* * The previous logic for multi-part MC mode (non-letter cards) 
-                 * allowed one MC set to disable the other. By only targeting 
-                 * 'container' when disabling and doing it only on correct,
-                 * we keep MC sets isolated and allow retries until correct.
-                 */
-
             });
             container.appendChild(btn);
         });
@@ -236,13 +225,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isAnswerCorrect(userAnswer, card.roman)) {
             romanizedInput.value = userAnswer + ' ✅';
             feedbackEl.textContent = 'Correct';
+            trackerCorrect++;
         } else {
             romanizedInput.value = userAnswer + ' ❌';
             feedbackEl.textContent = 'Incorrect';
             feedbackEl.classList.add('incorrect');
+            trackerIncorrect++;
         }
-        
-        // Disable ONLY the Romanized input buttons after checking
+        updateTracker();
         toggleInputRowButtons(romanActionRow, true);
     }
 
@@ -256,13 +246,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isAnswerCorrect(userAnswer, card.english)) {
             englishInput.value = userAnswer + ' ✅';
             feedbackEl.textContent = 'Correct';
+            trackerCorrect++;
         } else {
             englishInput.value = userAnswer + ' ❌';
             feedbackEl.textContent = 'Incorrect';
             feedbackEl.classList.add('incorrect');
+            trackerIncorrect++;
         }
-        
-        // Disable ONLY the English input buttons after checking
+        updateTracker();
         toggleInputRowButtons(englishActionRowCorrected, true);
     }
 
@@ -272,20 +263,15 @@ document.addEventListener('DOMContentLoaded', () => {
     romanizedInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') checkRomanizedAnswer(); });
     englishInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') checkEnglishAnswer(); });
 
-    // Clear feedback and RE-ENABLE buttons when user starts typing again
     romanizedInput.addEventListener('input', () => { 
         romanizedInput.value = romanizedInput.value.replace(/[✅❌]/g, '');
         feedbackEl.classList.add('hidden');
-        if (romanizedInput.value.trim() === '') {
-            toggleInputRowButtons(romanActionRow, false);
-        }
+        if (romanizedInput.value.trim() === '') toggleInputRowButtons(romanActionRow, false);
     });
     englishInput.addEventListener('input', () => { 
         englishInput.value = englishInput.value.replace(/[✅❌]/g, '');
         feedbackEl.classList.add('hidden');
-        if (englishInput.value.trim() === '') {
-            toggleInputRowButtons(englishActionRowCorrected, false);
-        }
+        if (englishInput.value.trim() === '') toggleInputRowButtons(englishActionRowCorrected, false);
     });
 
     prevBtn.addEventListener('click', () => {
@@ -306,27 +292,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     multipleChoiceToggle.addEventListener('change', displayCard);
 
-    // --- UPDATED FILTER DROPDOWN LISTENER (Now filters by 'sort' OR 'sort2') ---
     filterDropdown.addEventListener('change', () => {
         const value = filterDropdown.value;
         if (value === "all") {
             filteredQuizData = quizData.slice();
         } else {
-            // ⭐ NEW FILTER LOGIC: Check both 'sort' and 'sort2' fields
-            filteredQuizData = quizData.filter(card => 
-                card.sort === value || card.sort2 === value
-            );
+            filteredQuizData = quizData.filter(card => card.sort === value || card.sort2 === value);
         }
-        
         if (randomizeToggle.checked) shuffle(filteredQuizData);
         currentCardIndex = 0;
         displayCard();
     });
-    // ----------------------------------------
 
     randomizeToggle.addEventListener('change', () => {
         if (randomizeToggle.checked) shuffle(filteredQuizData);
-        currentCardIndex = 0; // Reset index to 0 when shuffling to see the first card of the new order
+        currentCardIndex = 0;
         displayCard();
     });
 
@@ -339,7 +319,6 @@ document.addEventListener('DOMContentLoaded', () => {
             englishModeBtn.style.display = '';
             return;
         }
-
         quizContent.style.display = 'none';
         searchResultsContainer.classList.remove('hidden');
         filterDropdown.style.display = 'none';
@@ -350,7 +329,6 @@ document.addEventListener('DOMContentLoaded', () => {
             normalizeAnswer(card.english).includes(term) ||
             card.devanagari.includes(term)
         );
-
         displaySearchResults(results);
     });
 
@@ -363,15 +341,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 const li = document.createElement('li');
                 li.innerHTML = `<span class="result-nepali">${card.devanagari}</span> <span class="result-english">(${card.roman} / ${card.english})</span>`;
                 li.addEventListener('click', () => {
-                    // Determine which sort value to use for the dropdown and filter
                     const cardSortValue = card.sort || card.sort2;
-                    
                     filterDropdown.value = cardSortValue;
-                    
-                    filteredQuizData = quizData.filter(c => 
-                        c.sort === cardSortValue || c.sort2 === cardSortValue
-                    );
-                    
+                    filteredQuizData = quizData.filter(c => c.sort === cardSortValue || c.sort2 === cardSortValue);
                     if (randomizeToggle.checked) shuffle(filteredQuizData);
                     const newIndex = filteredQuizData.findIndex(item => item.devanagari === card.devanagari);
                     currentCardIndex = newIndex !== -1 ? newIndex : 0;
@@ -399,8 +371,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (card) {
             answerEl.textContent = card.roman;
             answerEl.classList.remove('hidden');
-            feedbackEl.classList.add('hidden'); // Hide feedback when revealing answer
-            // Disable buttons after revealing the answer
+            feedbackEl.classList.add('hidden');
             toggleInputRowButtons(romanActionRow, true);
         }
     });
@@ -409,8 +380,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (card) {
             answerEl.textContent = card.english;
             answerEl.classList.remove('hidden');
-            feedbackEl.classList.add('hidden'); // Hide feedback when revealing answer
-            // Disable buttons after revealing the answer
+            feedbackEl.classList.add('hidden');
             toggleInputRowButtons(englishActionRowCorrected, true);
         }
     });
@@ -451,18 +421,11 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(data => {
                 quizData = data;
                 filteredQuizData = quizData.slice();
-                
-                // Populate the dropdown with unique categories from the data
                 populateFilterDropdown(quizData);
-                
-                // Initial shuffle if the randomize toggle is checked by default
-                if (randomizeToggle.checked) {
-                    shuffle(filteredQuizData);
-                }
-
-                // Initialize the display
+                if (randomizeToggle.checked) shuffle(filteredQuizData);
                 displayCard();
                 englishModeBtn.textContent = 'En';
+                updateTracker();
             })
             .catch(err => {
                 console.error('Error loading data.json:', err);
