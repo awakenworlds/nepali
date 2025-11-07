@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,72 +8,79 @@
     <link rel="icon" type="images/x-icon" href="images/favicon.ico">
 </head>
 <body>
-<div class="quiz-container">
     
-    <div class="header-nav-container">
-        <input type="text" id="search-input" placeholder="Search here..." autocomplete="off">
+    <div class="quiz-container">
         
-        <select id="filter-dropdown">
-            <option value="all">All</option>
-        </select>
+        <div class="header-nav-container">
+            <input type="text" id="search-input" placeholder="Search here..." autocomplete="off">
+            
+            <select id="filter-dropdown">
+                <option value="all">All</option>
+            </select>
+            
+            <button id="english-mode-btn">En</button>
+        </div>
         
-        <button id="english-mode-btn">En</button>
-    </div>
-    
-    <div id="search-results-container" class="search-results-container hidden">
-        <ul id="search-results-list"></ul>
-        <div class="back-to-quiz-btn-container">
-            <button id="back-to-quiz-btn" class="submit-button">Back to Quiz</button>
-        </div>
-    </div>
-
-    <div id="quiz-content">
-        <div class="card">
-            <div id="question"></div>
-            <div id="answer" class="hidden"></div>
-            <div id="feedback" class="hidden"></div>
-        </div>
-
-        <div class="input-action-row" id="romanized-action-row">
-            <input type="text" id="romanized-answer-input" placeholder="Roman Answer" autocomplete="off">
-            <div class="button-group">
-                <button id="submit-romanized-btn" class="submit-button">Submit</button>
-                <button id="show-roman-answer-btn" class="submit-button reveal">Reveal</button>
+        <div id="search-results-container" class="search-results-container hidden">
+            <ul id="search-results-list"></ul>
+            <div class="back-to-quiz-btn-container">
+                <button id="back-to-quiz-btn" class="submit-button">Back to Quiz</button>
             </div>
         </div>
 
-        <div class="input-action-row" id="english-action-row">
-            <input type="text" id="english-answer-input" placeholder="English Answer" autocomplete="off">
-            <div class="button-group">
-                <button id="submit-english-btn" class="submit-button">Submit</button>
-                <button id="show-english-answer-btn" class="submit-button reveal">Reveal</button>
+        <div id="quiz-content">
+            <div class="card">
+                <div id="question"></div>
+                <div id="answer" class="hidden"></div>
+                <div id="feedback" class="hidden"></div>
             </div>
-        </div>
 
-        <div class="multiple-choice-container hidden" id="multiple-choice-container"></div>
-        <div class="multiple-choice-container hidden mc-style-2" id="secondary-mc-container"></div>
-        
-        <div class="bottom-nav-container">
-            <button id="prev-card-btn" class="nav-button bottom-nav-button">Previous</button>
-            <button id="next-card-btn" class="nav-button bottom-nav-button">Next</button>
-        </div>
-        
-        <div class="bottom-info-container"> 
-            <div id="bottom-left-title">Nepali Vocab</div>
-            <div class="checkbox-container">
-                <label>
-                    <input type="checkbox" id="multiple-choice-toggle" checked>
-                    Multiple Choice
-                </label>
-                <label>
-                    <input type="checkbox" id="random-toggle" checked>
-                    Random
-                </label>
+            <div class="input-action-row" id="romanized-action-row">
+                <input type="text" id="romanized-answer-input" placeholder="Roman Answer" autocomplete="off">
+                <div class="button-group">
+                    <button id="submit-romanized-btn" class="submit-button">Submit</button>
+                    <button id="show-roman-answer-btn" class="submit-button reveal">Reveal</button>
+                </div>
+            </div>
+
+            <div class="input-action-row" id="english-action-row">
+                <input type="text" id="english-answer-input" placeholder="English Answer" autocomplete="off">
+                <div class="button-group">
+                    <button id="submit-english-btn" class="submit-button">Submit</button>
+                    <button id="show-english-answer-btn" class="submit-button reveal">Reveal</button>
+                </div>
+            </div>
+
+            <div class="multiple-choice-container hidden" id="multiple-choice-container"></div>
+            <div class="multiple-choice-container hidden mc-style-2" id="secondary-mc-container"></div>
+            
+            <div class="bottom-nav-container">
+                <button id="prev-card-btn" class="nav-button bottom-nav-button">Previous</button>
+                <button id="next-card-btn" class="nav-button bottom-nav-button">Next</button>
+            </div>
+            
+            <div class="bottom-info-container"> 
+                <div id="bottom-left-title">Nepali Vocab</div>
+                <div class="checkbox-container">
+                    <label>
+                        <input type="checkbox" id="multiple-choice-toggle" checked>
+                        Multiple Choice
+                    </label>
+                    <label>
+                        <input type="checkbox" id="random-toggle" checked>
+                        Random
+                    </label>
+                </div>
+            </div>
+
+            <div class="tracker-container">
+                Correct: <span id="tracker-correct">0</span> | 
+                Incorrect: <span id="tracker-incorrect">0</span> | 
+                Accuracy: <span id="tracker-accuracy">0%</span>
             </div>
         </div>
     </div>
-</div>
 
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
