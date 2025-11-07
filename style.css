@@ -8,7 +8,7 @@ body {
     background-color: #1a202c; 
     color: #a0aec0; 
     margin: 0;
-    padding: 5px 0;
+    padding: 0 0; /* Ensures absolutely no padding on the body itself */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -36,40 +36,45 @@ body {
     background: var(--very-dark-blue); 
     max-width: 500px;
     width: 95%;
-    border-radius: 8px;
+    border-radius: 0 0 8px 8px; /* Top corners square, bottom corners remain rounded */
     box-shadow: 0 4px 12px rgba(0,0,0,0.4); 
     border: 2px solid #2b3a67;
     padding: 0.8em 1em 1em 1em;
     text-align: center;
+    margin-top: 0; 
     margin-bottom: 10px;
 }
 
-/* --- TITLE + CHECKBOX CONTAINER --- */
-.title-checkbox-container {
+/* --- BOTTOM INFO CONTAINER (Holds title and checkboxes) --- */
+.bottom-info-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-    margin-bottom: 0.5em;
+    justify-content: space-between;
+    align-items: flex-end; 
+    margin-top: 1.5em; 
+    padding-top: 0.5em;
+    border-top: 1px solid var(--subtle-dark-blue); 
 }
 
-#top-left-title {
-    font-size: 1.3rem;
+#bottom-left-title {
+    font-size: 0.9rem; 
     color: var(--primary-accent);
-    text-align: center;
+    text-align: left;
+    flex-grow: 1;
+    white-space: nowrap;
 }
 
 .checkbox-container {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    justify-content: flex-end;
     gap: 15px;
     color: #ffffff;
+    flex-wrap: nowrap;
 }
 
 .checkbox-container label {
     cursor: pointer;
     font-size: 0.85rem;
+    white-space: nowrap;
 }
 
 /* --- HEADER NAVIGATION --- */
@@ -80,7 +85,7 @@ body {
     align-items: center;
     width: 100%;
     margin-bottom: 0.5em;
-    margin-top: 1em;
+    margin-top: 0.3em; /* Reduced top margin */
     flex-wrap: wrap;
 }
 
@@ -96,13 +101,11 @@ body {
     height: 44px;
 }
 
-/* --- Search Input Placeholder Text --- */
 .header-nav-container #search-input::placeholder {
     color: #ffffff; 
     opacity: 1; 
 }
 
-/* --- Dropdown Box Text Color --- */
 .header-nav-container select {
     padding: 0.7em 0.8em;
     border-radius: 6px;
@@ -118,7 +121,6 @@ body {
     text-align: left;
 }
 
-/* --- ENGLISH TOGGLE BUTTON --- */
 #english-mode-btn {
     padding: 0.7em 1em;
     background-color: var(--nepali-crimson); 
@@ -158,7 +160,6 @@ body {
     margin-top: 0.5em;
 }
 
-/* --- FEEDBACK --- */
 #feedback {
     margin-top: 0.5em;
     font-size: 1rem;
@@ -169,7 +170,6 @@ body {
     color: var(--incorrect-orange);
 }
 
-/* --- INPUT ROWS & BUTTONS --- */
 .input-action-row {
     display: flex;
     gap: 0.4em;
@@ -184,7 +184,7 @@ body {
     border: 1px solid var(--nepali-crimson); 
     border-radius: 6px;
     background-color: #FFFFFF; 
-    color: #000000;      
+    color: #000000;      
     caret-color: #000000; 
     min-height: 44px;
     font-size: clamp(1rem, 2.5vw, 2em);
@@ -208,13 +208,11 @@ body {
     white-space: nowrap;
 }
 
-/* --- Submit Button (MODIFIED to Green) --- */
 .input-action-row .submit-button:not(.reveal) {
     background-color: var(--submit-green); 
     color: #1a202c; 
 }
 
-/* --- Reveal Button (Using Secondary Accent Orange) --- */
 .submit-button.reveal {
     background-color: var(--secondary-accent); 
     color: #1a202c; 
@@ -224,19 +222,18 @@ body {
     opacity: 0.85;
 }
 
-/* --- MULTIPLE CHOICE GRID --- */
 .multiple-choice-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 8px;
     margin: 1em 0;
-    border: 2px solid var(--subtle-dark-blue); /* Subtle Border */
+    border: 2px solid var(--subtle-dark-blue); 
     border-radius: 6px;
     padding: 0.5em;
 }
 
 .multiple-choice-container button {
-    background-color: #ffffff; /* White Buttons */
+    background-color: #ffffff; 
     color: #1a202c; 
     border-radius: 6px;
     padding: 0.6em;
@@ -252,7 +249,6 @@ body {
     background-color: #e0e0e0; 
 }
 
-/* --- BOTTOM NAVIGATION --- */
 .bottom-nav-container {
     display: flex;
     justify-content: space-between;
@@ -276,7 +272,6 @@ body {
     background-color: var(--grey-hover);
 }
 
-/* --- SEARCH RESULTS --- */
 .search-results-container {
     background: var(--very-dark-blue); 
     width: 100%;
@@ -307,7 +302,6 @@ body {
     color: #ffffff; 
 }
 
-/* --- MOBILE LAYOUT REFINEMENT --- */
 @media (max-width: 450px) {
     .header-nav-container {
         flex-wrap: wrap;
@@ -347,9 +341,24 @@ body {
         font-size: 0.7rem;
         padding: 0.4em 0.6em;
     }
+    
+    .bottom-info-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    #bottom-left-title {
+        order: 1;
+    }
+    
+    .checkbox-container {
+        justify-content: flex-start;
+        order: 2;
+        margin-top: 5px;
+    }
 }
 
-/* --- CARD ANIMATION --- */
 .hidden {
     display: none !important;
 }
