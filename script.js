@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const filterDropdown = document.getElementById('filter-dropdown');
     const randomizeToggle = document.getElementById('random-toggle');
     const multipleChoiceToggle = document.getElementById('multiple-choice-toggle');
-    const categoryLimitedToggle = document.getElementById('category-limited-toggle'); // NEW
+    const categoryLimitedToggle = document.getElementById('category-limited-toggle'); 
     const searchInput = document.getElementById('search-input');
     const searchResultsContainer = document.getElementById('search-results-container');
     const searchResultsList = document.getElementById('search-results-list');
@@ -30,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentCardIndex = 0;
     let isEnglishMode = false;
 
-    // --- Tracker setup ---
     const tracker = {
         roman: { correct: 0, incorrect: 0 },
         english: { correct: 0, incorrect: 0 },
@@ -46,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     multipleChoiceToggle.checked = true;
-    categoryLimitedToggle.checked = true; // CHECKED BY DEFAULT
+    categoryLimitedToggle.checked = true;
 
     function capitalize(string) {
         if (!string) return '';
@@ -186,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let pool = quizData.filter(c => c[key] !== correctAnswer);
         if (limitCategory) {
-            pool = pool.filter(c => c.sort === card.sort); // Limit to same category
+            pool = pool.filter(c => c.sort === card.sort); 
         }
         pool = pool.map(c => c[key]);
         shuffle(pool);
@@ -202,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (opt === correctAnswer) {
                     btn.style.backgroundColor = 'green';
                     btn.style.color = 'white';
-                    feedbackEl.textContent = 'Correct';
+                    feedbackEl.textContent = 'Correct | सही';
                     if (key === 'roman') tracker.roman.correct++;
                     if (key === 'english') tracker.english.correct++;
                     if (key === 'devanagari') tracker.devanagari.correct++;
@@ -210,7 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     btn.style.backgroundColor = 'red';
                     btn.style.color = 'white'; 
-                    feedbackEl.textContent = 'Incorrect'; 
+                    feedbackEl.textContent = 'Incorrect | गलत'; 
                     feedbackEl.classList.add('incorrect'); 
                     if (key === 'roman') tracker.roman.incorrect++;
                     if (key === 'english') tracker.english.incorrect++;
@@ -231,11 +230,11 @@ document.addEventListener('DOMContentLoaded', () => {
         feedbackEl.classList.remove('hidden', 'incorrect');
         if (isAnswerCorrect(userAnswer, card.roman)) {
             romanizedInput.value = userAnswer + ' ✅';
-            feedbackEl.textContent = 'Correct';
+            feedbackEl.textContent = 'Correct | सही';
             tracker.roman.correct++;
         } else {
             romanizedInput.value = userAnswer + ' ❌';
-            feedbackEl.textContent = 'Incorrect';
+            feedbackEl.textContent = 'Incorrect | गलत';
             feedbackEl.classList.add('incorrect');
             tracker.roman.incorrect++;
         }
@@ -251,11 +250,11 @@ document.addEventListener('DOMContentLoaded', () => {
         feedbackEl.classList.remove('hidden', 'incorrect');
         if (isAnswerCorrect(userAnswer, card.english)) {
             englishInput.value = userAnswer + ' ✅';
-            feedbackEl.textContent = 'Correct';
+            feedbackEl.textContent = 'Correct | सही';
             tracker.english.correct++;
         } else {
             englishInput.value = userAnswer + ' ❌';
-            feedbackEl.textContent = 'Incorrect';
+            feedbackEl.textContent = 'Incorrect | गलत';
             feedbackEl.classList.add('incorrect');
             tracker.english.incorrect++;
         }
@@ -372,7 +371,6 @@ document.addEventListener('DOMContentLoaded', () => {
         displayCard();
     }
 
-    // --- REVEAL BUTTONS ---
     showRomanBtn.addEventListener('click', () => {
         const card = filteredQuizData[currentCardIndex];
         if (card) {
@@ -400,7 +398,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // load data
     function initializeQuiz() {
         fetch('./data.json')
             .then(res => res.json())
