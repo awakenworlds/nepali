@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const filterDropdown = document.getElementById('filter-dropdown');
     const randomizeToggle = document.getElementById('random-toggle');
     const multipleChoiceToggle = document.getElementById('multiple-choice-toggle');
+    const categoryLimitedToggle = document.getElementById('category-limited-toggle'); // NEW
     const searchInput = document.getElementById('search-input');
     const searchResultsContainer = document.getElementById('search-results-container');
     const searchResultsList = document.getElementById('search-results-list');
@@ -29,27 +30,29 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentCardIndex = 0;
     let isEnglishMode = false;
 
-    // Tracker
-    let trackerCorrect = 0;
-    let trackerIncorrect = 0;
+    // --- Tracker setup ---
+    const tracker = {
+        roman: { correct: 0, incorrect: 0 },
+        english: { correct: 0, incorrect: 0 },
+        devanagari: { correct: 0, incorrect: 0 }
+    };
+
     function updateTracker() {
-        const total = trackerCorrect + trackerIncorrect;
-        const accuracy = total === 0 ? 0 : Math.round((trackerCorrect / total) * 100);
-        document.getElementById('tracker-correct').textContent = trackerCorrect;
-        document.getElementById('tracker-incorrect').textContent = trackerIncorrect;
-        document.getElementById('tracker-accuracy').textContent = accuracy + '%';
+        document.querySelector('.tracker-container').innerHTML = `
+            Roman - Correct: ${tracker.roman.correct} | Incorrect: ${tracker.roman.incorrect}<br>
+            English - Correct: ${tracker.english.correct} | Incorrect: ${tracker.english.incorrect}<br>
+            Devanagari - Correct: ${tracker.devanagari.correct} | Incorrect: ${tracker.devanagari.incorrect}
+        `;
     }
 
-    // Set multiple choice checked by default
     multipleChoiceToggle.checked = true;
+    categoryLimitedToggle.checked = true; // CHECKED BY DEFAULT
 
-    // Helper to capitalize first letter for dropdown display
     function capitalize(string) {
         if (!string) return '';
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
-    // Fisher-Yates shuffle
     function shuffle(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -135,17 +138,18 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleInputRowButtons(englishActionRowCorrected, false);
 
         const useMC = multipleChoiceToggle.checked;
+        const limitCategory = categoryLimitedToggle.checked;
 
         if (card.sort === 'letter') {
             if (useMC) {
                 if (isEnglishMode) {
-                    generateMC(card, 'devanagari', multipleChoiceContainer);
+                    generateMC(card, 'devanagari', multipleChoiceContainer, limitCategory);
                 } else {
-                    generateMC(card, 'roman', multipleChoiceContainer);
+                    generateMC(card, 'roman', multipleChoiceContainer, limitCategory);
                 }
             } else {
                 if (isEnglishMode) {
-                    generateMC(card, 'devanagari', multipleChoiceContainer);
+                    generateMC(card, 'devanagari', multipleChoiceContainer, limitCategory);
                 } else {
                     romanActionRow.style.display = 'flex';
                 }
@@ -153,19 +157,19 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             if (useMC) {
                 if (isEnglishMode) {
-                    generateMC(card, 'roman', multipleChoiceContainer);
+                    generateMC(card, 'roman', multipleChoiceContainer, limitCategory);
                     secondaryMCContainer.classList.add('mc-style-2');
-                    generateMC(card, 'devanagari', secondaryMCContainer);
+                    generateMC(card, 'devanagari', secondaryMCContainer, limitCategory);
                 } else {
-                    generateMC(card, 'roman', multipleChoiceContainer);
+                    generateMC(card, 'roman', multipleChoiceContainer, limitCategory);
                     secondaryMCContainer.classList.add('mc-style-2');
-                    generateMC(card, 'english', secondaryMCContainer);
+                    generateMC(card, 'english', secondaryMCContainer, limitCategory);
                 }
             } else {
                 if (isEnglishMode) {
                     romanActionRow.style.display = 'flex';
                     secondaryMCContainer.classList.add('mc-style-2');
-                    generateMC(card, 'devanagari', secondaryMCContainer);
+                    generateMC(card, 'devanagari', secondaryMCContainer, limitCategory);
                 } else {
                     romanActionRow.style.display = 'flex';
                     englishActionRowCorrected.style.display = 'flex';
@@ -174,18 +178,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function generateMC(card, key, container) {
+    function generateMC(card, key, container, limitCategory) {
         container.innerHTML = '';
         container.classList.remove('hidden');
-
         const correctAnswer = card[key];
         let options = [correctAnswer];
 
-        const pool = quizData
-            .filter(c => c[key] !== correctAnswer && (c.sort === card.sort || c.sort2 === card.sort2)) 
-            .map(c => c[key]);
-
+        let pool = quizData.filter(c => c[key] !== correctAnswer);
+        if (limitCategory) {
+            pool = pool.filter(c => c.sort === card.sort); // Limit to same category
+        }
+        pool = pool.map(c => c[key]);
         shuffle(pool);
+
         while (options.length < 4 && pool.length > 0) options.push(pool.pop());
         shuffle(options); 
 
@@ -194,22 +199,25 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.textContent = opt;
             btn.addEventListener('click', () => {
                 feedbackEl.classList.remove('hidden', 'incorrect'); 
-                
                 if (opt === correctAnswer) {
                     btn.style.backgroundColor = 'green';
                     btn.style.color = 'white';
-                    feedbackEl.textContent = 'Correct'; 
-                    trackerCorrect++;
-                    updateTracker();
+                    feedbackEl.textContent = 'Correct';
+                    if (key === 'roman') tracker.roman.correct++;
+                    if (key === 'english') tracker.english.correct++;
+                    if (key === 'devanagari') tracker.devanagari.correct++;
                     Array.from(container.querySelectorAll('button')).forEach(b => b.disabled = true);
                 } else {
                     btn.style.backgroundColor = 'red';
                     btn.style.color = 'white'; 
                     feedbackEl.textContent = 'Incorrect'; 
                     feedbackEl.classList.add('incorrect'); 
-                    trackerIncorrect++;
+                    if (key === 'roman') tracker.roman.incorrect++;
+                    if (key === 'english') tracker.english.incorrect++;
+                    if (key === 'devanagari') tracker.devanagari.incorrect++;
                     updateTracker();
                 }
+                updateTracker();
             });
             container.appendChild(btn);
         });
@@ -220,17 +228,16 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!card) return;
         const userAnswer = romanizedInput.value.replace(/[✅❌]/g, '').trim();
         if (!userAnswer) return;
-        
         feedbackEl.classList.remove('hidden', 'incorrect');
         if (isAnswerCorrect(userAnswer, card.roman)) {
             romanizedInput.value = userAnswer + ' ✅';
             feedbackEl.textContent = 'Correct';
-            trackerCorrect++;
+            tracker.roman.correct++;
         } else {
             romanizedInput.value = userAnswer + ' ❌';
             feedbackEl.textContent = 'Incorrect';
             feedbackEl.classList.add('incorrect');
-            trackerIncorrect++;
+            tracker.roman.incorrect++;
         }
         updateTracker();
         toggleInputRowButtons(romanActionRow, true);
@@ -241,17 +248,16 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!card) return;
         const userAnswer = englishInput.value.replace(/[✅❌]/g, '').trim();
         if (!userAnswer) return;
-
         feedbackEl.classList.remove('hidden', 'incorrect');
         if (isAnswerCorrect(userAnswer, card.english)) {
             englishInput.value = userAnswer + ' ✅';
             feedbackEl.textContent = 'Correct';
-            trackerCorrect++;
+            tracker.english.correct++;
         } else {
             englishInput.value = userAnswer + ' ❌';
             feedbackEl.textContent = 'Incorrect';
             feedbackEl.classList.add('incorrect');
-            trackerIncorrect++;
+            tracker.english.incorrect++;
         }
         updateTracker();
         toggleInputRowButtons(englishActionRowCorrected, true);
@@ -291,6 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     multipleChoiceToggle.addEventListener('change', displayCard);
+    categoryLimitedToggle.addEventListener('change', () => displayCard());
 
     filterDropdown.addEventListener('change', () => {
         const value = filterDropdown.value;
@@ -356,7 +363,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     backToQuizBtn.addEventListener('click', resetSearchAndGoToQuiz);
-
     function resetSearchAndGoToQuiz() {
         searchInput.value = '';
         searchResultsContainer.classList.add('hidden');
@@ -366,12 +372,17 @@ document.addEventListener('DOMContentLoaded', () => {
         displayCard();
     }
 
+    // --- REVEAL BUTTONS ---
     showRomanBtn.addEventListener('click', () => {
         const card = filteredQuizData[currentCardIndex];
         if (card) {
             answerEl.textContent = card.roman;
             answerEl.classList.remove('hidden');
             feedbackEl.classList.add('hidden');
+            if (!romanizedInput.value.includes('✅')) {
+                tracker.roman.incorrect++;
+                updateTracker();
+            }
             toggleInputRowButtons(romanActionRow, true);
         }
     });
@@ -381,40 +392,15 @@ document.addEventListener('DOMContentLoaded', () => {
             answerEl.textContent = card.english;
             answerEl.classList.remove('hidden');
             feedbackEl.classList.add('hidden');
+            if (!englishInput.value.includes('✅')) {
+                tracker.english.incorrect++;
+                updateTracker();
+            }
             toggleInputRowButtons(englishActionRowCorrected, true);
         }
     });
 
-    let startX = 0;
-    let endX = 0;
-    const threshold = 75;
-
-    quizContent.addEventListener('touchstart', (e) => {
-        const target = e.target;
-        const targetTagName = target.tagName;
-        if (targetTagName === 'INPUT' || targetTagName === 'BUTTON' || target === answerEl) { startX = 0; endX = 0; return; }
-        startX = e.touches[0].clientX;
-    });
-    quizContent.addEventListener('touchmove', (e) => { if (startX !== 0) endX = e.touches[0].clientX; });
-    quizContent.addEventListener('touchend', () => {
-        if (startX === 0) return;
-        const deltaX = endX - startX;
-        if (Math.abs(deltaX) > threshold) deltaX > 0 ? (currentCardIndex = (currentCardIndex - 1 + filteredQuizData.length) % filteredQuizData.length, displayCard()) : (currentCardIndex = (currentCardIndex + 1) % filteredQuizData.length, displayCard());
-        startX = 0; endX = 0;
-    });
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowUp') {
-            const card = filteredQuizData[currentCardIndex];
-            if (!card) return;
-            if (document.activeElement === romanizedInput) {
-                romanizedInput.value = card.roman;
-            } else if (document.activeElement === englishInput) {
-                englishInput.value = card.english;
-            }
-        }
-    });
-
+    // load data
     function initializeQuiz() {
         fetch('./data.json')
             .then(res => res.json())
