@@ -4,21 +4,21 @@
         "roman": "amilo",
         "english": "sour",
         "sort": "adjective",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "अँध्यारो",
         "roman": "andhyaro",
         "english": "dark",
         "sort": "adjective",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "अन्तिम",
         "roman": "antim",
         "english": "last",
         "sort": "adjective",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "अस्वस्थ",
@@ -46,7 +46,7 @@
         "roman": "bhari",
         "english": "heavy",
         "sort": "adjective",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "चिसो",
@@ -74,7 +74,7 @@
         "roman": "dosro",
         "english": "second",
         "sort": "adjective",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "दुखी",
@@ -95,14 +95,14 @@
         "roman": "gahiro",
         "english": "deep",
         "sort": "adjective",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "गाह्रो",
         "roman": "gahro",
         "english": "difficult",
         "sort": "adjective",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "गरिब",
@@ -130,7 +130,7 @@
         "roman": "hariyo",
         "english": "green",
         "sort": "adjective",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "झूटो",
@@ -151,7 +151,7 @@
         "roman": "khairo",
         "english": "brown",
         "sort": "adjective",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "खुसी",
@@ -193,7 +193,7 @@
         "roman": "guliyo",
         "english": "sweet",
         "sort": "adjective",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "पिरो",
@@ -207,7 +207,7 @@
         "roman": "nunilo",
         "english": "salty",
         "sort": "adjective",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "मोटो",
@@ -289,7 +289,7 @@
     {
         "devanagari": "राम्रो",
         "roman": "ramro",
-        "english": "good",
+        "english": "good / well",
         "sort": "adjective",
         "sort2": null
     },
@@ -347,7 +347,7 @@
         "roman": "sidha",
         "english": "straight",
         "sort": "adjective",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "सुन्दर",
@@ -382,7 +382,7 @@
         "roman": "tadhaa",
         "english": "far",
         "sort": "adjective",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "तातो",
@@ -760,21 +760,21 @@
         "roman": "bhitra",
         "english": "inside",
         "sort": "adverb",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "बिस्तारै",
         "roman": "bistari",
         "english": "slowly",
         "sort": "adverb",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "चाँडो",
         "roman": "chado",
         "english": "quickly",
         "sort": "adverb",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "धेरै",
@@ -788,21 +788,21 @@
         "roman": "eklai",
         "english": "alone",
         "sort": "adverb",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "कहिलेकाहीं",
         "roman": "kahilekahi",
         "english": "sometimes",
         "sort": "adverb",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "मात्र",
         "roman": "maatra",
         "english": "only / merely",
         "sort": "adverb",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "माथि",
@@ -826,18 +826,11 @@
         "sort2": null
     },
     {
-        "devanagari": "राम्रो",
-        "roman": "ramro",
-        "english": "well",
-        "sort": "adverb",
-        "sort2": null
-    },
-    {
         "devanagari": "सधैं",
         "roman": "sadain",
         "english": "always",
         "sort": "adverb",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "तल",
@@ -851,7 +844,7 @@
         "roman": "tyaha",
         "english": "there",
         "sort": "adverb",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "वरिपरि",
@@ -900,7 +893,7 @@
         "roman": "askar",
         "english": "frequently",
         "sort": "adverb",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "ताजा",
@@ -928,7 +921,7 @@
         "roman": "kripaya",
         "english": "please",
         "sort": "adverb",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "यहाँ",
@@ -970,7 +963,7 @@
         "roman": "kinaki",
         "english": "because",
         "sort": "conjunction",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "र",
@@ -1334,14 +1327,14 @@
         "roman": "aago",
         "english": "fire",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "आकाश",
         "roman": "aakash",
         "english": "sky",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "आलु",
@@ -1362,7 +1355,7 @@
         "roman": "simi",
         "english": "beans",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "केरा",
@@ -1390,7 +1383,7 @@
         "roman": "bhuikatahar",
         "english": "pineapple",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "आँप",
@@ -1404,7 +1397,7 @@
         "roman": "kiraaya",
         "english": "fare",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "आमा",
@@ -1425,7 +1418,7 @@
         "roman": "aduwa",
         "english": "ginger",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "अण्डा",
@@ -1446,21 +1439,21 @@
         "roman": "ankha",
         "english": "eye",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "अन्त",
         "roman": "anta",
         "english": "end",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "औंला",
         "roman": "aola",
         "english": "finger",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "अस्पताल",
@@ -1481,7 +1474,7 @@
         "roman": "baadal",
         "english": "cloud",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "बाँस",
@@ -1579,35 +1572,35 @@
         "roman": "chandrama",
         "english": "moon",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "चप्पल",
         "roman": "chappal",
         "english": "sandal",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "चरा",
         "roman": "chara",
         "english": "bird",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "चस्मा",
         "roman": "chasma",
         "english": "glasses",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "चट्टान",
         "roman": "chattan",
         "english": "rock",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "क्षण",
@@ -1628,7 +1621,7 @@
         "roman": "chini",
         "english": "sugar",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "चिठ्ठी",
@@ -1705,7 +1698,7 @@
         "roman": "dar",
         "english": "fear / anxiety",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "दौड",
@@ -1719,14 +1712,14 @@
         "roman": "dhad",
         "english": "back",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "ढोका",
         "roman": "dhoka",
         "english": "door",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "धुलो",
@@ -1761,7 +1754,7 @@
         "roman": "duhkha",
         "english": "sadness/pain",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "इन्जिनियर",
@@ -1782,35 +1775,35 @@
         "roman": "gadi",
         "english": "car",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "गाउँ",
         "roman": "gaun",
         "english": "village",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "घडी",
         "roman": "ghadi",
         "english": "watch / clock",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "समारोह",
         "roman": "samaaroh",
         "english": "ceremony",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "घाम",
         "roman": "ghama",
         "english": "sunlight",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "घण्टा",
@@ -1852,7 +1845,7 @@
         "roman": "git",
         "english": "song",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "गुफा",
@@ -1870,10 +1863,10 @@
     },
     {
         "devanagari": "हात",
-        "roman": "haat / arm",
+        "roman": "haat",
         "english": "hand",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "हातको हत्केला",
@@ -1887,21 +1880,21 @@
         "roman": "hapta",
         "english": "week",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "हावा",
         "roman": "hawa",
         "english": "wind",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "हवाई जहाज",
         "roman": "hawai jahaj",
         "english": "airplane",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "हिमाल",
@@ -1950,35 +1943,35 @@
         "roman": "jhola",
         "english": "bag",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "झ्याल",
         "roman": "jhyal",
         "english": "window",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "जुत्ता",
         "roman": "jutta",
         "english": "shoes",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "ज्याकेट",
         "roman": "jyaket",
         "english": "jacket",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "काग",
         "roman": "kaag",
         "english": "crow",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "कफी",
@@ -1999,21 +1992,21 @@
         "roman": "kan",
         "english": "ear",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "काँटा",
         "roman": "kanta",
         "english": "fork (utensil)",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "कपाल",
         "roman": "kapal",
         "english": "hair",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "खाना",
@@ -2027,14 +2020,14 @@
         "roman": "khel",
         "english": "game",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "खेत",
         "roman": "khet",
         "english": "field",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "महादेश",
@@ -2062,7 +2055,7 @@
         "roman": "khutta",
         "english": "leg",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "खुट्टाको पैतला",
@@ -2097,14 +2090,14 @@
         "roman": "kursi",
         "english": "chair",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "लसुन",
         "roman": "lasun",
         "english": "garlic",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "लुगा",
@@ -2125,14 +2118,14 @@
         "roman": "mah",
         "english": "honey",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "महिना",
         "roman": "mahina",
         "english": "month",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "माला",
@@ -2209,7 +2202,7 @@
         "roman": "mukh",
         "english": "mouth",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "नाच",
@@ -2223,42 +2216,42 @@
         "roman": "naak",
         "english": "nose",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "शर्ट",
         "roman": "shart",
         "english": "shirt",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "पाइन्ट",
         "roman": "paint",
         "english": "pants",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "सर्ट",
         "roman": "sart",
         "english": "shorts",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "नदी",
         "roman": "nadi",
         "english": "river",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "नक्सा",
         "roman": "naksa",
         "english": "map",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "नेपाली",
@@ -2286,14 +2279,14 @@
         "roman": "thali",
         "english": "plate (traditional)",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "ओछ्यान",
         "roman": "ochhyan",
         "english": "bed",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "पहाड",
@@ -2335,7 +2328,7 @@
         "roman": "parikshaa",
         "english": "exam / test",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "परिवार",
@@ -2356,7 +2349,7 @@
         "roman": "pashu",
         "english": "animal",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "चौरों",
@@ -2384,133 +2377,133 @@
         "roman": "patni",
         "english": "wife",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "पेट",
         "roman": "pet",
         "english": "stomach",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "खुट्टाको गोढी",
         "roman": "khuttako godhi",
         "english": "ankle",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "दाह्री",
         "roman": "daarhi",
         "english": "beard",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "स्तन",
         "roman": "stan",
         "english": "breast",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "पिंडली",
         "roman": "pindali",
         "english": "calf",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "छाती",
         "roman": "chhati",
         "english": "chest",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "चिउँडो",
         "roman": "chiundo",
         "english": "chin",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "कान",
         "roman": "kaan",
         "english": "ear",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "कुहिनो",
         "roman": "kuhino",
         "english": "elbow",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "आँखा",
         "roman": "aankha",
         "english": "eye",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "अनुहार",
         "roman": "anuhar",
         "english": "face",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "आँगुली",
         "roman": "aanguli",
         "english": "finger",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "नङ",
         "roman": "nang",
         "english": "fingernail / toenail",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "निधार",
         "roman": "nidhaar",
         "english": "forehead",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "टाउको",
         "roman": "tauko",
         "english": "head",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "एड़ी",
         "roman": "edi",
         "english": "heel",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "घुँडा",
         "roman": "ghundaa",
         "english": "knee",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "फल",
         "roman": "phal",
         "english": "fruit",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "फूल",
@@ -2524,7 +2517,7 @@
         "roman": "phoolbari",
         "english": "garden",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "पोखरी",
@@ -2538,7 +2531,7 @@
         "roman": "prashna",
         "english": "question",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "पुलिस",
@@ -2559,14 +2552,14 @@
         "roman": "pyaj",
         "english": "onion",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "च्याउ",
         "roman": "chyaau",
         "english": "mushrooms",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "ब्रोकाउली",
@@ -2615,7 +2608,7 @@
         "roman": "rukh",
         "english": "tree",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "सागर",
@@ -2636,7 +2629,7 @@
         "roman": "kursi",
         "english": "chair",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "सगरमाथा",
@@ -2650,7 +2643,7 @@
         "roman": "sahar",
         "english": "city",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "साइकल",
@@ -2664,14 +2657,14 @@
         "roman": "samaya",
         "english": "time",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "समुद्र",
         "roman": "samudra",
         "english": "sea",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "संग्रहालय",
@@ -2685,7 +2678,7 @@
         "roman": "santan",
         "english": "child / offspring",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "साथी",
@@ -2699,14 +2692,14 @@
         "roman": "satya",
         "english": "truth",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "शब्द",
         "roman": "shabda",
         "english": "word",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "शब्दकोश",
@@ -2741,7 +2734,7 @@
         "roman": "shir",
         "english": "head",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "सपिङ्ग सेन्टर",
@@ -2755,7 +2748,7 @@
         "roman": "shriman",
         "english": "husband",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "सिँचाइ",
@@ -2860,7 +2853,7 @@
         "roman": "pustakalaya",
         "english": "library",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "महल",
@@ -2874,7 +2867,7 @@
         "roman": "vidyarthi",
         "english": "student",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "पेशा",
@@ -2888,21 +2881,21 @@
         "roman": "wakya",
         "english": "sentence",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "सङ्गीत",
         "roman": "sangit",
         "english": "music",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "पात्रो",
         "roman": "patro",
         "english": "calendar",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "कलाकृति",
@@ -2937,7 +2930,7 @@
         "roman": "puraskaar",
         "english": "award",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "मोलतोल",
@@ -3168,7 +3161,7 @@
         "roman": "daya",
         "english": "left (direction)",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "भोलि",
@@ -3182,7 +3175,7 @@
         "roman": "baya",
         "english": "right (direction)",
         "sort": "noun",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "दु:ख",
@@ -3462,7 +3455,7 @@
         "roman": "pachchis",
         "english": "25",
         "sort": "number",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "२६",
@@ -3497,7 +3490,7 @@
         "roman": "tis",
         "english": "30",
         "sort": "number",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "३१",
@@ -3532,7 +3525,7 @@
         "roman": "paitis",
         "english": "35",
         "sort": "number",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "३६",
@@ -3567,7 +3560,7 @@
         "roman": "chalis",
         "english": "40",
         "sort": "number",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "४१",
@@ -3602,7 +3595,7 @@
         "roman": "paitaalish",
         "english": "45",
         "sort": "number",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "४६",
@@ -3637,7 +3630,7 @@
         "roman": "pachaas",
         "english": "50",
         "sort": "number",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "५१",
@@ -3707,7 +3700,7 @@
         "roman": "saathi",
         "english": "60",
         "sort": "number",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "६१",
@@ -3742,7 +3735,7 @@
         "roman": "paisathi",
         "english": "65",
         "sort": "number",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "६६",
@@ -3777,7 +3770,7 @@
         "roman": "sattari",
         "english": "70",
         "sort": "number",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "७१",
@@ -3812,7 +3805,7 @@
         "roman": "pachahattar",
         "english": "75",
         "sort": "number",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "७६",
@@ -3847,7 +3840,7 @@
         "roman": "asi",
         "english": "80",
         "sort": "number",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "८१",
@@ -3882,7 +3875,7 @@
         "roman": "pachasi",
         "english": "85",
         "sort": "number",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "८६",
@@ -3917,7 +3910,7 @@
         "roman": "nabbe",
         "english": "90",
         "sort": "number",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "९१",
@@ -3952,7 +3945,7 @@
         "roman": "pachanabbe",
         "english": "95",
         "sort": "number",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "९६",
@@ -3987,7 +3980,7 @@
         "roman": "saya",
         "english": "100",
         "sort": "number",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "बिस्तारै बोल्नुहोस्",
@@ -4028,15 +4021,15 @@
         "devanagari": "म बुझ्छु",
         "roman": "ma bujhchu",
         "english": "I understand",
-        "sort": "Phrase",
-        "sort2": "pf"
+        "sort": "phrase",
+        "sort2": null
     },
     {
         "devanagari": "म बुझ्दिनँ",
         "roman": "ma bujhdina",
         "english": "I don't understand",
         "sort": "phrase",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "म नेपाल मनपराउँछु",
@@ -4050,7 +4043,7 @@
         "roman": "ma sanchai chu",
         "english": "I am fine",
         "sort": "phrase",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "माफ गर्नुहोस्",
@@ -4078,7 +4071,7 @@
         "roman": "malai sancho chaina",
         "english": "I am not feeling well",
         "sort": "phrase",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "मलाई ट्याक्सी चाहिन्छ",
@@ -4183,21 +4176,21 @@
         "roman": "yo mahango cha",
         "english": "this is expensive",
         "sort": "phrase",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "यो सस्तो छ",
         "roman": "yo sasto cha",
         "english": "this is cheap",
         "sort": "phrase",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "म हिँड्दै छु।",
         "roman": "Ma hiddai chu",
         "english": "I am walking",
         "sort": "phrase",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "बाट",
@@ -4358,7 +4351,7 @@
         "roman": "yo kati ho?",
         "english": "how much is this?",
         "sort": "question",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "यो के हो?",
@@ -4372,7 +4365,7 @@
         "roman": "tapai kahaa bata aunu bhayo?",
         "english": "where are you from?",
         "sort": "question",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "तपाइँलाई कस्तो छ?",
@@ -4484,7 +4477,7 @@
         "roman": "sakinu",
         "english": "to finish",
         "sort": "verb",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "आराम गर्नु",
@@ -4512,7 +4505,7 @@
         "roman": "bachnu",
         "english": "to live",
         "sort": "verb",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "बढाउनु",
@@ -4533,14 +4526,14 @@
         "roman": "banaunu",
         "english": "to make",
         "sort": "verb",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "बन्द गर्नु",
         "roman": "banda garnu",
         "english": "to close",
         "sort": "verb",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "बन्नु",
@@ -4589,14 +4582,14 @@
         "roman": "bhetnu",
         "english": "to meet",
         "sort": "verb",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "बिर्सनु",
         "roman": "birsanu",
         "english": "to forget",
         "sort": "verb",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "बिताउनु",
@@ -4610,7 +4603,7 @@
         "roman": "bitaunu",
         "english": "to spend (money)",
         "sort": "verb",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "बोल्नु",
@@ -4624,21 +4617,21 @@
         "roman": "bujhnu",
         "english": "to understand",
         "sort": "verb",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "चाहनु",
         "roman": "chahanu",
         "english": "to want",
         "sort": "verb",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "चलाउनु",
         "roman": "chalaunu",
         "english": "to drive / to operate",
         "sort": "verb",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "चल्नु",
@@ -4652,21 +4645,21 @@
         "roman": "chhodnu",
         "english": "to leave",
         "sort": "verb",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "छुनु",
         "roman": "chhunu",
         "english": "to touch",
         "sort": "verb",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "चिन्ता गर्नु",
         "roman": "chinta garnu",
         "english": "to worry",
         "sort": "verb",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "चिर्नु",
@@ -4687,7 +4680,7 @@
         "roman": "chup lagna",
         "english": "to be quiet",
         "sort": "verb",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "धुनु",
@@ -4708,14 +4701,14 @@
         "roman": "galti garnu",
         "english": "to make a mistake",
         "sort": "verb",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "गन्नु",
         "roman": "gannu",
         "english": "to count",
         "sort": "verb",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "गर्नु",
@@ -4757,14 +4750,14 @@
         "roman": "haraunu",
         "english": "to lose (something)",
         "sort": "verb",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "हाँस्नु",
         "roman": "hasnu",
         "english": "to laugh",
         "sort": "verb",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "हेर्नु",
@@ -4848,7 +4841,7 @@
         "roman": "khulnu",
         "english": "to open",
         "sort": "verb",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "किन्नु",
@@ -4862,7 +4855,7 @@
         "roman": "tirnu",
         "english": "to pay",
         "sort": "verb",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "लडाउनु",
@@ -4911,7 +4904,7 @@
         "roman": "maddat garnu",
         "english": "to help",
         "sort": "verb",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "नाप्नु",
@@ -5184,7 +5177,7 @@
         "roman": "metnu",
         "english": "to erase",
         "sort": "verb",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "घुम्नु",
@@ -5212,13 +5205,6 @@
         "roman": "brata basnu",
         "english": "to fast",
         "sort": "verb",
-        "sort2": "pf"
-    },
-    {
-        "devanagari": "खन्नु)",
-        "roman": "khannu",
-        "english": "to eat",
-        "sort": "verb",
         "sort2": null
     },
     {
@@ -5226,7 +5212,7 @@
         "roman": "manaaunu",
         "english": "to celebrate",
         "sort": "verb",
-        "sort2": "pf"
+        "sort2": null
     },
     {
         "devanagari": "रोक्नु",
@@ -5265,7 +5251,7 @@
     },
     {
         "devanagari": "जनाउनु",
-        "roman": "janmanu",
+        "roman": "janaunu",
         "english": "to be born",
         "sort": "verb",
         "sort2": null
