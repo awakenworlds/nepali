@@ -454,4 +454,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     initializeQuiz();
+
+    // ------------------- NEW: Right Arrow Key -------------------
+    document.addEventListener('keydown', (e) => {
+        if (e.key === "ArrowRight") {
+            nextBtn.click();
+        }
+    });
 });
