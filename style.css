@@ -395,4 +395,47 @@ body {
     flex-direction: column;
     align-items: center; /* center the tracker horizontally */
     margin-top: 1em;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.tracker-container table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    color: #a0aec0;
+}
+
+.tracker-container th,
+.tracker-container td {
+    padding: 6px 10px;
+    font-size: 1rem;
+}
+
+.tracker-container th {
+    font-weight: 600;
+}
+
+.lang-col {
+    text-align: left;
+    font-weight: 500;
+}
+
+.score-col {
+    font-weight: 500;
+}
+
+/* Correct / Incorrect colors */
+.correct-col span {
+    color: #4ade80;
+    font-weight: 600;
+}
+
+.incorrect-col span {
+    color: #f87171;
+    font-weight: 600;
+}
+
+/* Total row bold */
+.tracker-container .total-row {
+    font-weight: 700;
 }
