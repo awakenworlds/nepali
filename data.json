@@ -42,8 +42,8 @@
         "sort2": null
     },
     {
-        "devanagari": "भारी",
-        "roman": "bhari",
+        "devanagari": "गह्रौं",
+        "roman": "garhau",
         "english": "heavy",
         "sort": "adjective",
         "sort2": null
@@ -729,8 +729,92 @@
     },
     {
         "devanagari": "उस्तै",
-        "roman": "utai",
-        "english": "same / exactly",
+        "roman": "ustai",
+        "english": "same / similar",
+        "sort": "adjective",
+        "sort2": "sixth grade"
+    },
+    {
+        "devanagari": "शानदार",
+        "roman": "saandaar",
+        "english": "magnificent",
+        "sort": "adjective",
+        "sort2": "sixth grade"
+    },
+    {
+        "devanagari": "लोपोन्मुख",
+        "roman": "loponmukh",
+        "english": "endangered",
+        "sort": "adjective",
+        "sort2": "sixth grade"
+    },
+    {
+        "devanagari": "एकान्त",
+        "roman": "ekaanta",
+        "english": "solitude",
+        "sort": "adjective",
+        "sort2": "sixth grade"
+    },
+    {
+        "devanagari": "सबैभन्दा दुब्लो",
+        "roman": "sabai bhanda dublo",
+        "english": "thinnest / skinniest",
+        "sort": "adjective",
+        "sort2": "sixth grade"
+    },
+    {
+        "devanagari": "छिटो",
+        "roman": "chito",
+        "english": "fast / quick",
+        "sort": "adjective",
+        "sort2": "sixth grade"
+    },
+    {
+        "devanagari": "सबैभन्दा छिटो",
+        "roman": "sabai bhanda chito",
+        "english": "fastest / quickest",
+        "sort": "adjective",
+        "sort2": "sixth grade"
+    },
+    {
+        "devanagari": "सबैभन्दा गह्रौं",
+        "roman": "sabai bhanda garhau",
+        "english": "heaviest",
+        "sort": "adjective",
+        "sort2": "sixth grade"
+    },
+    {
+        "devanagari": "डरलाग्दो",
+        "roman": "darlaagdo",
+        "english": "scary",
+        "sort": "adjective",
+        "sort2": "sixth grade"
+    },
+    {
+        "devanagari": "खतरनाक",
+        "roman": "khataranaak",
+        "english": "dangerous",
+        "sort": "adjective",
+        "sort2": "sixth grade"
+    },
+    {
+        "devanagari": "लाजमर्दो",
+        "roman": "laagmardo",
+        "english": "embarrassing",
+        "sort": "adjective",
+        "sort2": "sixth grade"
+    },
+    {
+        "devanagari": "जवान",
+        "roman": "javan",
+        "english": "young (person)",
+        "sort": "adjective",
+        "sort2": "sixth grade"
+    },
+    {
+        "devanagari": "घिनलाग्दो",
+        "roman": "ghinalaagdo",
+        "english": "disgusting",
         "sort": "adjective",
         "sort2": "sixth grade"
     },
@@ -1514,7 +1598,7 @@
     {
         "devanagari": "बाटो",
         "roman": "bato",
-        "english": "path",
+        "english": "path / road / route",
         "sort": "noun",
         "sort2": null
     },
@@ -3279,6 +3363,13 @@
         "devanagari": "तस्बिरहरू",
         "roman": "tasbirhuru",
         "english": "images",
+        "sort": "noun",
+        "sort2": "sixth grade"
+    },
+    {
+        "devanagari": "स्फटिक",
+        "roman": "sphatik",
+        "english": "crystal",
         "sort": "noun",
         "sort2": "sixth grade"
     },
@@ -5418,9 +5509,9 @@
         "sort2": "sixth grade"
     },
     {
-        "devanagari": "डुङ्गा बिहार",
-        "roman": "naukaa bihaar",
-        "english": "boating",
+        "devanagari": "डुङ्गा चलाउनु",
+        "roman": "dunga calaunu",
+        "english": "to boat",
         "sort": "verb",
         "sort2": "sixth grade"
     }
