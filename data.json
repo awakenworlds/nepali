@@ -65,7 +65,7 @@
     {
         "devanagari": "धनी",
         "roman": "dhani",
-        "english": "sadness / pain",
+        "english": "rich",
         "sort": "adjective",
         "sort2": null
     },
@@ -490,7 +490,7 @@
         "sort2": null
     },
     {
-        "devanagari": "अनुत्पादक",
+        "devanagari": "बाँझो",
         "roman": "bajho",
         "english": "barren",
         "sort": "adjective",
@@ -667,7 +667,7 @@
     {
         "devanagari": "तिम्रो",
         "roman": "timro",
-        "english": "you (informal)",
+        "english": "your (informal)",
         "sort": "adjective",
         "sort2": null
     },
@@ -3242,7 +3242,7 @@
     },
     {
         "devanagari": "बायाँ",
-        "roman": "daya",
+        "roman": "baya",
         "english": "left (direction)",
         "sort": "noun",
         "sort2": null
@@ -3256,7 +3256,7 @@
     },
     {
         "devanagari": "दायाँ",
-        "roman": "baya",
+        "roman": "daya",
         "english": "right (direction)",
         "sort": "noun",
         "sort2": null
@@ -3372,6 +3372,13 @@
         "english": "crystal",
         "sort": "noun",
         "sort2": "sixth grade"
+    },
+    {
+        "devanagari": "धुवाँ",
+        "roman": "dhuwaa",
+        "english": "smoke",
+        "sort": "noun",
+        "sort2": null
     },
     {
         "devanagari": "१",
@@ -4888,7 +4895,7 @@
     {
         "devanagari": "जोड्नु",
         "roman": "jodnu",
-        "english": "to connect / add",
+        "english": "to connect / to add",
         "sort": "verb",
         "sort2": null
     },
@@ -5426,7 +5433,7 @@
     },
     {
         "devanagari": "दन्कनु",
-        "roman": "jvalanasil hunu",
+        "roman": "dankanu",
         "english": "to blaze / to burn brightly",
         "sort": "verb",
         "sort2": null
@@ -5514,5 +5521,26 @@
         "english": "to boat",
         "sort": "verb",
         "sort2": "sixth grade"
+    },
+    {
+        "devanagari": "वर्णन गर्नु",
+        "roman": "varnan garnu",
+        "english": "describe",
+        "sort": "verb",
+        "sort2": "seventh grade"
+    },
+    {
+        "devanagari": "हुन सक्ल",
+        "roman": "hun sakla",
+        "english": "might be / could be",
+        "sort": "verb",
+        "sort2": "seventh grade"
+    },
+    {
+        "devanagari": "देखिनु",
+        "roman": "dekhinu",
+        "english": "to seem / to give impression",
+        "sort": "verb",
+        "sort2": "seventh grade"
     }
 ]
