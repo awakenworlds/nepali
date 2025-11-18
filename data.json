@@ -403,7 +403,7 @@
         "roman": "thulo",
         "english": "big",
         "sort": "adjective",
-        "sort2": null
+        "sort2": "seventh grade"
     },
     {
         "devanagari": "उज्यालो",
@@ -438,7 +438,7 @@
         "roman": "purano",
         "english": "old (thing)",
         "sort": "adjective",
-        "sort2": null
+        "sort2": "seventh grade"
     },
     {
         "devanagari": "अग्लो",
@@ -634,14 +634,14 @@
         "roman": "mahattvapurna",
         "english": "important",
         "sort": "adjective",
-        "sort2": "sixth grade"
+        "sort2": "seventh grade"
     },
     {
         "devanagari": "धेरै",
         "roman": "dherai",
         "english": "many / much",
         "sort": "adjective",
-        "sort2": null
+        "sort2": "seventh grade"
     },
     {
         "devanagari": "हाम्रो",
@@ -819,11 +819,60 @@
         "sort2": "sixth grade"
     },
     {
+        "devanagari": "पहाडी",
+        "roman": "paahaadi",
+        "english": "hilly",
+        "sort": "adjective",
+        "sort2": "seventh grade"
+    },
+    {
+        "devanagari": "काठको",
+        "roman": "kaathko",
+        "english": "wooden",
+        "sort": "adjective",
+        "sort2": "seventh grade"
+    },
+    {
+        "devanagari": "राष्ट्रिय",
+        "roman": "raastriya",
+        "english": "national",
+        "sort": "adjective",
+        "sort2": "seventh grade"
+    },
+    {
+        "devanagari": "साँघुरो",
+        "roman": "saagro",
+        "english": "narrow",
+        "sort": "adjective",
+        "sort2": "seventh grade"
+    },
+    {
         "devanagari": "आजकल",
         "roman": "aajakal",
         "english": "nowadays",
         "sort": "adverb",
         "sort2": null
+    },
+    {
+        "devanagari": "कोरिएको",
+        "roman": "koriyeko",
+        "english": "carved",
+        "sort": "adjective",
+        "sort2": "seventh grade"
+    },
+    {
+        "devanagari": "आधुनिक",
+        "roman": "aadhunik",
+        "english": "modern",
+        "sort": "adjective",
+        "sort2": "seventh grade"
+    },
+    {
+        "devanagari": "जोडिएको",
+        "roman": "jodieko",
+        "english": "adjoining",
+        "sort": "adjective",
+        "sort2": "seventh grade"
     },
     {
         "devanagari": "अहिले",
@@ -893,7 +942,7 @@
         "roman": "mathi",
         "english": "up / above / upstairs",
         "sort": "adverb",
-        "sort2": null
+        "sort2": "seventh grade"
     },
     {
         "devanagari": "पछि",
@@ -1034,6 +1083,20 @@
         "english": "exactly / precisely",
         "sort": "adverb",
         "sort2": "sixth grade"
+    },
+    {
+        "devanagari": "बलियोसँग",
+        "roman": "baliyo sanga",
+        "english": "strongly",
+        "sort": "adverb",
+        "sort2": "seventh grade"
+    },
+    {
+        "devanagari": "पूर्वककालमा",
+        "roman": "purvakaalmaa",
+        "english": "formerly",
+        "sort": "adverb",
+        "sort2": "seventh grade"
     },
     {
         "devanagari": "जति",
@@ -1600,7 +1663,7 @@
         "roman": "bato",
         "english": "path / road / route",
         "sort": "noun",
-        "sort2": null
+        "sort2": "seventh grade"
     },
     {
         "devanagari": "बटुवा",
@@ -1803,7 +1866,7 @@
         "roman": "dhoka",
         "english": "door",
         "sort": "noun",
-        "sort2": null
+        "sort2": "seventh grade"
     },
     {
         "devanagari": "धुलो",
@@ -1901,7 +1964,7 @@
         "roman": "ghar",
         "english": "house",
         "sort": "noun",
-        "sort2": null
+        "sort2": "seventh grade"
     },
     {
         "devanagari": "घिउ",
@@ -2034,7 +2097,7 @@
         "roman": "jhyal",
         "english": "window",
         "sort": "noun",
-        "sort2": null
+        "sort2": "seventh grade"
     },
     {
         "devanagari": "जुत्ता",
@@ -2230,7 +2293,7 @@
         "roman": "mandir",
         "english": "temple",
         "sort": "noun",
-        "sort2": null
+        "sort2": "seventh grade"
     },
     {
         "devanagari": "मस्जिद",
@@ -2692,7 +2755,7 @@
         "roman": "rukh",
         "english": "tree",
         "sort": "noun",
-        "sort2": null
+        "sort2": "seventh grade"
     },
     {
         "devanagari": "सागर",
@@ -2727,7 +2790,7 @@
         "roman": "sahar",
         "english": "city",
         "sort": "noun",
-        "sort2": null
+        "sort2": "seventh grade"
     },
     {
         "devanagari": "साइकल",
@@ -2748,7 +2811,7 @@
         "roman": "samudra",
         "english": "sea",
         "sort": "noun",
-        "sort2": null
+        "sort2": "seventh grade"
     },
     {
         "devanagari": "संग्रहालय",
@@ -3161,7 +3224,7 @@
         "roman": "nepal",
         "english": "Nepal",
         "sort": "noun",
-        "sort2": "sixth grade"
+        "sort2": "seventh grade"
     },
     {
         "devanagari": "जिल्ला",
@@ -3379,6 +3442,146 @@
         "english": "smoke",
         "sort": "noun",
         "sort2": null
+    },
+    {
+        "devanagari": "काठमाडौं",
+        "roman": "kathmandau",
+        "english": "Kathmandu",
+        "sort": "noun",
+        "sort2": "seventh grade"
+    },
+    {
+        "devanagari": "क्षेत्र",
+        "roman": "ksetra",
+        "english": "region",
+        "sort": "noun",
+        "sort2": "seventh grade"
+    },
+    {
+        "devanagari": "फिट",
+        "roman": "phit",
+        "english": "gatekeeper / doorman",
+        "sort": "noun",
+        "sort2": "seventh grade"
+    },
+    {
+        "devanagari": "मिटर",
+        "roman": "mitar",
+        "english": "meter / metre",
+        "sort": "noun",
+        "sort2": "seventh grade"
+    },
+    {
+        "devanagari": "काठमाडौं",
+        "roman": "kaath",
+        "english": "wood",
+        "sort": "noun",
+        "sort2": "seventh grade"
+    },
+    {
+        "devanagari": "निर्माण",
+        "roman": "nirmaan",
+        "english": "construction",
+        "sort": "noun",
+        "sort2": "seventh grade"
+    },
+    {
+        "devanagari": "विस्तार",
+        "roman": "vistaar",
+        "english": "expansion",
+        "sort": "noun",
+        "sort2": "seventh grade"
+    },
+    {
+        "devanagari": "केन्द्र",
+        "roman": "kendra",
+        "english": "hub",
+        "sort": "noun",
+        "sort2": "seventh grade"
+    },
+    {
+        "devanagari": "यातायात",
+        "roman": "yaataayaat",
+        "english": "transportation",
+        "sort": "noun",
+        "sort2": "seventh grade"
+    },
+    {
+        "devanagari": "प्रणाली",
+        "roman": "pranaali",
+        "english": "system",
+        "sort": "noun",
+        "sort2": "seventh grade"
+    },
+    {
+        "devanagari": "इँटा",
+        "roman": "itaa",
+        "english": "brick",
+        "sort": "noun",
+        "sort2": "seventh grade"
+    },
+    {
+        "devanagari": "विनाश",
+        "roman": "vinaasa",
+        "english": "destruction",
+        "sort": "noun",
+        "sort2": "seventh grade"
+    },
+    {
+        "devanagari": "भूकम्प",
+        "roman": "bhukampa",
+        "english": "earthquake",
+        "sort": "noun",
+        "sort2": "seventh grade"
+    },
+    {
+        "devanagari": "भवन",
+        "roman": "bhavan",
+        "english": "building",
+        "sort": "noun",
+        "sort2": "seventh grade"
+    },
+    {
+        "devanagari": "दरबार",
+        "roman": "darabaar",
+        "english": "palace",
+        "sort": "noun",
+        "sort2": "seventh grade"
+    },
+    {
+        "devanagari": "जुलुस",
+        "roman": "julus",
+        "english": "parade",
+        "sort": "noun",
+        "sort2": "seventh grade"
+    },
+    {
+        "devanagari": "घोषणा",
+        "roman": "ghosanaa",
+        "english": "pronouncement",
+        "sort": "noun",
+        "sort2": "seventh grade"
+    },
+    {
+        "devanagari": "सेना",
+        "roman": "senaa",
+        "english": "army",
+        "sort": "noun",
+        "sort2": "seventh grade"
+    },
+    {
+        "devanagari": "प्रधानमन्त्री",
+        "roman": "pradhaanmantri",
+        "english": "Prime Minister",
+        "sort": "noun",
+        "sort2": "seventh grade"
+    },
+    {
+        "devanagari": "उपान्त",
+        "roman": "upaanta",
+        "english": "outskirts",
+        "sort": "noun",
+        "sort2": "seventh grade"
     },
     {
         "devanagari": "१",
@@ -5540,6 +5743,34 @@
         "devanagari": "देखिनु",
         "roman": "dekhinu",
         "english": "to seem / to give impression",
+        "sort": "verb",
+        "sort2": "seventh grade"
+    },
+    {
+        "devanagari": "स्थापना गर्नु",
+        "roman": "sthaapanaa garnu",
+        "english": "to found",
+        "sort": "verb",
+        "sort2": "seventh grade"
+    },
+    {
+        "devanagari": "वर्तमान",
+        "roman": "vartamaan",
+        "english": "present (time)",
+        "sort": "verb",
+        "sort2": "seventh grade"
+    },
+    {
+        "devanagari": "तुलना गर्नु",
+        "roman": "tulnaa garnu",
+        "english": "to contrast",
+        "sort": "verb",
+        "sort2": "seventh grade"
+    },
+    {
+        "devanagari": "कोर्नु",
+        "roman": "kornu",
+        "english": "to carve",
         "sort": "verb",
         "sort2": "seventh grade"
     }
