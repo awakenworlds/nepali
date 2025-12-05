@@ -1134,6 +1134,20 @@
         "sort2": "seventh grade"
     },
     {
+        "devanagari": "अंश",
+        "roman": "ansa",
+        "english": "partly",
+        "sort": "adverb",
+        "sort2": null
+    },
+    {
+        "devanagari": "अझै",
+        "roman": "ajhai",
+        "english": "still / yet",
+        "sort": "adverb",
+        "sort2": null
+    },
+    {
         "devanagari": "जति",
         "roman": "jati",
         "english": "as much as",
@@ -3689,7 +3703,7 @@
         "sort2": "seventh grade"
     },
     {
-        "devanagari": "१संसार",
+        "devanagari": "१",
         "roman": "ek",
         "english": "1",
         "sort": "number",
@@ -4665,6 +4679,13 @@
         "devanagari": "तल",
         "roman": "tala",
         "english": "under",
+        "sort": "preposition",
+        "sort2": null
+    },
+    {
+        "devanagari": "अगाडि",
+        "roman": "agaadi",
+        "english": "in front / before",
         "sort": "preposition",
         "sort2": null
     },
@@ -5833,7 +5854,7 @@
     {
         "devanagari": "वर्णन गर्नु",
         "roman": "varnan garnu",
-        "english": "describe",
+        "english": "to describe",
         "sort": "verb",
         "sort2": "seventh grade"
     },
